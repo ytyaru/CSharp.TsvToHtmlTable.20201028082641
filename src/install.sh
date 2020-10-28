@@ -23,14 +23,24 @@ Run() {
 	}
 	InstallCommandLineParser() {
 		[ -f "$HERE/CommandLine.dll" ] && return
+		mono $(which nuget.exe) install CommandLineParser
+		cp ./CommandLineParser.*/lib/net461/CommandLine.dll "$HERE/CommandLine.dll"
+	}
+	InstallNLog() {
+		[ -f "$HERE/NLog.dll" ] && return
+		mono $(which nuget.exe) install NLog
+		cp ./NLog.*/lib/net45/NLog.dll "$HERE/NLog.dll"
+	}
+	AllInstall() {
 		InstallMono
 		InstallNuGet
 		mkdir -p packages
 		cd packages
-		mono $(which nuget.exe) install CommandLineParser
-		cp ./CommandLineParser.*/lib/net461/CommandLine.dll "$HERE/CommandLine.dll"
+		InstallNLog
+		InstallCommandLineParser
+		cd "$HERE"
 		sleep 1
 	}
-	InstallCommandLineParser
+	AllInstall
 }
 Run "$@"

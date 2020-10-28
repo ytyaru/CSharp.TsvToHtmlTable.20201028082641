@@ -10,7 +10,12 @@ Run() {
 	. "$HERE/install.sh"
 #	csc -nologo Program.cs Sub.cs
 #	csc -nologo *.cs -out:prog.exe
-	csc -nologo -recurse:*.cs -nullable:enable -langversion:latest -r:CommandLine.dll
+	csc -nologo \
+		-recurse:*.cs \
+		-nullable:enable \
+		-langversion:latest \
+		-r:CommandLine.dll \
+		-r:NLog.dll
 	chmod +x Program.exe
 	mono Program.exe
 }
