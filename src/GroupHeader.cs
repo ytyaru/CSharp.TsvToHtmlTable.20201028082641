@@ -25,7 +25,7 @@ namespace TsvToHtmlTable
         {
             Console.WriteLine("GroupHeader");
             Console.WriteLine("----- Arguments -----");
-            Console.WriteLine($"Header: {opt.Header}");
+            Console.WriteLine("Header: {0}", opt.Header);
             Console.WriteLine($"Row: {opt.Row}");
             Console.WriteLine($"Column: {opt.Column}");
             Console.WriteLine($"RowHeaderAttributes: {opt.RowHeaderAttributes}");
@@ -40,6 +40,12 @@ namespace TsvToHtmlTable
         {
             Console.WriteLine("ShowArgsNLog()");
             logger.Debug("GroupHeader");
+            logger.Fatal("Fatal");
+            logger.Error("Error");
+            logger.Warn("Warn");
+            logger.Info("Info");
+            logger.Debug("Debug");
+            logger.Trace("Trace");
             logger.Debug("----- Arguments -----");
             logger.Debug($"Header: {opt.Header}");
             logger.Debug($"Row: {opt.Row}");
