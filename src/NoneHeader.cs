@@ -12,6 +12,12 @@ namespace TsvToHtmlTable
         public NoneHeader(NoneHeaderOptions opt):base()
         {
             Console.WriteLine("NoneHeader");
+            Console.WriteLine("----- Arguments -----");
+            Console.WriteLine($"File: {opt.File }");
+            Console.WriteLine($"Delimiter: {opt.Delimiter}");
+            Console.WriteLine($"TableAttributes: {opt.TableAttributes}");
+            Console.WriteLine($"LoggingLevel: {opt.LoggingLevel}");
+            Console.WriteLine("----------");
         }
         public override string ToHtml()
         {
