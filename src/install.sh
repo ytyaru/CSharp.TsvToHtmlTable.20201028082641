@@ -31,6 +31,12 @@ Run() {
 		mono $(which nuget.exe) install NLog
 		cp ./NLog.*/lib/net45/NLog.dll "$HERE/NLog.dll"
 	}
+	InstallMicrosoft_VisualBasic() {
+		[ -f "$HERE/Microsoft.VisualBasic.dll" ] && return
+		mono $(which nuget.exe) install Microsoft.VisualBasic
+		cp ./Microsoft.VisualBasic.*/lib/netcore50/Microsoft.VisualBasic.dll "$HERE/Microsoft.VisualBasic.dll"
+/tmp/work/CSharp.TsvToHtmlTable.20201028082641/src/packages/Microsoft.VisualBasic.10.3.0/lib/netcore50/Microsoft.VisualBasic.dll
+	}
 	AllInstall() {
 		InstallMono
 		InstallNuGet
@@ -38,6 +44,7 @@ Run() {
 		cd packages
 		InstallNLog
 		InstallCommandLineParser
+		InstallMicrosoft_VisualBasic
 		cd "$HERE"
 		sleep 1
 	}

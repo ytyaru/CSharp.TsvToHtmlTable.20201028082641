@@ -5,7 +5,6 @@ using CommandLine.Text;
 using System.Collections;
 using System.Collections.Generic;
 using NLog;
-using NLog.Config;
 namespace TsvToHtmlTable
 {
     public class InnerHeader : AConverter

@@ -23,7 +23,10 @@ namespace TsvToHtmlTable
         [Option('l', "logging-level", Required=false, Default=LoggingLevelType.f, HelpText="ログ出力する。指定したレベル以上のもののみ出力する。")]
         public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.f;
 
-        public string Source = "";
+        public System.IO.TextReader Source;
+//        public System.IO.TextReader Source = new System.IO.TextReader();
+//        public string Source = "";
+        public List<List<Cell>> SourceList = new List<List<Cell>>();
         public void SetLoggingLevels()
         {
             var level = this.LoggingLevel switch
@@ -48,9 +51,11 @@ namespace TsvToHtmlTable
         public void GetInput()
         {
             if (0 == this.File.Length) {
-                this.Source = System.Console.In.ReadToEnd();
+                this.Source = System.Console.In;
+//                this.Source = System.Console.In.ReadToEnd();
             } else {
-                this.Source = new System.IO.StreamReader(this.File).ReadToEnd();
+                this.Source = new System.IO.StreamReader(this.File);
+//                this.Source = new System.IO.StreamReader(this.File).ReadToEnd();
 //                this.Source = new System.IO.StreamReader(this.File,
 //                                    System.Text.Encoding.GetEncoding("UTF-8"));
             }
