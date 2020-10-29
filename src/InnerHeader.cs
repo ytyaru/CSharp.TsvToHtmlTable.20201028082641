@@ -30,28 +30,41 @@ namespace TsvToHtmlTable
         }
         private string MakeRow()
         {
-            logger.Debug("MakeRow");
-            return "<>";
+            logger.Debug("MakeRow()");
+            var tr = new StringBuilder();
+            var td = new StringBuilder();
+            for (int r=0; r<this.Options.SourceList.Count; r++)
+            {
+                td.Clear();
+                string element = (IsHeader(r)) ? "th" : "td";
+                for (int c=0; c<this.Options.SourceList[r].Count; c++)
+                {
+                    td.Append(Html.Enclose(element, this.Options.SourceList[r][c].Text));
+                }
+                tr.Append(Html.Enclose("tr", td.ToString()));
+            }
+            return tr.ToString();
         }
         private string MakeColumn()
         {
+            logger.Debug("MakeColumn()");
             var tr = new StringBuilder();
             var td = new StringBuilder();
             foreach (var row in this.Options.SourceList)
             {
                 td.Clear();
                 for (int c=0; c<row.Count; c++)
-//                foreach (var cell in row)
                 {
-                    td.Append(Html.Enclose((IsColumnHeader(c)) ? "th" : "td", row[c].Text));
+                    td.Append(Html.Enclose((IsHeader(c)) ? "th" : "td", row[c].Text));
                 }
                 tr.Append(Html.Enclose("tr", td.ToString()));
             }
             return tr.ToString();
         }
-        private bool IsColumnHeader(int idx)
+        private bool IsHeader(int idx)
         {
-            if (0 == ((idx + 1 - this.Options.Start) % this.Options.Step)) { return true; }
+            logger.Debug("{} {} {} {}", idx, this.Options.Start, this.Options.Step, ((idx + 1 - this.Options.Start) % this.Options.Step));
+            if (0 == ((idx + 1 - this.Options.Start) % (this.Options.Step + 1))) { return true; }
             else { return false; }
         }
 
