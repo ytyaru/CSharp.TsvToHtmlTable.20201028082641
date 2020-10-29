@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NLog;
 using NLog.Config;
-
+using Microsoft.VisualBasic;
 namespace TsvToHtmlTable
 {
     public enum LoggingLevelType { f, e, w, i, d, t }
@@ -23,6 +23,7 @@ namespace TsvToHtmlTable
         [Option('l', "logging-level", Required=false, Default=LoggingLevelType.f, HelpText="ログ出力する。指定したレベル以上のもののみ出力する。")]
         public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.f;
 
+        public string Source = "";
         public void SetLoggingLevels()
         {
             var level = this.LoggingLevel switch
@@ -35,7 +36,7 @@ namespace TsvToHtmlTable
                 LoggingLevelType.t => LogLevel.Trace,
                 _ => LogLevel.Fatal,
             };
-            Console.WriteLine(level);
+//            Console.WriteLine(level);
             foreach (LoggingRule rule in NLog.LogManager.Configuration.LoggingRules)
             {
                 rule.SetLoggingLevels(level, LogLevel.Fatal);
@@ -44,5 +45,24 @@ namespace TsvToHtmlTable
 //            LogManager.Configuration.Reload();
             LogManager.ReconfigExistingLoggers();
         }
+        public void GetInput()
+        {
+            if (0 == this.File.Length) {
+                this.Source = System.Console.In.ReadToEnd();
+            } else {
+                this.Source = new System.IO.StreamReader(this.File).ReadToEnd();
+//                this.Source = new System.IO.StreamReader(this.File,
+//                                    System.Text.Encoding.GetEncoding("UTF-8"));
+            }
+        }
+        /*
+        private void LoadInput(TextReader reader)
+        {
+            string line = "";
+            while ((line = reader.ReadLine()) != null) {
+                
+            }
+        }
+        */
     }
 }

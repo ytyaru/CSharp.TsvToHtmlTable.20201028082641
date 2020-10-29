@@ -13,7 +13,6 @@ namespace TsvToHtmlTable
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public InnerHeader(InnerHeaderOptions opt):base(opt)
         {
-            SetLoggingLevel(opt);
             ShowArgsConsole(opt);
             ShowArgsNLog(opt);
         }
@@ -21,24 +20,6 @@ namespace TsvToHtmlTable
         {
             Console.WriteLine("InnerHeader.ToHtml()");
             return "<table></table>";
-        }
-        private void SetLoggingLevel(InnerHeaderOptions opt)
-        {
-            var level = opt.LoggingLevel switch
-            {
-                LoggingLevelType.f => LogLevel.Fatal,
-                LoggingLevelType.e => LogLevel.Error,
-                LoggingLevelType.w => LogLevel.Warn,
-                LoggingLevelType.i => LogLevel.Info,
-                LoggingLevelType.d => LogLevel.Debug,
-                LoggingLevelType.t => LogLevel.Trace,
-                _ => LogLevel.Fatal,
-            };
-            Console.WriteLine(level);
-            foreach (LoggingRule rule in NLog.LogManager.Configuration.LoggingRules)
-            {
-                rule.DisableLoggingForLevel(level);
-            }
         }
         private void ShowArgsConsole(InnerHeaderOptions opt)
         {
@@ -72,6 +53,7 @@ namespace TsvToHtmlTable
             logger.Debug("Delimiter             : {}", opt.Delimiter);
             logger.Debug("TableAttributes       : {}", opt.TableAttributes);
             logger.Debug("LoggingLevel          : {}", opt.LoggingLevel);
+            logger.Debug("Source                :\n{}", opt.Source);
             logger.Debug("----------");
         }
     }

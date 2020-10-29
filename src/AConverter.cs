@@ -12,6 +12,7 @@ namespace TsvToHtmlTable
         public AConverter(CommonOptions opt)
         {
             opt.SetLoggingLevels();
+            opt.GetInput();
         }
         protected void LoadStdin()
         {

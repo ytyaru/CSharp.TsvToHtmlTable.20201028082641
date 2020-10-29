@@ -17,6 +17,6 @@ Run() {
 		-r:CommandLine.dll \
 		-r:NLog.dll
 	chmod +x Program.exe
-	mono Program.exe
+	mono Program.exe -l t "$APP_ROOT/res/tsv/matrix_3.tsv"
 }
 Run "$@"
