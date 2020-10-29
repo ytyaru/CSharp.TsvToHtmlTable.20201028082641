@@ -4,14 +4,25 @@ using CommandLine;
 using CommandLine.Text;
 using System.Collections;
 using System.Collections.Generic;
-
+using NLog;
 namespace TsvToHtmlTable
 {
     public class InnerHeader : AConverter
     {
+        private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public InnerHeader(InnerHeaderOptions opt):base()
         {
-            Console.WriteLine("InnerHeader");
+            ShowArgsConsole(opt);
+            ShowArgsNLog(opt);
+        }
+        public override string ToHtml()
+        {
+            Console.WriteLine("InnerHeader.ToHtml()");
+            return "<table></table>";
+        }
+        private void ShowArgsConsole(InnerHeaderOptions opt)
+        {
+            Console.WriteLine("InnerHeader.ShowArgsConsole()");
             Console.WriteLine("----- Arguments -----");
             Console.WriteLine($"Header: {opt.Header}");
             Console.WriteLine($"Start: {opt.Start}");
@@ -23,10 +34,25 @@ namespace TsvToHtmlTable
             Console.WriteLine($"LoggingLevel: {opt.LoggingLevel}");
             Console.WriteLine("----------");
         }
-        public override string ToHtml()
+        private void ShowArgsNLog(InnerHeaderOptions opt)
         {
-            Console.WriteLine("InnerHeader.ToHtml()");
-            return "<table></table>";
+            logger.Debug("InnerHeader.ShowArgsNLog()");
+            logger.Fatal("Fatal");
+            logger.Error("Error");
+            logger.Warn("Warn");
+            logger.Info("Info");
+            logger.Debug("Debug");
+            logger.Trace("Trace");
+            logger.Debug("----- Arguments -----");
+            logger.Debug("Header                : {}", opt.Header);
+            logger.Debug("Start                 : {}", opt.Start);
+            logger.Debug("Step                  : {}", opt.Step);
+            logger.Debug("HeaderAttributes      : {}", opt.HeaderAttributes);
+            logger.Debug("File                  : {}", opt.File);
+            logger.Debug("Delimiter             : {}", opt.Delimiter);
+            logger.Debug("TableAttributes       : {}", opt.TableAttributes);
+            logger.Debug("LoggingLevel          : {}", opt.LoggingLevel);
+            logger.Debug("----------");
         }
     }
 }

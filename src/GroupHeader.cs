@@ -38,8 +38,7 @@ namespace TsvToHtmlTable
         }
         private void ShowArgsNLog(GroupHeaderOptions opt)
         {
-            Console.WriteLine("ShowArgsNLog()");
-            logger.Debug("GroupHeader");
+            logger.Debug("GroupHeader.ShowArgsNLog()");
             logger.Fatal("Fatal");
             logger.Error("Error");
             logger.Warn("Warn");
@@ -47,15 +46,15 @@ namespace TsvToHtmlTable
             logger.Debug("Debug");
             logger.Trace("Trace");
             logger.Debug("----- Arguments -----");
-            logger.Debug($"Header: {opt.Header}");
-            logger.Debug($"Row: {opt.Row}");
-            logger.Debug($"Column: {opt.Column}");
-            logger.Debug($"RowHeaderAttributes: {opt.RowHeaderAttributes}");
-            logger.Debug($"ColumnHeaderAttributes: {opt.ColumnHeaderAttributes}");
-            logger.Debug($"File: {opt.File }");
-            logger.Debug($"Delimiter: {opt.Delimiter}");
-            logger.Debug($"TableAttributes: {opt.TableAttributes}");
-            logger.Debug($"LoggingLevel: {opt.LoggingLevel}");
+            logger.Debug("Header                : {}", opt.Header);
+            logger.Debug("Row                   : {}", opt.Row);
+            logger.Debug("Column                : {}", opt.Column);
+            logger.Debug("RowHeaderAttributes   : {}", opt.RowHeaderAttributes);
+            logger.Debug("ColumnHeaderAttributes: {}", opt.ColumnHeaderAttributes);
+            logger.Debug("File                  : {}", opt.File);
+            logger.Debug("Delimiter             : {}", opt.Delimiter);
+            logger.Debug("TableAttributes       : {}", opt.TableAttributes);
+            logger.Debug("LoggingLevel          : {}", opt.LoggingLevel);
             logger.Debug("----------");
         }
     }
