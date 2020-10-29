@@ -67,11 +67,6 @@ namespace TsvToHtmlTable
             if (0 == ((idx + 1 - this.Options.Start) % (this.Options.Step + 1))) { return true; }
             else { return false; }
         }
-
-        private string MakeTr()
-        {
-            return "";
-        }
         private void ShowArgsNLog(InnerHeaderOptions opt)
         {
             logger.Debug("InnerHeader.ShowArgsNLog()");
