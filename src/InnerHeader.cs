@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Diagnostics;
 using CommandLine;
 using CommandLine.Text;
@@ -10,29 +11,53 @@ namespace TsvToHtmlTable
     public class InnerHeader : AConverter
     {
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
+        public InnerHeaderOptions Options { get; private set; }
         public InnerHeader(InnerHeaderOptions opt):base(opt)
         {
-            ShowArgsConsole(opt);
+            this.Options = opt;
             ShowArgsNLog(opt);
         }
         public override string ToHtml()
         {
             Console.WriteLine("InnerHeader.ToHtml()");
-            return "<table></table>";
+            var tr = this.Options.Header switch
+            {
+                InnerHeaderType.c => MakeColumn(),
+                InnerHeaderType.r => MakeRow(),
+                _ => MakeColumn(),
+            };
+            return Html.Enclose("table", tr);
         }
-        private void ShowArgsConsole(InnerHeaderOptions opt)
+        private string MakeRow()
         {
-            Console.WriteLine("InnerHeader.ShowArgsConsole()");
-            Console.WriteLine("----- Arguments -----");
-            Console.WriteLine($"Header: {opt.Header}");
-            Console.WriteLine($"Start: {opt.Start}");
-            Console.WriteLine($"Step: {opt.Step}");
-            Console.WriteLine($"HeaderAttributes: {opt.HeaderAttributes}");
-            Console.WriteLine($"File: {opt.File }");
-            Console.WriteLine($"Delimiter: {opt.Delimiter}");
-            Console.WriteLine($"TableAttributes: {opt.TableAttributes}");
-            Console.WriteLine($"LoggingLevel: {opt.LoggingLevel}");
-            Console.WriteLine("----------");
+            logger.Debug("MakeRow");
+            return "<>";
+        }
+        private string MakeColumn()
+        {
+            var tr = new StringBuilder();
+            var td = new StringBuilder();
+            foreach (var row in this.Options.SourceList)
+            {
+                td.Clear();
+                for (int c=0; c<row.Count; c++)
+//                foreach (var cell in row)
+                {
+                    td.Append(Html.Enclose((IsColumnHeader(c)) ? "th" : "td", row[c].Text));
+                }
+                tr.Append(Html.Enclose("tr", td.ToString()));
+            }
+            return tr.ToString();
+        }
+        private bool IsColumnHeader(int idx)
+        {
+            if (0 == ((idx + 1 - this.Options.Start) % this.Options.Step)) { return true; }
+            else { return false; }
+        }
+
+        private string MakeTr()
+        {
+            return "";
         }
         private void ShowArgsNLog(InnerHeaderOptions opt)
         {

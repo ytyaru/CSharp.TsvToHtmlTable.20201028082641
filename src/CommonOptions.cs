@@ -10,7 +10,6 @@ using Microsoft.VisualBasic;
 namespace TsvToHtmlTable
 {
     public enum LoggingLevelType { f, e, w, i, d, t }
-//    public enum LoggingLevelType { c, e, w, i, d }
 
     public class CommonOptions
     {
@@ -37,11 +36,9 @@ namespace TsvToHtmlTable
                 LoggingLevelType.t => LogLevel.Trace,
                 _ => LogLevel.Fatal,
             };
-//            Console.WriteLine(level);
             foreach (LoggingRule rule in NLog.LogManager.Configuration.LoggingRules)
             {
                 rule.SetLoggingLevels(level, LogLevel.Fatal);
-//                rule.DisableLoggingForLevel(level);
             }
 //            LogManager.Configuration.Reload();
             LogManager.ReconfigExistingLoggers();
@@ -58,14 +55,5 @@ namespace TsvToHtmlTable
 //                                    System.Text.Encoding.GetEncoding("UTF-8"));
             }
         }
-        /*
-        private void LoadInput(TextReader reader)
-        {
-            string line = "";
-            while ((line = reader.ReadLine()) != null) {
-                
-            }
-        }
-        */
     }
 }

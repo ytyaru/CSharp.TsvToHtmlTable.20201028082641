@@ -16,13 +16,11 @@ namespace TsvToHtmlTable
         public NoneHeader(NoneHeaderOptions opt):base(opt)
         {
             this.Options = opt;
-            ShowArgsConsole(opt);
             ShowArgsNLog(opt);
         }
         public override string ToHtml()
         {
-            Console.WriteLine("NoneHeader.ToHtml()");
-//            return "<table></table>";
+            logger.Debug("NoneHeader.ToHtml()");
             return Html.Enclose("table", this.MakeTr());
         }
         private string MakeTr()
@@ -39,16 +37,6 @@ namespace TsvToHtmlTable
                 tr.Append(Html.Enclose("tr", td.ToString()));
             }
             return tr.ToString();
-        }
-        private void ShowArgsConsole(NoneHeaderOptions opt)
-        {
-            Console.WriteLine("NoneHeader");
-            Console.WriteLine("----- Arguments -----");
-            Console.WriteLine($"File: {opt.File }");
-            Console.WriteLine($"Delimiter: {opt.Delimiter}");
-            Console.WriteLine($"TableAttributes: {opt.TableAttributes}");
-            Console.WriteLine($"LoggingLevel: {opt.LoggingLevel}");
-            Console.WriteLine("----------");
         }
         private void ShowArgsNLog(NoneHeaderOptions opt)
         {
