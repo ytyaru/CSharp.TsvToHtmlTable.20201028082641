@@ -9,6 +9,10 @@ namespace TsvToHtmlTable
 {
     public abstract class AConverter
     {
+        public AConverter(CommonOptions opt)
+        {
+            opt.SetLoggingLevels();
+        }
         protected void LoadStdin()
         {
             Console.WriteLine("LoadStdin()");

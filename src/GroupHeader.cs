@@ -12,7 +12,7 @@ namespace TsvToHtmlTable
     {
 //        private Logger logger = LogManager.GetCurrentClassLogger();
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
-        public GroupHeader(GroupHeaderOptions opt):base()
+        public GroupHeader(GroupHeaderOptions opt):base(opt)
         {
             SetLoggingLevel(opt);
             ShowArgsConsole(opt);

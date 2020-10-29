@@ -9,7 +9,7 @@ namespace TsvToHtmlTable
 {
     public class NoneHeader : AConverter
     {
-        public NoneHeader(NoneHeaderOptions opt):base()
+        public NoneHeader(NoneHeaderOptions opt):base(opt)
         {
             Console.WriteLine("NoneHeader");
             Console.WriteLine("----- Arguments -----");

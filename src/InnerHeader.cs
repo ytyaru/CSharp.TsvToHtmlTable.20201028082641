@@ -11,7 +11,7 @@ namespace TsvToHtmlTable
     public class InnerHeader : AConverter
     {
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
-        public InnerHeader(InnerHeaderOptions opt):base()
+        public InnerHeader(InnerHeaderOptions opt):base(opt)
         {
             SetLoggingLevel(opt);
             ShowArgsConsole(opt);

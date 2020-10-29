@@ -10,11 +10,11 @@ namespace TsvToHtmlTable
     public enum HeaderType { a, r, c, m }
     public enum RowHeaderPosType { t, b, B }
     public enum ColumnHeaderPosType { l, r, B }
-    public enum LoggingLevelType { f, e, w, i, d, t }
+//    public enum LoggingLevelType { f, e, w, i, d, t }
 //    public enum LoggingLevelType { c, e, w, i, d }
 
     [Verb("g", true, HelpText = "ヘッダが外側にある。" )]
-    public class GroupHeaderOptions
+    public class GroupHeaderOptions : CommonOptions
     {
         [Option('H', "header", Required = false, HelpText = "ヘッダ。")]
         public HeaderType Header { get; set; } = HeaderType.a;
@@ -26,15 +26,5 @@ namespace TsvToHtmlTable
         public string RowHeaderAttributes { get; set; } = "t";
         [Option('C', "--column-header-attributes", Required = false, HelpText = "列ヘッダ属性。")]
         public string ColumnHeaderAttributes { get; set; } = "t";
-
-        // 共通引数
-        [Value(1, MetaName = "file")]
-        public string File { get; set; } = "";
-        [Option('d', "delimiter", Required = false, HelpText = "入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。")]
-        public string Delimiter { get; set; } = "\t";
-        [Option('T', "table-attributes", Required = false, HelpText = "table要素の属性。")]
-        public string TableAttributes { get; set; } = "";
-        [Option('l', "logging-level", Required=false, Default=LoggingLevelType.f, HelpText="ログ出力する。指定したレベル以上のもののみ出力する。")]
-        public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.f;
     }
 }
