@@ -5,6 +5,7 @@ using CommandLine.Text;
 using System.Collections;
 using System.Collections.Generic;
 using NLog;
+using NLog.Config;
 namespace TsvToHtmlTable
 {
     public class GroupHeader : AConverter
@@ -13,6 +14,7 @@ namespace TsvToHtmlTable
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public GroupHeader(GroupHeaderOptions opt):base()
         {
+            SetLoggingLevel(opt);
             ShowArgsConsole(opt);
             ShowArgsNLog(opt);
         }
@@ -20,6 +22,27 @@ namespace TsvToHtmlTable
         {
             Console.WriteLine("GroupHeader.ToHtml()");
             return "<table></table>";
+        }
+        private void SetLoggingLevel(GroupHeaderOptions opt)
+        {
+            var level = opt.LoggingLevel switch
+            {
+                LoggingLevelType.f => LogLevel.Fatal,
+                LoggingLevelType.e => LogLevel.Error,
+                LoggingLevelType.w => LogLevel.Warn,
+                LoggingLevelType.i => LogLevel.Info,
+                LoggingLevelType.d => LogLevel.Debug,
+                LoggingLevelType.t => LogLevel.Trace,
+                _ => LogLevel.Fatal,
+            };
+            Console.WriteLine(level);
+            foreach (LoggingRule rule in NLog.LogManager.Configuration.LoggingRules)
+            {
+                rule.SetLoggingLevels(level, LogLevel.Fatal);
+//                rule.DisableLoggingForLevel(level);
+            }
+//            LogManager.Configuration.Reload();
+            LogManager.ReconfigExistingLoggers();
         }
         private void ShowArgsConsole(GroupHeaderOptions opt)
         {
@@ -39,6 +62,17 @@ namespace TsvToHtmlTable
         private void ShowArgsNLog(GroupHeaderOptions opt)
         {
             logger.Debug("GroupHeader.ShowArgsNLog()");
+            logger.Fatal("Fatal");
+            logger.Error("Error");
+            logger.Warn("Warn");
+            logger.Info("Info");
+            logger.Debug("Debug");
+            logger.Trace("Trace");
+            foreach (LoggingRule rule in NLog.LogManager.Configuration.LoggingRules)
+            {
+                rule.DisableLoggingForLevel(LogLevel.Warn);
+            }
+            LogManager.ReconfigExistingLoggers();
             logger.Fatal("Fatal");
             logger.Error("Error");
             logger.Warn("Warn");

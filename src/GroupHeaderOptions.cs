@@ -10,7 +10,8 @@ namespace TsvToHtmlTable
     public enum HeaderType { a, r, c, m }
     public enum RowHeaderPosType { t, b, B }
     public enum ColumnHeaderPosType { l, r, B }
-    public enum LoggingLevelType { c, e, w, i, d }
+    public enum LoggingLevelType { f, e, w, i, d, t }
+//    public enum LoggingLevelType { c, e, w, i, d }
 
     [Verb("g", true, HelpText = "ヘッダが外側にある。" )]
     public class GroupHeaderOptions
@@ -33,7 +34,7 @@ namespace TsvToHtmlTable
         public string Delimiter { get; set; } = "\t";
         [Option('T', "table-attributes", Required = false, HelpText = "table要素の属性。")]
         public string TableAttributes { get; set; } = "";
-        [Option('l', "logging-level", Required = false, HelpText = "ログ出力する。指定したレベル以上のもののみ出力する。")]
-        public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.c;
+        [Option('l', "logging-level", Required=false, Default=LoggingLevelType.f, HelpText="ログ出力する。指定したレベル以上のもののみ出力する。")]
+        public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.f;
     }
 }

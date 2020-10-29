@@ -28,7 +28,8 @@ namespace TsvToHtmlTable
         public string Delimiter { get; set; } = "\t";
         [Option('T', "table-attributes", Required = false, HelpText = "table要素の属性。")]
         public string TableAttributes { get; set; } = "";
-        [Option('l', "logging-level", Required = false, HelpText = "ログ出力する。指定したレベル以上のもののみ出力する。")]
-        public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.c;
+        [Option('l', "logging-level", Required=false, Default=LoggingLevelType.f, HelpText="ログ出力する。指定したレベル以上のもののみ出力する。")]
+        public LoggingLevelType LoggingLevel { get; set; } = LoggingLevelType.f;
+
     }
 }
