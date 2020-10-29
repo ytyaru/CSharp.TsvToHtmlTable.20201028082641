@@ -10,8 +10,6 @@ namespace TsvToHtmlTable
     public enum HeaderType { a, r, c, m }
     public enum RowHeaderPosType { t, b, B }
     public enum ColumnHeaderPosType { l, r, B }
-//    public enum LoggingLevelType { f, e, w, i, d, t }
-//    public enum LoggingLevelType { c, e, w, i, d }
 
     [Verb("g", true, HelpText = "ヘッダが外側にある。" )]
     public class GroupHeaderOptions : CommonOptions

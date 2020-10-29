@@ -12,13 +12,13 @@ namespace TsvToHtmlTable
     [Verb("i", HelpText = "ヘッダが内側にある。" )]
     public class InnerHeaderOptions : CommonOptions
     {
-        [Option('H', "header", Required = false, HelpText = "指定した軸がヘッダになる。")]
+        [Option('H', "header", Required=false, Default=InnerHeaderType.c, HelpText = "指定した軸がヘッダになる。")]
         public InnerHeaderType Header { get; set; } = InnerHeaderType.c;
-        [Option('s', "start", Required = false, HelpText = "ヘッダ開始位置。")]
+        [Option('s', "start", Required=false, Default=1, HelpText="ヘッダ開始位置。")]
         public int Start { get; set; } = 1;
-        [Option('S', "step", Required = false, HelpText = "ヘッダを指定数だけ飛ばす。")]
+        [Option('S', "step", Required=false, Default=1, HelpText="ヘッダを指定数だけ飛ばす。")]
         public int Step { get; set; } = 1;
-        [Option('A', "header-attributes", Required = false, HelpText = "全ヘッダに指定した属性を付与する")]
-        public string HeaderAttributes { get; set; } = "t";
+        [Option('A', "header-attributes", Required=false, HelpText="全ヘッダに指定した属性を付与する")]
+        public string HeaderAttributes { get; set; } = "";
     }
 }

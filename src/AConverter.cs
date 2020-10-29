@@ -24,7 +24,6 @@ namespace TsvToHtmlTable
                 string line = "";
                 while((line = opt.Source.ReadLine()) != null)  
                 {  
-//                    System.Console.WriteLine(line);
                     logger.Debug(line);
                     opt.SourceList.Add(new List<Cell>());
                     foreach (string col in line.Split(opt.Delimiter))
