@@ -11,14 +11,18 @@ namespace TsvToHtmlTable
     {
 //        private Logger logger = LogManager.GetCurrentClassLogger();
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
+        public GroupHeaderOptions Options { get; private set; }
         public GroupHeader(GroupHeaderOptions opt):base(opt)
         {
+            this.Options = opt;
             ShowArgsConsole(opt);
             ShowArgsNLog(opt);
         }
         public override string ToHtml()
         {
             Console.WriteLine("GroupHeader.ToHtml()");
+            var cellTable = new CellTable(this.Options.SourceList);
+            cellTable.SetBlankToZero();
             return "<table></table>";
         }
         private void ShowArgsConsole(GroupHeaderOptions opt)
@@ -58,5 +62,41 @@ namespace TsvToHtmlTable
             logger.Debug("Source                :\n{}", opt.Source);
             logger.Debug("----------");
         }
+    }
+    class Header
+    {
+        public RowHeader Row { get; private set; } = default!;
+        public ColumnHeader Column { get; private set; } = default!;
+        public MatrixHeader Matrix { get; private set; } = default!;
+        public void Infer(List<List<Cell>> SourceList)
+        {
+            ;//SourceList[0]
+        }
+
+    }
+    class RowHeader
+    {
+//        public List<List<Cell>> SourceList { get; private set; }
+        public int Count { get; private set; }
+        public RowHeader()
+        {
+            
+        }
+        public void Infer(List<List<Cell>> SourceList)
+        {
+
+        }
+        private int InferRowHeaderCount()
+        {
+            return 0;
+        }
+    }
+    class ColumnHeader
+    {
+
+    }
+    class MatrixHeader
+    {
+
     }
 }
