@@ -23,6 +23,10 @@ namespace TsvToHtmlTable
             Console.WriteLine("GroupHeader.ToHtml()");
             var cellTable = new CellTable(this.Options.SourceList);
             cellTable.SetBlankToZero();
+            logger.Debug("InferColumnHeaderCount: {}", cellTable.InferColumnHeaderCount());
+            logger.Debug("InferRowHeaderCount: {}", cellTable.InferRowHeaderCount());
+//            cellTable.InferColumnHeaderCount();
+//            cellTable.InferRowHeaderCount();
             return "<table></table>";
         }
         private void ShowArgsConsole(GroupHeaderOptions opt)

@@ -28,17 +28,17 @@ namespace TsvToHtmlTable
         public void SetBlankToZero()
         {
 //            foreach (var i in this.Cells())
-            foreach ((int r, int c) i in this.Cells())
+            foreach ((int r, int c) in this.Cells())
             {
-                if (0 == this.SourceList[i.r][i.c].Text.Length)
+                if (0 == this.SourceList[r][c].Text.Length)
                 {
-                    this.SourceList[i.r][i.c].RowSpan = 0;
-                    this.SourceList[i.r][i.c].ColSpan = 0;
-                    logger.Debug("{},{} ({},{}) {}", i.r, i.c, this.SourceList[i.r][i.c].RowSpan, this.SourceList[i.r][i.c].ColSpan, this.SourceList[i.r][i.c].Text);
+                    this.SourceList[r][c].RowSpan = 0;
+                    this.SourceList[r][c].ColSpan = 0;
+                    logger.Debug("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
                 } else {
-                    this.SourceList[i.r][i.c].RowSpan = 1;
-                    this.SourceList[i.r][i.c].ColSpan = 1;
-                    logger.Debug("{},{} ({},{}) {}", i.r, i.c, this.SourceList[i.r][i.c].RowSpan, this.SourceList[i.r][i.c].ColSpan, this.SourceList[i.r][i.c].Text);
+                    this.SourceList[r][c].RowSpan = 1;
+                    this.SourceList[r][c].ColSpan = 1;
+                    logger.Debug("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
                 }
             }
         }
@@ -62,15 +62,17 @@ namespace TsvToHtmlTable
         }
         public int InferRowHeaderCount()
         {
+            int colHeadCnt = this.InferColumnHeaderCount();
+            logger.Debug("colHeadCnt: {}", colHeadCnt);
             if (0 == this.SourceList.Count) { return 0; }
-//            bool[] has = new bool[this.SourceList[0].Count];
-            List<bool> has = new List<bool>(this.SourceList[0].Count);
-            foreach ((int r, int c) i in this.Cells())
+            List<bool> has = new List<bool>(new bool[this.SourceList[0].Count - colHeadCnt]);
+            foreach ((int r, int c) in this.Cells())
             {
-                if (0 != this.SourceList[i.r][i.c].Text.Length)
+                if (c < colHeadCnt) { continue; }
+                if (0 != this.SourceList[r][c].Text.Length)
                 {
-                    has[i.c] = true;
-                    if (has.All(v => true == v)) { return i.r + 1; }
+                    has[c - colHeadCnt] = true;
+                    if (has.All(v => true == v)) { return r + 1; }
                 }
             }
             return this.SourceList.Count;
