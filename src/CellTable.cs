@@ -34,11 +34,11 @@ namespace TsvToHtmlTable
                 {
                     this.SourceList[r][c].RowSpan = 0;
                     this.SourceList[r][c].ColSpan = 0;
-                    logger.Debug("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
+                    logger.Trace("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
                 } else {
                     this.SourceList[r][c].RowSpan = 1;
                     this.SourceList[r][c].ColSpan = 1;
-                    logger.Debug("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
+                    logger.Trace("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
                 }
             }
         }
@@ -62,16 +62,19 @@ namespace TsvToHtmlTable
         }
         public int InferRowHeaderCount()
         {
-            int colHeadCnt = this.InferColumnHeaderCount();
-            logger.Debug("colHeadCnt: {}", colHeadCnt);
+            return InferRowHeaderCount(this.InferColumnHeaderCount());
+        }
+        public int InferRowHeaderCount(int columnHeaderCount)
+        {
+            logger.Trace("columnHeaderCount: {}", columnHeaderCount);
             if (0 == this.SourceList.Count) { return 0; }
-            List<bool> has = new List<bool>(new bool[this.SourceList[0].Count - colHeadCnt]);
+            List<bool> has = new List<bool>(new bool[this.SourceList[0].Count - columnHeaderCount]);
             foreach ((int r, int c) in this.Cells())
             {
-                if (c < colHeadCnt) { continue; }
+                if (c < columnHeaderCount) { continue; }
                 if (0 != this.SourceList[r][c].Text.Length)
                 {
-                    has[c - colHeadCnt] = true;
+                    has[c - columnHeaderCount] = true;
                     if (has.All(v => true == v)) { return r + 1; }
                 }
             }

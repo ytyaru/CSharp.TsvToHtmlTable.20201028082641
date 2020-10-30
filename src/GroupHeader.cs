@@ -1,9 +1,10 @@
 using System;
-using System.Diagnostics;
-using CommandLine;
-using CommandLine.Text;
+//using System.Diagnostics;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using CommandLine;
+using CommandLine.Text;
 using NLog;
 namespace TsvToHtmlTable
 {
@@ -23,8 +24,10 @@ namespace TsvToHtmlTable
             Console.WriteLine("GroupHeader.ToHtml()");
             var cellTable = new CellTable(this.Options.SourceList);
             cellTable.SetBlankToZero();
-            logger.Debug("InferColumnHeaderCount: {}", cellTable.InferColumnHeaderCount());
-            logger.Debug("InferRowHeaderCount: {}", cellTable.InferRowHeaderCount());
+            var header = new Header();
+            header.Infer(this.Options.SourceList, cellTable);
+//            logger.Debug("InferColumnHeaderCount: {}", cellTable.InferColumnHeaderCount());
+//            logger.Debug("InferRowHeaderCount: {}", cellTable.InferRowHeaderCount());
 //            cellTable.InferColumnHeaderCount();
 //            cellTable.InferRowHeaderCount();
             return "<table></table>";
@@ -69,23 +72,59 @@ namespace TsvToHtmlTable
     }
     class Header
     {
+        private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public RowHeader Row { get; private set; } = default!;
         public ColumnHeader Column { get; private set; } = default!;
         public MatrixHeader Matrix { get; private set; } = default!;
-        public void Infer(List<List<Cell>> SourceList)
+        public void Infer(List<List<Cell>> SourceList, CellTable cellTable)
         {
-            ;//SourceList[0]
+            int colCnt = cellTable.InferColumnHeaderCount();
+            int rowCnt = cellTable.InferRowHeaderCount(colCnt);
+            logger.Debug("InferColumnHeaderCount: {}", colCnt);
+            logger.Debug("InferRowHeaderCount: {}", rowCnt);
+            Row = new RowHeader(SourceList, rowCnt, colCnt);
+            Column = new ColumnHeader(SourceList, rowCnt, colCnt);
+            Matrix = new MatrixHeader(rowCnt, colCnt);
         }
 
     }
     class RowHeader
     {
+        private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
 //        public List<List<Cell>> SourceList { get; private set; }
         public int Count { get; private set; }
-        public RowHeader()
+        public List<List<Cell>> Cells { get; private set; } = new List<List<Cell>>();
+        private List<List<Cell>> SourceList = default!;
+        private int RowHeaderCount;
+        private int ColumnHeaderCount;
+        public RowHeader(List<List<Cell>> SourceList, int rowCnt, int colCnt)
         {
-            
+            this.SourceList = SourceList;
+            this.RowHeaderCount = rowCnt;
+            this.ColumnHeaderCount = rowCnt;
+            logger.Trace("colCnt: {}", colCnt);
+            foreach (var row in SourceList.GetRange(0, rowCnt))
+            {
+                logger.Trace("row: {}", row);
+                this.Cells.Add(row.GetRange(colCnt, row.Count - colCnt));
+                logger.Trace("Cells: {}", Cells);
+            }
+            /*
+            */
         }
+        private List<List<Cell>> ReversedCells()
+        {
+            return new List<List<Cell>>();
+        }
+        /*
+        public IEnumerable<List<Cell>> Cells()
+        {
+            foreach (var row in this.SourceList.GetRange(0, this.RowHeaderCount))
+            {
+                yield return row.GetRange(colCnt, row.Count - this.ColumnHeaderCount);
+            }
+        }
+        */
         public void Infer(List<List<Cell>> SourceList)
         {
 
@@ -97,10 +136,17 @@ namespace TsvToHtmlTable
     }
     class ColumnHeader
     {
-
+        private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
+        public ColumnHeader(List<List<Cell>> SourceList, int rowCnt, int colCnt)
+        {
+        }
     }
     class MatrixHeader
     {
+        private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
+        public MatrixHeader(int rowCnt, int colCnt)
+        {
+        }
 
     }
 }
