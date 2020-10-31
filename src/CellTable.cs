@@ -145,5 +145,55 @@ namespace TsvToHtmlTable
             }
             return cells;
         }
+        public List<List<Cell>> SetZeroRect(List<List<Cell>> cells)
+        {
+            logger.Debug("SetZeroRect");
+            foreach ((int r, int c) in this.Cells(cells))
+            {
+                if (!IsZeroRect(cells, r, c, cells[r][c].RowSpan, cells[r][c].ColSpan))
+                {
+                    cells = SetSpanAllOne(cells, r, c, cells[r][c].RowSpan, cells[r][c].ColSpan);
+                }
+            }
+            return cells;
+        }
+        private bool IsZeroRect(List<List<Cell>> cells, int r, int c, int rs, int cs)
+        {
+            if (1 < rs && 1 < cs)
+            {
+                logger.Debug("IsZeroRect: {} {} {} {}", r, c, rs, cs);
+                for (int R=r+1; R<r+rs; R++)
+                {
+//                    logger.Debug("IsZeroRect: {}", R);
+                    for (int C=c+1; C<c+cs; C++)
+                    {
+                        logger.Debug("rc: {},{}", R, C);
+//                        if (cells[R][C].RowSpan < 1 && cells[R][C].ColSpan < 1)
+                        if (0 < cells[R][C].Text.Length)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        private List<List<Cell>> SetSpanAllOne(List<List<Cell>> cells, int r, int c, int rs, int cs)
+        {
+            cells[r][c].RowSpan = 1;
+            cells[r][c].ColSpan = 1;
+            for (int R=r+1; R<r+rs; R++)
+            {
+                for (int C=c+1; C<c+cs; C++)
+                {
+                    if (cells[R][C].RowSpan < 1 && cells[R][C].ColSpan < 1)
+                    {
+                        cells[R][C].RowSpan = 1;
+                        cells[R][C].ColSpan = 1;
+                    }
+                }
+            }
+            return cells;
+        }
     }
 }

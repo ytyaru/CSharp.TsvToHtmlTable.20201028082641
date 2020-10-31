@@ -144,6 +144,8 @@ namespace TsvToHtmlTable
             }
             this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
             this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
+            SetCrossSpan();
+            this.Cells = this.CellTable.SetZeroRect(this.Cells);
             for (int r=0; r<this.Cells.Count; r++)
             {
                 for (int c=0; c<this.Cells[r].Count; c++)
@@ -152,6 +154,29 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
+        }
+        private void SetCrossSpan()
+        {
+            foreach ((int r, int c) in this.CellTable.Cells(this.Cells))
+            {
+                int C = CrossSpanRC(r, c, this.Cells[r][c].ColSpan);
+                if (-2 < C) { this.Cells[r][c].ColSpan = C; }
+            }
+        }
+        private int CrossSpanRC(int r, int c, int cs)
+        {
+            for (int C=c+1; C<c+cs; C++)
+            {
+                for (int R=this.Cells.Count-1; r<=R; R--)
+                {
+                    logger.Debug("RC: {},{}", R, C);
+                    if (R <= this.Cells[R][C].RowSpan - 1 - R + r)
+                    {
+                        return C - c;
+                    }
+                }
+            }
+            return -2;
         }
         private void MakeReversedCells()
         {
