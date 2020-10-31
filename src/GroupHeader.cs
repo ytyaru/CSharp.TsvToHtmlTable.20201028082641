@@ -16,36 +16,26 @@ namespace TsvToHtmlTable
         public GroupHeader(GroupHeaderOptions opt):base(opt)
         {
             this.Options = opt;
-            ShowArgsConsole(opt);
             ShowArgsNLog(opt);
         }
         public override string ToHtml()
         {
-            Console.WriteLine("GroupHeader.ToHtml()");
-            var cellTable = new CellTable(this.Options.SourceList);
-            cellTable.SetBlankToZero();
-            var header = new Header(this.Options);
-            header.Infer(cellTable);
-//            logger.Debug("InferColumnHeaderCount: {}", cellTable.InferColumnHeaderCount());
-//            logger.Debug("InferRowHeaderCount: {}", cellTable.InferRowHeaderCount());
-//            cellTable.InferColumnHeaderCount();
-//            cellTable.InferRowHeaderCount();
+            try
+            {
+                logger.Debug("GroupHeader.ToHtml()");
+                var cellTable = new CellTable(this.Options.SourceList);
+                cellTable.SetBlankToZero();
+                var header = new Header(this.Options);
+                header.Infer(cellTable);
+                throw new Exception("Some Error");
+                return "<table></table>";
+            }
+            catch (Exception e)
+            {
+                Logger logger = NLog.LogManager.GetLogger("AppErrorLogger");
+                logger.Error(e, "Error !!");
+            }
             return "<table></table>";
-        }
-        private void ShowArgsConsole(GroupHeaderOptions opt)
-        {
-            Console.WriteLine("GroupHeader");
-            Console.WriteLine("----- Arguments -----");
-            Console.WriteLine("Header: {0}", opt.Header);
-            Console.WriteLine($"Row: {opt.Row}");
-            Console.WriteLine($"Column: {opt.Column}");
-            Console.WriteLine($"RowHeaderAttributes: {opt.RowHeaderAttributes}");
-            Console.WriteLine($"ColumnHeaderAttributes: {opt.ColumnHeaderAttributes}");
-            Console.WriteLine($"File: {opt.File }");
-            Console.WriteLine($"Delimiter: {opt.Delimiter}");
-            Console.WriteLine($"TableAttributes: {opt.TableAttributes}");
-            Console.WriteLine($"LoggingLevel: {opt.LoggingLevel}");
-            Console.WriteLine("----------");
         }
         private void ShowArgsNLog(GroupHeaderOptions opt)
         {
@@ -159,7 +149,6 @@ namespace TsvToHtmlTable
                 if (1 < this.Cells[r][c].ColSpan)
                 {
                     int C = CrossSpanRC(r, c, this.Cells[r][c].ColSpan);
-//                    logger.Debug("{}", C);
                     if (-2 < C) { this.Cells[r][c].ColSpan = C; }
                 }
             }
@@ -170,10 +159,8 @@ namespace TsvToHtmlTable
             {
                 for (int R=r; 0<=R; R--)
                 {
-//                    logger.Debug("RC: {},{}", R, C);
                     if (r <= this.Cells[R][C].RowSpan - 1 - R + r)
                     {
-//                        logger.Debug("C-c={}", C - c);
                         return C - c;
                     }
                 }
@@ -233,22 +220,6 @@ namespace TsvToHtmlTable
                     Cell tmp = ReversedCells[r][c];
                     ReversedCells[r][c] = ReversedCells[R][c];
                     ReversedCells[R][c] = tmp;
-                    break;
-                }
-            }
-
-        }
-        private void SwapText(int r, int c)
-        {
-//            for (int R=r; R<this.ReversedCells.Count; R++)
-            for (int R=r+1; R<this.ReversedCells.Count; R++)
-            {
-//                if ("" != ReversedCells[R][c].Text)
-                if ("" != ReversedCells[R][c].Text && 1 < ReversedCells[R][c].RowSpan)
-                {
-                    string tmp = ReversedCells[r][c].Text;
-                    ReversedCells[r][c].Text = ReversedCells[R][c].Text;
-                    ReversedCells[R][c].Text = tmp;
                     break;
                 }
             }
@@ -358,7 +329,6 @@ namespace TsvToHtmlTable
                 if (1 < this.Cells[r][c].RowSpan)
                 {
                     int R = CrossSpanCR(r, c, this.Cells[r][c].RowSpan);
-//                    logger.Debug("{}", C);
                     if (-2 < R) { this.Cells[r][c].RowSpan = R; }
                 }
             }
@@ -369,10 +339,8 @@ namespace TsvToHtmlTable
             {
                 for (int C=c; 0<=C; C--)
                 {
-//                    logger.Debug("RC: {},{}", R, C);
                     if (c <= this.Cells[R][C].ColSpan - 1 - C + c)
                     {
-//                        logger.Debug("C-c={}", C - c);
                         return R - r;
                     }
                 }
