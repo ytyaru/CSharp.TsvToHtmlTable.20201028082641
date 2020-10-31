@@ -129,12 +129,28 @@ namespace TsvToHtmlTable
                 this.Cells.Add(row.GetRange(colCnt, row.Count - colCnt));
                 logger.Trace("Cells: {}", Cells);
             }
+            for (int r=0; r<this.Cells.Count; r++)
+            {
+                for (int c=0; c<this.Cells[r].Count; c++)
+                {
+                    if (0 < this.Cells[r][c].Text.Length)
+                    {
+                        this.Cells[r][c].RowSpan = this.CellTable.GetZeroLenByRow(this.Cells, r, c);
+                        this.Cells[r][c].ColSpan = this.CellTable.GetZeroLenByColumn(this.Cells, r, c);
+                    }
+                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                }
+                Console.WriteLine();
+            }
         }
         private void MakeReversedCells()
         {
             this.DeepCopySourceList();
             this.ReversedCells.Reverse();
-
+            ReversedText();
+        }
+        private void ReversedText()
+        {
             for (int r=0; r<this.ReversedCells.Count; r++)
             {
                 for (int c=0; c<this.ReversedCells[r].Count; c++)

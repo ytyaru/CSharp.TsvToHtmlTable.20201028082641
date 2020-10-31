@@ -80,5 +80,41 @@ namespace TsvToHtmlTable
             }
             return this.SourceList.Count;
         }
+        public int GetZeroLenByRow(List<List<Cell>> cells, int r, int c)
+        {
+            int len = 1;
+            if (cells.Count <= r+1+len) { return len; }
+            for (int R=r+1; R<cells.Count; R++)
+            {
+                if (0 == cells[R][c].Text.Length) { len++; }
+                else { break; }
+            }
+            /*
+            while (r+1+len < cells.Count)
+            {
+                if (0 == cells[r+1][c].Text.Length) { len++; }
+                else { break; }
+            }
+            */
+            return len;
+        }
+        public int GetZeroLenByColumn(List<List<Cell>> cells, int r, int c)
+        {
+            int len = 1;
+            if (cells[r].Count <= c+1+len) { return len; }
+            for (int C=c+1; C<cells[r].Count; C++)
+            {
+                if (0 == cells[r][C].Text.Length) { len++; }
+                else { break; }
+            }
+            /*
+            while (c+1+len < cells[r].Count)
+            {
+                if (0 == cells[r][c+1].Text.Length) { len++; }
+                else { break; }
+            }
+            */
+            return len;
+        }
     }
 }
