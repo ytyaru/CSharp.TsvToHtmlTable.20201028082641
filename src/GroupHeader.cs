@@ -143,6 +143,7 @@ namespace TsvToHtmlTable
                 Console.WriteLine();
             }
             this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
+            this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
             for (int r=0; r<this.Cells.Count; r++)
             {
                 for (int c=0; c<this.Cells[r].Count; c++)

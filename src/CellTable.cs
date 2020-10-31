@@ -120,7 +120,6 @@ namespace TsvToHtmlTable
                 if (1 < cells[r][c].RowSpan)
                 {
                     Console.WriteLine($"{r},{c}");
-//                    SetRowSpanMinus(cells, r, c, cells[r][c].RowSpan);
                     for (int R=r+1; R<r+cells[r][c].RowSpan; R++)
                     {
                         Console.WriteLine($"  {R},{c}");
@@ -130,14 +129,21 @@ namespace TsvToHtmlTable
             }
             return cells;
         }
-        /*
-        private void SetColSpanMinus(List<List<Cell>> cells, r, c, rowLen)
+        public List<List<Cell>> StopRowSpanByColSpan(List<List<Cell>> cells)
         {
-            for (int R=r+1, R<r+rowLen; R++)
+            foreach ((int r, int c) in this.Cells(cells))
             {
-                cells[R][c].ColSpan = -1;
+                if (1 < cells[r][c].ColSpan)
+                {
+                    Console.WriteLine($"{r},{c}");
+                    for (int C=c+1; C<c+cells[r][c].ColSpan; C++)
+                    {
+                        Console.WriteLine($"  {r},{C}");
+                        cells[r][C].RowSpan = -1;
+                    }
+                }
             }
+            return cells;
         }
-        */
     }
 }
