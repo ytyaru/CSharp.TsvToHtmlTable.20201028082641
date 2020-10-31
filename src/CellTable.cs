@@ -43,13 +43,6 @@ namespace TsvToHtmlTable
                 list.Add(new List<Cell>());
                 foreach (var cell in row)
                 {
-                    /*
-                    Cell n = new Cell();
-                    n.Text = cell.Text;
-                    n.RowSpan  = cell.RowSpan;
-                    n.ColSpan= cell.ColSpan;
-                    list.Last().Add(n);
-                    */
                     list.Last().Add(cell.Clone());
                 }
             }
