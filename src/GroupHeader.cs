@@ -184,11 +184,11 @@ namespace TsvToHtmlTable
         {
             this.ReversedCells = this.CellTable.DeepCopy(this.Cells);
             this.ReversedCells.Reverse();
-            ReversedText();
+            this.Reverse();
         }
-        private void ReversedText()
+        private void Reverse()
         {
-            Console.WriteLine("ReversedText");
+            Console.WriteLine("Reverse");
             for (int r=0; r<this.ReversedCells.Count; r++) { 
                 for (int c=0; c<this.ReversedCells[r].Count; c++) {
                     Console.Write($"{this.ReversedCells[r][c].Text}\t");
@@ -201,51 +201,28 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
-
             for (int r=0; r<this.ReversedCells.Count; r++)
             {
                 for (int c=0; c<this.ReversedCells[r].Count; c++)
                 {
                     if ("" == this.ReversedCells[r][c].Text)
-                    /*
-                    if ("" == this.ReversedCells[r][c].Text && 
-                        0 < this.ReversedCells[r][c].RowSpan &&
-                        0 < this.ReversedCells[r][c].ColSpan)
-                    */
-                    /*
-                    if ("" == this.ReversedCells[r][c].Text && 
-                        this.ReversedCells[r][c].RowSpan < 1 &&
-                        this.ReversedCells[r][c].ColSpan < 1)
-                    */
                     {
-//                        SwapText(r, c);
                         SwapCell(r, c);
                     }
                 }
             }
-            /*
-            foreach (var row in this.ReversedCells)
-            {
-                foreach (var cell in row)
-                {
-                    Console.Write($"{cell.Text}\t");
-                }
-                Console.WriteLine();
-            }
-            */
             for (int r=0; r<this.ReversedCells.Count; r++) { 
                 for (int c=0; c<this.ReversedCells[r].Count; c++) {
                     Console.Write($"{this.ReversedCells[r][c].Text}\t");
                 }
                 Console.WriteLine();
             }
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
+            for (int r=0; r<this.ReversedCells.Count; r++) {
                 for (int c=0; c<this.ReversedCells[r].Count; c++) {
                     Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
                 }
                 Console.WriteLine();
             }
-
         }
         private void SwapCell(int r, int c)
         {
@@ -372,6 +349,7 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
+            this.Reverse();
         }
         private void SetCrossSpan()
         {
@@ -400,6 +378,57 @@ namespace TsvToHtmlTable
                 }
             }
             return -2;
+        }
+        private void Reverse()
+        {
+            Console.WriteLine("Reverse");
+            for (int r=0; r<this.ReversedCells.Count; r++) { 
+                for (int c=0; c<this.ReversedCells[r].Count; c++) {
+                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
+                }
+                Console.WriteLine();
+            }
+            for (int r=0; r<this.ReversedCells.Count; r++) { 
+                for (int c=0; c<this.ReversedCells[r].Count; c++) {
+                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
+                }
+                Console.WriteLine();
+            }
+            for (int r=0; r<this.ReversedCells.Count; r++)
+            {
+                for (int c=0; c<this.ReversedCells[r].Count; c++)
+                {
+                    if ("" == this.ReversedCells[r][c].Text)
+                    {
+                        SwapCell(r, c);
+                    }
+                }
+            }
+            for (int r=0; r<this.ReversedCells.Count; r++) { 
+                for (int c=0; c<this.ReversedCells[r].Count; c++) {
+                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
+                }
+                Console.WriteLine();
+            }
+            for (int r=0; r<this.ReversedCells.Count; r++) {
+                for (int c=0; c<this.ReversedCells[r].Count; c++) {
+                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
+                }
+                Console.WriteLine();
+            }
+        }
+        private void SwapCell(int r, int c)
+        {
+            for (int C=c+1; C<this.ReversedCells[r].Count; C++)
+            {
+                if ("" != ReversedCells[r][C].Text && 1 < ReversedCells[r][C].ColSpan)
+                {
+                    Cell tmp = ReversedCells[r][c];
+                    ReversedCells[r][c] = ReversedCells[r][C];
+                    ReversedCells[r][C] = tmp;
+                    break;
+                }
+            }
         }
     }
     class MatrixHeader
