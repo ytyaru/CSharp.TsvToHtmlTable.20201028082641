@@ -22,26 +22,30 @@ Run() {
 		wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 	}
 	InstallCommandLineParser() {
-		[ -f "$HERE/CommandLine.dll" ] && return
+		[ -f "../CommandLine.dll" ] && return
 		mono $(which nuget.exe) install CommandLineParser
-		cp ./CommandLineParser.*/lib/net461/CommandLine.dll "$HERE/CommandLine.dll"
+		cp ./CommandLineParser.*/lib/net461/CommandLine.dll "../CommandLine.dll"
 	}
 	InstallNLog() {
-		[ -f "$HERE/NLog.dll" ] && return
+		[ -f "../NLog.dll" ] && return
 		mono $(which nuget.exe) install NLog
-		cp ./NLog.*/lib/net45/NLog.dll "$HERE/NLog.dll"
+		cp ./NLog.*/lib/net45/NLog.dll "../NLog.dll"
 	}
 	InstallMicrosoft_VisualBasic() {
-		[ -f "$HERE/Microsoft.VisualBasic.dll" ] && return
+		[ -f "../Microsoft.VisualBasic.dll" ] && return
 		mono $(which nuget.exe) install Microsoft.VisualBasic
-		cp ./Microsoft.VisualBasic.*/lib/netcore50/Microsoft.VisualBasic.dll "$HERE/Microsoft.VisualBasic.dll"
-/tmp/work/CSharp.TsvToHtmlTable.20201028082641/src/packages/Microsoft.VisualBasic.10.3.0/lib/netcore50/Microsoft.VisualBasic.dll
+		cp ./Microsoft.VisualBasic.*/lib/netcore50/Microsoft.VisualBasic.dll "../Microsoft.VisualBasic.dll"
+	}
+	CopyNLogConfig() {
+#		[ -f "$APP_ROOT/bin/NLog.config" ] && return
+		cp -auv "$APP_ROOT/src/NLog.config" "$APP_ROOT/bin/NLog.config"
 	}
 	AllInstall() {
 		InstallMono
 		InstallNuGet
-		mkdir -p packages
-		cd packages
+		cd "$APP_ROOT"
+		mkdir -p ./bin/packages
+		cd ./bin/packages
 		InstallNLog
 		InstallCommandLineParser
 		InstallMicrosoft_VisualBasic
@@ -49,5 +53,6 @@ Run() {
 		sleep 1
 	}
 	AllInstall
+	CopyNLogConfig
 }
 Run "$@"
