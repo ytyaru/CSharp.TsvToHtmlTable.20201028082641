@@ -142,6 +142,15 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
+            this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
+            for (int r=0; r<this.Cells.Count; r++)
+            {
+                for (int c=0; c<this.Cells[r].Count; c++)
+                {
+                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                }
+                Console.WriteLine();
+            }
         }
         private void MakeReversedCells()
         {

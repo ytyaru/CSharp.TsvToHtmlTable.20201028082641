@@ -25,6 +25,17 @@ namespace TsvToHtmlTable
                 }
             }
         }
+        public IEnumerable<(int r, int c)> Cells(List<List<Cell>> cells)
+        {
+            for (int r=0; r<cells.Count; r++)
+            {
+                for (int c=0; c<cells[r].Count; c++)
+                {
+                    yield return ( r:r, c:c );
+                }
+            }
+        }
+
         public void SetBlankToZero()
         {
 //            foreach (var i in this.Cells())
@@ -89,13 +100,6 @@ namespace TsvToHtmlTable
                 if (0 == cells[R][c].Text.Length) { len++; }
                 else { break; }
             }
-            /*
-            while (r+1+len < cells.Count)
-            {
-                if (0 == cells[r+1][c].Text.Length) { len++; }
-                else { break; }
-            }
-            */
             return len;
         }
         public int GetZeroLenByColumn(List<List<Cell>> cells, int r, int c)
@@ -107,14 +111,33 @@ namespace TsvToHtmlTable
                 if (0 == cells[r][C].Text.Length) { len++; }
                 else { break; }
             }
-            /*
-            while (c+1+len < cells[r].Count)
-            {
-                if (0 == cells[r][c+1].Text.Length) { len++; }
-                else { break; }
-            }
-            */
             return len;
         }
+        public List<List<Cell>> StopColSpanByRowSpan(List<List<Cell>> cells)
+        {
+            foreach ((int r, int c) in this.Cells(cells))
+            {
+                if (1 < cells[r][c].RowSpan)
+                {
+                    Console.WriteLine($"{r},{c}");
+//                    SetRowSpanMinus(cells, r, c, cells[r][c].RowSpan);
+                    for (int R=r+1; R<r+cells[r][c].RowSpan; R++)
+                    {
+                        Console.WriteLine($"  {R},{c}");
+                        cells[R][c].ColSpan = -1;
+                    }
+                }
+            }
+            return cells;
+        }
+        /*
+        private void SetColSpanMinus(List<List<Cell>> cells, r, c, rowLen)
+        {
+            for (int R=r+1, R<r+rowLen; R++)
+            {
+                cells[R][c].ColSpan = -1;
+            }
+        }
+        */
     }
 }
