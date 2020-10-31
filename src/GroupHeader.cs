@@ -100,17 +100,14 @@ namespace TsvToHtmlTable
     {
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public GroupHeaderOptions Options { get; private set; }
-//        public List<List<Cell>> SourceList { get; private set; }
         public CellTable CellTable { get; private set; }
         public int Count { get; private set; }
         public List<List<Cell>> Cells { get; private set; } = new List<List<Cell>>();
         public List<List<Cell>> ReversedCells { get; private set; } = new List<List<Cell>>();
-//        private List<List<Cell>> SourceList = default!;
         private int RowHeaderCount;
         private int ColumnHeaderCount;
         public RowHeader(GroupHeaderOptions opt, CellTable cellTable, int rowCnt, int colCnt, bool hasReverseHeader=false)
         {
-//            this.SourceList = SourceList;
             this.Options = opt;
             this.CellTable = cellTable;
             this.RowHeaderCount = rowCnt;
@@ -185,7 +182,8 @@ namespace TsvToHtmlTable
         }
         private void MakeReversedCells()
         {
-            this.DeepCopySourceList();
+            this.ReversedCells = this.CellTable.DeepCopy(this.Cells);
+//            this.DeepCopySourceList();
             this.ReversedCells.Reverse();
             ReversedText();
         }
@@ -201,8 +199,6 @@ namespace TsvToHtmlTable
                     }
                 }
             }
-            /*
-            */
             foreach (var row in this.ReversedCells)
             {
                 foreach (var cell in row)
@@ -211,13 +207,6 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
-            /*
-            foreach ((int r, int c) in this.CellTable.Cells())
-            {
-//                logger.Debug("{}\t", this.ReversedCells[r][c].Text);
-                Console.Write("{}\t", this.ReversedCells[r][c].Text);
-            }
-            */
         }
         private void DeepCopySourceList()
         {
@@ -269,16 +258,93 @@ namespace TsvToHtmlTable
     {
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public GroupHeaderOptions Options { get; private set; }
-        /*
-        public ColumnHeader(GroupHeaderOptions opt)
-        {
-            this.Options = opt;
-        }
-        */
+        public CellTable CellTable { get; private set; }
+        public int Count { get; private set; }
+        public List<List<Cell>> Cells { get; private set; } = new List<List<Cell>>();
+        public List<List<Cell>> ReversedCells { get; private set; } = new List<List<Cell>>();
+        private int RowHeaderCount;
+        private int ColumnHeaderCount;
+
         public ColumnHeader(GroupHeaderOptions opt, CellTable cellTable, int rowCnt, int colCnt)
         {
             this.Options = opt;
+            this.CellTable = cellTable;
+            this.RowHeaderCount = rowCnt;
+            this.ColumnHeaderCount = rowCnt;
+            logger.Debug("ColumnHeader");
+            /*
+            MakeCells(rowCnt, colCnt);
+            if (ColumnHeaderPosType.r == this.Options.Column || 
+                ColumnHeaderPosType.B == this.Options.Column) { MakeReversedCells(); }
+                */
         }
+        /*
+        private void MakeCells(int rowCnt, int colCnt)
+        {
+            foreach (var row in this.Options.SourceList.GetRange(rowCnt, Options.SourceList.Count - rowCnt))
+            {
+                this.Cells.Add(row.GetRange(0, colCnt));
+            }
+            for (int r=0; r<this.Cells.Count; r++)
+            {
+                for (int c=0; c<this.Cells[r].Count; c++)
+                {
+                    if (0 < this.Cells[r][c].Text.Length)
+                    {
+                        this.Cells[r][c].RowSpan = this.CellTable.GetZeroLenByRow(this.Cells, r, c);
+                        this.Cells[r][c].ColSpan = this.CellTable.GetZeroLenByColumn(this.Cells, r, c);
+                    }
+                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                }
+                Console.WriteLine();
+            }
+            this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
+            this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
+            SetCrossSpan();
+            this.Cells = this.CellTable.SetZeroRect(this.Cells);
+            for (int r=0; r<this.Cells.Count; r++)
+            {
+                for (int c=0; c<this.Cells[r].Count; c++)
+                {
+                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                }
+                Console.WriteLine();
+            }
+        }
+        private void MakeReversedCells()
+        {
+            this.DeepCopySourceList();
+            this.ReversedCells.Reverse();
+        }
+        private void SetCrossSpan()
+        {
+            foreach ((int r, int c) in this.CellTable.Cells(this.Cells))
+            {
+                if (1 < this.Cells[r][c].RowSpan)
+                {
+                    int R = CrossSpanCR(r, c, this.Cells[r][c].RowSpan);
+//                    logger.Debug("{}", C);
+                    if (-2 < R) { this.Cells[r][c].RowSpan = R; }
+                }
+            }
+        }
+        private int CrossSpanCR(int r, int c, int rs)
+        {
+            for (int R=r+1; R<r+rs; R++)
+            {
+                for (int C=c; 0<=C; C--)
+                {
+//                    logger.Debug("RC: {},{}", R, C);
+                    if (c <= this.Cells[R][C].ColSpan - 1 - C + c)
+                    {
+//                        logger.Debug("C-c={}", C - c);
+                        return R - r;
+                    }
+                }
+            }
+            return -2;
+        }
+        */
     }
     class MatrixHeader
     {

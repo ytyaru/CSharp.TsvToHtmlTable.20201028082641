@@ -35,6 +35,26 @@ namespace TsvToHtmlTable
                 }
             }
         }
+        public List<List<Cell>> DeepCopy(List<List<Cell>> cells)
+        {
+            List<List<Cell>> list = new List<List<Cell>>();
+            foreach (var row in cells)
+            {
+                list.Add(new List<Cell>());
+                foreach (var cell in row)
+                {
+                    /*
+                    Cell n = new Cell();
+                    n.Text = cell.Text;
+                    n.RowSpan  = cell.RowSpan;
+                    n.ColSpan= cell.ColSpan;
+                    list.Last().Add(n);
+                    */
+                    list.Last().Add(cell.Clone());
+                }
+            }
+            return list;
+        }
 
         public void SetBlankToZero()
         {

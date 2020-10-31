@@ -11,5 +11,9 @@ namespace TsvToHtmlTable
         public string Text { get; set; } = "";
         public int RowSpan { get; set; } = 0;
         public int ColSpan { get; set; } = 0;
+        public Cell Clone()
+        {
+            return new Cell { Text=this.Text, RowSpan=this.RowSpan, ColSpan=this.ColSpan };
+        }
     }
 }
