@@ -94,8 +94,8 @@ namespace TsvToHtmlTable
         public int GetZeroLenByRow(List<List<Cell>> cells, int r, int c)
         {
             int len = 1;
-            if (cells.Count <= r+1+len) { return len; }
-            for (int R=r+1; R<cells.Count; R++)
+            if (cells.Count <= r+len) { return len; }
+            for (int R=r+len; R<cells.Count; R++)
             {
                 if (0 == cells[R][c].Text.Length) { len++; }
                 else { break; }
@@ -105,8 +105,8 @@ namespace TsvToHtmlTable
         public int GetZeroLenByColumn(List<List<Cell>> cells, int r, int c)
         {
             int len = 1;
-            if (cells[r].Count <= c+1+len) { return len; }
-            for (int C=c+1; C<cells[r].Count; C++)
+            if (cells[r].Count <= c+len) { return len; }
+            for (int C=c+len; C<cells[r].Count; C++)
             {
                 if (0 == cells[r][C].Text.Length) { len++; }
                 else { break; }
