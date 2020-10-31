@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 //using System.Diagnostics;
 using System.Linq;
 using System.Collections;
@@ -27,8 +28,9 @@ namespace TsvToHtmlTable
                 cellTable.SetBlankToZero();
                 var header = new Header(this.Options);
                 header.Infer(cellTable);
-                throw new Exception("Some Error");
-                return "<table></table>";
+//                throw new Exception("Some Error");
+                return new TableBuilder(this.Options, header).ToHtml();
+//                return "<table></table>";
             }
             catch (Exception e)
             {
@@ -102,6 +104,7 @@ namespace TsvToHtmlTable
             this.CellTable = cellTable;
             this.RowHeaderCount = rowCnt;
             this.ColumnHeaderCount = rowCnt;
+            this.Count = rowCnt;
             logger.Trace("colCnt: {}", colCnt);
             MakeCells(rowCnt, colCnt);
             logger.Debug("RowHeader");
@@ -259,6 +262,7 @@ namespace TsvToHtmlTable
             this.CellTable = cellTable;
             this.RowHeaderCount = rowCnt;
             this.ColumnHeaderCount = rowCnt;
+            this.Count = colCnt;
             logger.Debug("ColumnHeader");
             MakeCells(rowCnt, colCnt);
             if (ColumnHeaderPosType.r == this.Options.Column || 
@@ -413,6 +417,77 @@ namespace TsvToHtmlTable
         {
             this.Options = opt;
         }
-
+    }
+    class TableBuilder
+    {
+        public GroupHeaderOptions Options { get; private set; }
+        public Header Header { get; private set; }
+        public TableBuilder(GroupHeaderOptions opt, Header header)
+        {
+            this.Options = opt;
+            this.Header = header;
+        }
+        public string ToHtml()
+        {
+            StringBuilder html = new StringBuilder();
+            if (RowHeaderPosType.t == this.Options.Row || 
+                RowHeaderPosType.B == this.Options.Row) { html.Append(MakeRowHeader(this.Header.Row.Cells)); }
+            html.Append(MakeBody());
+            if (RowHeaderPosType.b == this.Options.Row || 
+                RowHeaderPosType.B == this.Options.Row) { html.Append(MakeRowHeader(this.Header.Row.ReversedCells)); }
+            return html.ToString();
+        }
+        private string MakeMatrixHeader()
+        {
+            if (0 < this.Header.Row.Count && 0 < this.Header.Column.Count)
+            {
+                return Html.Enclose("th", "", MakeAttrs(this.Header.Row.Count, this.Header.Column.Count));
+            }
+            return "";
+        }
+        private string MakeRowHeader(List<List<Cell>> cells)
+        {
+            StringBuilder th = new StringBuilder();
+            StringBuilder tr = new StringBuilder();
+            /*
+            foreach((int r, int c) in this.CellTable.Cells(cells))
+            {
+                if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
+                builder.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
+            }
+            */
+            for (int r=0; r<cells.Count; r++)
+            {
+                th.Clear();
+                for (int c=0; c<cells[r].Count; c++)
+                {
+                    if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
+                    th.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
+                }
+                tr.Append(Html.Enclose("tr", th.ToString()));
+            }
+            return tr.ToString();
+        }
+        private string MakeBody()
+        {
+            return "";
+        }
+        private Dictionary<string,string> MakeAttrs(int rs, int cs)
+        {
+            Dictionary<string,string> attrs = new Dictionary<string,string>();
+            if (1 < rs) { attrs["rowspan"] = rs.ToString(); }
+            if (1 < cs) { attrs["colspan"] = cs.ToString(); }
+            return attrs;
+        }
+        private Dictionary<string,string> MakeAttrs(Cell cell)
+        {
+            return MakeAttrs(cell.RowSpan, cell.ColSpan);
+            /*
+            Dictionary<string,string> attrs = new Dictionary<string,string>();
+            if (1 < cell.RowSpan) { attrs["rowspan"] = cell.RowSpan.ToString(); }
+            if (1 < cell.ColSpan) { attrs["colspan"] = cell.ColSpan.ToString(); }
+            return attrs;
+            */
+        }
     }
 }
