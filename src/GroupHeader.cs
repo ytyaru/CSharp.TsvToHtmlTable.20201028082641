@@ -218,10 +218,12 @@ namespace TsvToHtmlTable
                         this.ReversedCells[r][c].ColSpan < 1)
                     */
                     {
-                        SwapText(r, c);
+//                        SwapText(r, c);
+                        SwapCell(r, c);
                     }
                 }
             }
+            /*
             foreach (var row in this.ReversedCells)
             {
                 foreach (var cell in row)
@@ -230,6 +232,34 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
+            */
+            for (int r=0; r<this.ReversedCells.Count; r++) { 
+                for (int c=0; c<this.ReversedCells[r].Count; c++) {
+                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
+                }
+                Console.WriteLine();
+            }
+            for (int r=0; r<this.ReversedCells.Count; r++) { 
+                for (int c=0; c<this.ReversedCells[r].Count; c++) {
+                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
+                }
+                Console.WriteLine();
+            }
+
+        }
+        private void SwapCell(int r, int c)
+        {
+            for (int R=r+1; R<this.ReversedCells.Count; R++)
+            {
+                if ("" != ReversedCells[R][c].Text && 1 < ReversedCells[R][c].RowSpan)
+                {
+                    Cell tmp = ReversedCells[r][c];
+                    ReversedCells[r][c] = ReversedCells[R][c];
+                    ReversedCells[R][c] = tmp;
+                    break;
+                }
+            }
+
         }
         private void SwapText(int r, int c)
         {
