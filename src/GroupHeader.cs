@@ -159,19 +159,31 @@ namespace TsvToHtmlTable
         {
             foreach ((int r, int c) in this.CellTable.Cells(this.Cells))
             {
-                int C = CrossSpanRC(r, c, this.Cells[r][c].ColSpan);
-                if (-2 < C) { this.Cells[r][c].ColSpan = C; }
+                if (1 < this.Cells[r][c].ColSpan)
+                {
+                    int C = CrossSpanRC(r, c, this.Cells[r][c].ColSpan);
+                    logger.Debug("{}", C);
+                    if (-2 < C) { this.Cells[r][c].ColSpan = C; }
+                }
             }
         }
+        /*
+        private int CrossSpanRC(int r, int c, int cs)
+        {
+            
+        }
+        */
         private int CrossSpanRC(int r, int c, int cs)
         {
             for (int C=c+1; C<c+cs; C++)
             {
-                for (int R=this.Cells.Count-1; r<=R; R--)
+//                for (int R=this.Cells.Count-1; R<=r; R--)
+                for (int R=r; 0<=R; R--)
                 {
                     logger.Debug("RC: {},{}", R, C);
-                    if (R <= this.Cells[R][C].RowSpan - 1 - R + r)
+                    if (r <= this.Cells[R][C].RowSpan - 1 - R + r)
                     {
+                        logger.Debug("C-c={}", C - c);
                         return C - c;
                     }
                 }
