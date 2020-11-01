@@ -479,6 +479,10 @@ namespace TsvToHtmlTable
             if (this.Header.HasTopRight()) { Header.Row.Cells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
             if (this.Header.HasBottomLeft()) { Header.Row.ReversedCells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
             if (this.Header.HasBottomRight()) { Header.Row.ReversedCells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
+            if (!this.Header.Row.HasTop()) { this.Header.Row.Cells.Clear(); }
+            if (!this.Header.Column.HasLeft()) { this.Header.Column.Cells.Clear(); }
+            if (!this.Header.Row.HasBottom()) { this.Header.Row.ReversedCells.Clear(); }
+            if (!this.Header.Column.HasRight()) { this.Header.Column.ReversedCells.Clear(); }
 
             html.Append(MakeRowHeader());
             html.Append(MakeBody());
