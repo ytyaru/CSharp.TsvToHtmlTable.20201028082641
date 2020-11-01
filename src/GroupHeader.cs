@@ -161,6 +161,14 @@ namespace TsvToHtmlTable
                 }
                 Console.WriteLine();
             }
+            for (int r=0; r<this.Cells.Count; r++)
+            {
+                for (int c=0; c<this.Cells[r].Count; c++)
+                {
+                    Console.Write($"{this.Cells[r][c].Text}\t");
+                }
+                Console.WriteLine();
+            }
         }
         private void SetCrossSpan()
         {

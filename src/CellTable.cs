@@ -195,9 +195,11 @@ namespace TsvToHtmlTable
         {
             cells[r][c].RowSpan = 1;
             cells[r][c].ColSpan = 1;
-            for (int R=r+1; R<r+rs; R++)
+//            for (int R=r+1; R<r+rs; R++)
+            for (int R=r; R<r+rs; R++)
             {
-                for (int C=c+1; C<c+cs; C++)
+//                for (int C=c+1; C<c+cs; C++)
+                for (int C=c; C<c+cs; C++)
                 {
                     if (cells[R][C].RowSpan < 1 && cells[R][C].ColSpan < 1)
                     {
