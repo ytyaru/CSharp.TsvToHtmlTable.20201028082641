@@ -19,7 +19,7 @@ namespace TsvToHtmlTable
             builder.Append('>');
             return builder.ToString();
         }
-        public static string Enclose(string element, string text="")
+        public static string Enclose(string element, string text)
         {
             var builder = new StringBuilder();
             builder.Append('<');
@@ -37,22 +37,24 @@ namespace TsvToHtmlTable
             var builder = new StringBuilder();
             builder.Append('<');
             builder.Append(element);
-            builder.Append(' ');
-            builder.Append(MakeAttrs(attrs));
+            if (0 < attrs.Count) {
+                builder.Append(' ');
+                builder.Append(MakeAttrs(attrs));
+            }
             builder.Append(' ');
             builder.Append('/');
             builder.Append('>');
             return builder.ToString();
         }
-//        public string Enclose(string element, string text="", OrderedDictionary attrs)
         public static string Enclose(string element, string text, Dictionary<string, string> attrs)
         {
-//            "<" + element + MakeAttrs(attrs) + ">" + text + "</" + element + ">"
             var builder = new StringBuilder();
             builder.Append('<');
             builder.Append(element);
-            builder.Append(' ');
-            builder.Append(MakeAttrs(attrs));
+            if (0 < attrs.Count) {
+                builder.Append(' ');
+                builder.Append(MakeAttrs(attrs));
+            }
             builder.Append('>');
             builder.Append(text);
             builder.Append('<');
@@ -61,7 +63,6 @@ namespace TsvToHtmlTable
             builder.Append('>');
             return builder.ToString();
         }
-//        private string MakeAttrs(OrderedDictionary attrs)
         private static string MakeAttrs(Dictionary<string, string> attrs)
         {
             var builder = new StringBuilder();

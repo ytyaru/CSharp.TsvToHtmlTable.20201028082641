@@ -430,18 +430,36 @@ namespace TsvToHtmlTable
         public string ToHtml()
         {
             StringBuilder html = new StringBuilder();
-            if (RowHeaderPosType.t == this.Options.Row || 
-                RowHeaderPosType.B == this.Options.Row) { html.Append(MakeRowHeader(this.Header.Row.Cells)); }
+            if (0 < Header.Row.Count && 
+                (RowHeaderPosType.t == this.Options.Row || 
+                 RowHeaderPosType.B == this.Options.Row)) {
+                if (0 < Header.Column.Count && 
+                    (ColumnHeaderPosType.l == this.Options.Column ||
+                     ColumnHeaderPosType.B == this.Options.Column)) { html.Append(MakeMatrixHeader()); }
+                html.Append(MakeRowHeader(this.Header.Row.Cells));
+                if (0 < Header.Column.Count && 
+                    (ColumnHeaderPosType.r == this.Options.Column ||
+                     ColumnHeaderPosType.B == this.Options.Column)) { html.Append(MakeMatrixHeader()); }
+            }
             html.Append(MakeBody());
-            if (RowHeaderPosType.b == this.Options.Row || 
-                RowHeaderPosType.B == this.Options.Row) { html.Append(MakeRowHeader(this.Header.Row.ReversedCells)); }
+            if (0 < Header.Row.Count && 
+                (RowHeaderPosType.b == this.Options.Row || 
+                 RowHeaderPosType.B == this.Options.Row)) {
+                if (0 < Header.Column.Count && 
+                    (ColumnHeaderPosType.l == this.Options.Column ||
+                     ColumnHeaderPosType.B == this.Options.Column)) { html.Append(MakeMatrixHeader()); }
+                html.Append(MakeRowHeader(this.Header.Row.ReversedCells));
+                if (0 < Header.Column.Count && 
+                    (ColumnHeaderPosType.r == this.Options.Column ||
+                     ColumnHeaderPosType.B == this.Options.Column)) { html.Append(MakeMatrixHeader()); }
+            }
             return html.ToString();
         }
         private string MakeMatrixHeader()
         {
             if (0 < this.Header.Row.Count && 0 < this.Header.Column.Count)
             {
-                return Html.Enclose("th", "", MakeAttrs(this.Header.Row.Count, this.Header.Column.Count));
+                return Html.Enclose("th", MakeAttrs(this.Header.Row.Count, this.Header.Column.Count));
             }
             return "";
         }
