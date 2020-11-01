@@ -75,6 +75,19 @@ namespace TsvToHtmlTable
         }
         public void Infer(CellTable cellTable)
         {
+            /*
+            int colCnt;
+            int rowCnt;
+            if (HeaderType.a == this.Options.Header ||
+                HeaderType.m == this.Options.Header) {
+                colCnt = cellTable.InferColumnHeaderCount();
+                rowCnt = cellTable.InferRowHeaderCount(colCnt);
+            } else if (HeaderType.r == this.Options.Header) {
+
+            } else if (HeaderType.c == this.Options.Header) {
+
+            }
+            */
             int colCnt = cellTable.InferColumnHeaderCount();
             int rowCnt = cellTable.InferRowHeaderCount(colCnt);
             logger.Debug("InferColumnHeaderCount: {}", colCnt);
@@ -85,6 +98,12 @@ namespace TsvToHtmlTable
             Row = new RowHeader(this.Options, cellTable, rowCnt, colCnt);
             Column = new ColumnHeader(this.Options, cellTable, rowCnt, colCnt);
             Matrix = new MatrixHeader(this.Options, rowCnt, colCnt);
+        }
+        private void Set()
+        {
+            if (HeaderType.c == this.Options.Header) {
+
+            }
         }
         public bool HasTopLeft() { return this.Row.HasTop() && Column.HasLeft(); }
         public bool HasTopRight() { return this.Row.HasTop() && Column.HasRight(); }
@@ -108,11 +127,15 @@ namespace TsvToHtmlTable
             this.RowHeaderCount = rowCnt;
             this.ColumnHeaderCount = rowCnt;
             this.Count = rowCnt;
-            logger.Trace("colCnt: {}", colCnt);
-            MakeCells(rowCnt, colCnt);
-            logger.Debug("RowHeader");
-            if (RowHeaderPosType.b == this.Options.Row || 
-                RowHeaderPosType.B == this.Options.Row) { MakeReversedCells(); }
+            if (HeaderType.c == this.Options.Header) {
+                this.Count = 0;
+            } else {
+                logger.Trace("colCnt: {}", colCnt);
+                MakeCells(rowCnt, colCnt);
+                logger.Debug("RowHeader");
+                if (RowHeaderPosType.b == this.Options.Row || 
+                    RowHeaderPosType.B == this.Options.Row) { MakeReversedCells(); }
+            }
         }
         public bool HasTop()
         {
@@ -288,7 +311,16 @@ namespace TsvToHtmlTable
             this.RowHeaderCount = rowCnt;
             this.ColumnHeaderCount = rowCnt;
             this.Count = colCnt;
-            logger.Debug("ColumnHeader");
+            if (HeaderType.r == this.Options.Header) {
+                this.Count = 0;
+                return;
+            }
+            if (HeaderType.c == this.Options.Header) {
+                this.Count = InferLength();
+                logger.Debug("ColumnHeader.InferLength: {}", this.Count);
+                logger.Debug("rowCnt: {}", rowCnt);
+            }
+            logger.Debug("ColumnHeader: {}", this.Count);
             MakeCells(rowCnt, colCnt);
             if (ColumnHeaderPosType.r == this.Options.Column || 
                 ColumnHeaderPosType.B == this.Options.Column) { MakeReversedCells(); }
@@ -306,6 +338,24 @@ namespace TsvToHtmlTable
                 (ColumnHeaderPosType.r == this.Options.Column ||
                  ColumnHeaderPosType.B == this.Options.Column)) { return true; }
             else { return false; }
+        }
+        private int InferLength()
+        {
+            int len = 1;
+//            bool[] has = new bool[this.Options.SourceList[0].Count];
+//            bool[] has = new bool[this.Options.SourceList.Count-this.RowHeaderCount];
+            List<bool> has = new List<bool>(new bool[this.Options.SourceList.Count-this.RowHeaderCount]);
+//            for (int c=0; c<has.Count; c++)
+            for (int c=0; c<this.Options.SourceList[0].Count; c++)
+            {
+                for (int r=this.RowHeaderCount; r<this.Options.SourceList.Count-this.RowHeaderCount; r++)
+                {
+                    if (0 < this.Options.SourceList[r][c].Text.Length) { has[r] = true; }
+                }
+                if (has.All(v=>v==true)) { return len; }
+                len++;
+            }
+            return has.Count;
         }
         private void MakeCells(int rowCnt, int colCnt)
         {
