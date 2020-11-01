@@ -86,7 +86,10 @@ namespace TsvToHtmlTable
             Column = new ColumnHeader(this.Options, cellTable, rowCnt, colCnt);
             Matrix = new MatrixHeader(this.Options, rowCnt, colCnt);
         }
-
+        public bool HasTopLeft() { return this.Row.HasTop() && Column.HasLeft(); }
+        public bool HasTopRight() { return this.Row.HasTop() && Column.HasRight(); }
+        public bool HasBottomLeft() { return this.Row.HasBottom() && Column.HasLeft(); }
+        public bool HasBottomRight() { return this.Row.HasBottom() && Column.HasRight(); }
     }
     class RowHeader
     {
@@ -110,6 +113,20 @@ namespace TsvToHtmlTable
             logger.Debug("RowHeader");
             if (RowHeaderPosType.b == this.Options.Row || 
                 RowHeaderPosType.B == this.Options.Row) { MakeReversedCells(); }
+        }
+        public bool HasTop()
+        {
+            if (0 < this.Count && 
+                (RowHeaderPosType.t == this.Options.Row || 
+                 RowHeaderPosType.B == this.Options.Row)) { return true; }
+            else { return false; }
+        }
+        public bool HasBottom()
+        {
+            if (0 < this.Count && 
+                (RowHeaderPosType.b == this.Options.Row || 
+                 RowHeaderPosType.B == this.Options.Row)) { return true; }
+            else { return false; }
         }
         private void MakeCells(int rowCnt, int colCnt)
         {
@@ -267,6 +284,20 @@ namespace TsvToHtmlTable
             MakeCells(rowCnt, colCnt);
             if (ColumnHeaderPosType.r == this.Options.Column || 
                 ColumnHeaderPosType.B == this.Options.Column) { MakeReversedCells(); }
+        }
+        public bool HasLeft()
+        {
+            if (0 < this.Count && 
+                (ColumnHeaderPosType.l == this.Options.Column ||
+                 ColumnHeaderPosType.B == this.Options.Column)) { return true; }
+            else { return false; }
+        }
+        public bool HasRight()
+        {
+            if (0 < this.Count && 
+                (ColumnHeaderPosType.r == this.Options.Column ||
+                 ColumnHeaderPosType.B == this.Options.Column)) { return true; }
+            else { return false; }
         }
         private void MakeCells(int rowCnt, int colCnt)
         {
@@ -430,6 +461,20 @@ namespace TsvToHtmlTable
         public string ToHtml()
         {
             StringBuilder html = new StringBuilder();
+
+            if (this.Header.HasTopLeft()) { Header.Row.Cells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
+            if (this.Header.HasTopRight()) { Header.Row.Cells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
+            if (this.Header.HasBottomLeft()) { Header.Row.ReversedCells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
+            if (this.Header.HasBottomRight()) { Header.Row.ReversedCells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
+
+            html.Append(MakeRowHeader());
+            html.Append(MakeBody());
+            html.Append(MakeRowHeader(true));
+
+            /*
+            if (this.Header.HasTopLeft()) {
+                MakeRowTh();
+            }
             if (0 < Header.Row.Count && 
                 (RowHeaderPosType.t == this.Options.Row || 
                  RowHeaderPosType.B == this.Options.Row)) {
@@ -453,6 +498,7 @@ namespace TsvToHtmlTable
                     (ColumnHeaderPosType.r == this.Options.Column ||
                      ColumnHeaderPosType.B == this.Options.Column)) { html.Append(MakeMatrixHeader()); }
             }
+            */
             return html.ToString();
         }
         private string MakeMatrixHeader()
@@ -463,19 +509,44 @@ namespace TsvToHtmlTable
             }
             return "";
         }
-        private string MakeRowHeader(List<List<Cell>> cells)
+//        private string MakeRowTh(List<List<Cell>> cells, int r, bool isReversed=false)
+        private string MakeRowTh(int r, bool isReversed=false)
+        {
+            StringBuilder th = new StringBuilder();
+            /*
+//            th.Append(MakeTopMatrixHeader(isReversed));
+            if (isReversed && this.Header.HasTopRight() || 
+                isReversed == false && this.Header.HasTopLeft())
+            {
+                th.Append(MakeTopMatrixHeader(isReversed));
+            }
+            */
+            var cells = (isReversed) ? this.Header.Row.Cells : this.Header.Row.ReversedCells;
+            for (int c=0; c<cells[r].Count; c++)
+            {
+                if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
+                th.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
+            }
+            /*
+            if (isReversed && this.Header.HasBottomLeft() || 
+                isReversed == false && this.Header.HasBottomRight())
+            {
+                th.Append(MakeTopMatrixHeader(isReversed));
+            }
+//            th.Append(MakeBottomMatrixHeader(isReversed));
+            */
+            return th.ToString();
+        }
+//        private string MakeRowHeader(List<List<Cell>> cells)
+        private string MakeRowHeader(bool isReversed=false)
         {
             StringBuilder th = new StringBuilder();
             StringBuilder tr = new StringBuilder();
-            /*
-            foreach((int r, int c) in this.CellTable.Cells(cells))
-            {
-                if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                builder.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
-            }
-            */
+
+            List<List<Cell>> cells = (isReversed) ? this.Header.Row.Cells : this.Header.Row.ReversedCells;
             for (int r=0; r<cells.Count; r++)
             {
+//                MakeRowTh(r, isReversed);
                 th.Clear();
                 for (int c=0; c<cells[r].Count; c++)
                 {
