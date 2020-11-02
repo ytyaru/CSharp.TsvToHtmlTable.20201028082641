@@ -59,6 +59,10 @@ Run() {
 	cat $TSV/matrix_3.tsv | $CMD/tsv2table i -s 2
 	cat $TSV/matrix_3.tsv | $CMD/tsv2table i -S 2
 	cat $TSV/matrix_3.tsv | $CMD/tsv2table i -s 2 -S 3
+	cat $TSV/matrix_3.tsv | $CMD/tsv2table i -H r -s 2
+	cat $TSV/matrix_3.tsv | $CMD/tsv2table i -H r -S 2
+	cat $TSV/matrix_3.tsv | $CMD/tsv2table i -H r -s 2 -S 3
+
 	set +x
 	echo "----- none-header -----"
 	set -x
