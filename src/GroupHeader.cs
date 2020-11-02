@@ -119,7 +119,6 @@ namespace TsvToHtmlTable
             if (HeaderType.c == this.Options.Header) {
                 this.Count = 0;
             } else {
-                logger.Trace("colCnt: {}", colCnt);
                 MakeCells(rowCnt, colCnt);
                 logger.Debug("RowHeader");
                 if (RowHeaderPosType.b == this.Options.Row || 
@@ -145,9 +144,7 @@ namespace TsvToHtmlTable
             logger.Debug("RowHeader.MakeCells()");
             foreach (var row in this.Options.SourceList.GetRange(0, rowCnt))
             {
-                logger.Trace("row: {}", row);
                 this.Cells.Add(row.GetRange(colCnt, row.Count - colCnt));
-                logger.Trace("Cells: {}", Cells);
             }
             for (int r=0; r<this.Cells.Count; r++)
             {
@@ -412,12 +409,14 @@ namespace TsvToHtmlTable
         }
         public string ToHtml()
         {
+            logger.Debug("TableBuilder.ToHtml()");
+
             StringBuilder html = new StringBuilder();
 
-            logger.Debug("this.Header.HasTopLeft():{}", this.Header.HasTopLeft());
-            logger.Debug("this.Header.HasTopRight():{}", this.Header.HasTopRight());
-            logger.Debug("this.Header.HasBottomLeft():{}", this.Header.HasBottomLeft());
-            logger.Debug("this.Header.HasBottomRight():{}", this.Header.HasBottomRight());
+            logger.Debug("Header.HasTopLeft():{}", this.Header.HasTopLeft());
+            logger.Debug("Header.HasTopRight():{}", this.Header.HasTopRight());
+            logger.Debug("Header.HasBottomLeft():{}", this.Header.HasBottomLeft());
+            logger.Debug("Header.HasBottomRight():{}", this.Header.HasBottomRight());
             if (this.Header.HasTopLeft()) { Header.Row.Cells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
             if (this.Header.HasTopRight()) { Header.Row.Cells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
             if (this.Header.HasBottomLeft()) { Header.Row.ReversedCells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
@@ -473,48 +472,24 @@ namespace TsvToHtmlTable
         }
         private string MakeColumnHeader(int r, bool isReversed=false)
         {
-            /*
-            List<Cell> row  = (isReversed) ? this.Header.Column.Cells[r+this.Header.Row.Count] : this.Header.Column.ReversedCells[r+this.Header.Row.Count]
-            for (int c=0; c<row.Count; c++)
-            {
-                if (row[c].RowSpan < 1 && row[c].ColSpan < 1) { continue; }
-                th.Append(Html.Enclose("th", row[c].Text, MakeAttrs(row[c])));
-            }
-            */
-            logger.Debug("MakeColumnHeader: r={}", r);
             List<List<Cell>> cells = (isReversed) ? this.Header.Column.ReversedCells : this.Header.Column.Cells;
             if (cells.Count < 1) { return ""; }
             StringBuilder th = new StringBuilder();
-            logger.Debug("cells={}", cells.Count);
             for (int c=0; c<cells[r].Count; c++)
             {
-                logger.Debug("{},{} {}", r, c, cells[r][c].Text);
                 if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
                 th.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
             }
-            /*
-            */
             return th.ToString();
         }
         private string MakeData(int r)
         {
             StringBuilder td = new StringBuilder();
             List<Cell> row = this.Options.SourceList[r+this.Header.Row.Count];
-//            List<List<Cell>> cells = this.Options.SourceList[].GetRange(r+this.Header.Row.Count, this.Options.SourceList.Count-r+this.Header.Row.Count)
-//            for (int c=0; c<row.Count; c++)
             for (int c=this.Header.Column.Count; c<row.Count; c++)
             {
-//                if (row[c].RowSpan < 1 && row[c].ColSpan < 1) { continue; }
                 td.Append(Html.Enclose("td", row[c].Text, MakeAttrs(row[c])));
             }
-            /*
-//            for (int c=0; c<this.Options.SourceList[r+this.Header.Row.Count].Count; c++)
-//            for (int c=0; c<cells[r].Count; c++)
-            {
-                if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                th.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
-            }
-            */
             return td.ToString();
         }
         private Dictionary<string,string> MakeAttrs(int rs, int cs)
@@ -527,12 +502,6 @@ namespace TsvToHtmlTable
         private Dictionary<string,string> MakeAttrs(Cell cell)
         {
             return MakeAttrs(cell.RowSpan, cell.ColSpan);
-            /*
-            Dictionary<string,string> attrs = new Dictionary<string,string>();
-            if (1 < cell.RowSpan) { attrs["rowspan"] = cell.RowSpan.ToString(); }
-            if (1 < cell.ColSpan) { attrs["colspan"] = cell.ColSpan.ToString(); }
-            return attrs;
-            */
         }
     }
 }

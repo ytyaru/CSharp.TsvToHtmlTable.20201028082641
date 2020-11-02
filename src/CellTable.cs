@@ -78,11 +78,9 @@ namespace TsvToHtmlTable
                 {
                     this.SourceList[r][c].RowSpan = 0;
                     this.SourceList[r][c].ColSpan = 0;
-                    logger.Trace("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
                 } else {
                     this.SourceList[r][c].RowSpan = 1;
                     this.SourceList[r][c].ColSpan = 1;
-                    logger.Trace("{},{} ({},{}) {}", r, c, this.SourceList[r][c].RowSpan, this.SourceList[r][c].ColSpan, this.SourceList[r][c].Text);
                 }
             }
         }
@@ -110,7 +108,6 @@ namespace TsvToHtmlTable
         }
         public int InferRowHeaderCount(int columnHeaderCount)
         {
-            logger.Trace("columnHeaderCount: {}", columnHeaderCount);
             if (0 == this.SourceList.Count) { return 0; }
             List<bool> has = new List<bool>(new bool[this.SourceList[0].Count - columnHeaderCount]);
             foreach ((int r, int c) in this.Cells())
@@ -152,10 +149,8 @@ namespace TsvToHtmlTable
             {
                 if (1 < cells[r][c].RowSpan)
                 {
-                    Console.WriteLine($"{r},{c}");
                     for (int R=r+1; R<r+cells[r][c].RowSpan; R++)
                     {
-                        Console.WriteLine($"  {R},{c}");
                         cells[R][c].ColSpan = -1;
                     }
                 }
@@ -168,10 +163,8 @@ namespace TsvToHtmlTable
             {
                 if (1 < cells[r][c].ColSpan)
                 {
-                    Console.WriteLine($"{r},{c}");
                     for (int C=c+1; C<c+cells[r][c].ColSpan; C++)
                     {
-                        Console.WriteLine($"  {r},{C}");
                         cells[r][C].RowSpan = -1;
                     }
                 }
@@ -180,7 +173,6 @@ namespace TsvToHtmlTable
         }
         public List<List<Cell>> SetZeroRect(List<List<Cell>> cells)
         {
-            logger.Debug("SetZeroRect");
             foreach ((int r, int c) in this.Cells(cells))
             {
                 if (!IsZeroRect(cells, r, c, cells[r][c].RowSpan, cells[r][c].ColSpan))
@@ -194,14 +186,10 @@ namespace TsvToHtmlTable
         {
             if (1 < rs && 1 < cs)
             {
-                logger.Debug("IsZeroRect: {} {} {} {}", r, c, rs, cs);
                 for (int R=r+1; R<r+rs; R++)
                 {
-//                    logger.Debug("IsZeroRect: {}", R);
                     for (int C=c+1; C<c+cs; C++)
                     {
-                        logger.Debug("rc: {},{}", R, C);
-//                        if (cells[R][C].RowSpan < 1 && cells[R][C].ColSpan < 1)
                         if (0 < cells[R][C].Text.Length)
                         {
                             return false;
