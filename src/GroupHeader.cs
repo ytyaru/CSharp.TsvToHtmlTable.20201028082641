@@ -173,6 +173,8 @@ namespace TsvToHtmlTable
             logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
             logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
 
+            this.CellTable.Log(this.Cells);
+
             this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
             this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
             SetCrossSpan();

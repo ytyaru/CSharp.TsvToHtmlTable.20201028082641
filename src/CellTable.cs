@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,6 +49,39 @@ namespace TsvToHtmlTable
             }
             return list;
         }
+//        public void Log(List<List<Cell>> cells, LogLevel level=NLog.LogLevel.Debug)
+        public void Log(List<List<Cell>> cells, LogLevel level=default!)
+        {
+            if (null == level) { level = LogLevel.Debug; }
+            StringBuilder spanLog = new StringBuilder();
+            StringBuilder textLog = new StringBuilder();
+            for (int r=0; r<cells.Count; r++)
+            {
+                for (int c=0; c<cells[r].Count; c++)
+                {
+                    spanLog.Append($"({cells[r][c].RowSpan},{cells[r][c].ColSpan})\t");
+                    textLog.Append($"{cells[r][c].Text}\t");
+                }
+                spanLog.Length--;
+                textLog.Length--;
+                spanLog.Append("\n");
+                textLog.Append("\n");
+            }
+//            logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
+//            logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
+            logger.Log(level, "\n" + spanLog.ToString().TrimEnd('\n'));
+            logger.Log(level, "\n" + textLog.ToString().TrimEnd('\n'));
+        }
+        /*
+        public void LogSpan(List<List<Cell>> cells, LogLevel level=LogLevel.Debug)
+        {
+
+        }
+        public void LogText(List<List<Cell>> cells, LogLevel level=LogLevel.Debug)
+        {
+
+        }
+        */
 
         public void SetBlankToZero()
         {
