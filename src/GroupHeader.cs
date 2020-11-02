@@ -75,21 +75,21 @@ namespace TsvToHtmlTable
         }
         public void Infer(CellTable cellTable)
         {
-            /*
-            int colCnt;
-            int rowCnt;
+            int colCnt = 0;
+            int rowCnt = 0;
             if (HeaderType.a == this.Options.Header ||
                 HeaderType.m == this.Options.Header) {
                 colCnt = cellTable.InferColumnHeaderCount();
                 rowCnt = cellTable.InferRowHeaderCount(colCnt);
             } else if (HeaderType.r == this.Options.Header) {
-
+                rowCnt = cellTable.InferRowHeaderCount(colCnt);
             } else if (HeaderType.c == this.Options.Header) {
-
+                colCnt = cellTable.InferColumnHeaderCount();
             }
-            */
+            /*
             int colCnt = cellTable.InferColumnHeaderCount();
             int rowCnt = cellTable.InferRowHeaderCount(colCnt);
+            */
             logger.Debug("InferColumnHeaderCount: {}", colCnt);
             logger.Debug("InferRowHeaderCount: {}", rowCnt);
 
@@ -316,7 +316,10 @@ namespace TsvToHtmlTable
                 return;
             }
             if (HeaderType.c == this.Options.Header) {
+                rowCnt = 0;
+                this.RowHeaderCount = rowCnt;
                 this.Count = InferLength();
+                colCnt = this.Count;
                 logger.Debug("ColumnHeader.InferLength: {}", this.Count);
                 logger.Debug("rowCnt: {}", rowCnt);
             }
