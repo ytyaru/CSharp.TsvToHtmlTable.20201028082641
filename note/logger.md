@@ -66,3 +66,39 @@ class MyClass
 }
 ```
 
+# できなかったこと
+
+## 色付き＆改行なし
+
+```sh
+NLog.NLogConfigurationException: Exception when parsing /tmp/work/CSharp.TsvToHtmlTable.20201028082641/bin/NLog.config.  ---> System.NotSupportedException: Parameter lineEnding not supported on ColoredConsoleTarget
+```
+
+NLog.config
+```xml
+<nlog>
+    <targets>
+        <target name="log-stderr-none-new-line" 
+                xsi:type="ColoredConsole" 
+                errorStream="true" 
+                enableAnsiOutput="true" 
+                lineEnding="None" 
+                layout="[${level:upperCase=true}] ${message}">
+            <highlight-row condition="level == LogLevel.Trace" foregroundColor="Gray" />
+            <highlight-row condition="level == LogLevel.Debug" foregroundColor="Blue" />
+            <highlight-row condition="level == LogLevel.Info" foregroundColor="Green" />
+            <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow" />
+            <highlight-row condition="level == LogLevel.Error" foregroundColor="Red" />
+            <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Magenta" />
+        </target>
+    </targets>
+    <rules>
+        <logger name="NoneNewLineLogger" levels="Trace,Debug,Info,Warn" writeTo="log-stderr-none-new-line" />
+    </rules>
+</nlog>
+```
+
+* https://github.com/nlog/NLog/wiki/File-target
+
+　どうやらファイル用ログでないと改行なしにできないようだ……。
+

@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-//using System.Diagnostics;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ namespace TsvToHtmlTable
 {
     public class GroupHeader : AConverter
     {
-//        private Logger logger = LogManager.GetCurrentClassLogger();
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
         public GroupHeaderOptions Options { get; private set; }
         public GroupHeader(GroupHeaderOptions opt):base(opt)
@@ -30,7 +28,6 @@ namespace TsvToHtmlTable
                 header.Infer(cellTable);
 //                throw new Exception("Some Error");
                 return new TableBuilder(this.Options, header).ToHtml();
-//                return "<table></table>";
             }
             catch (Exception e)
             {
@@ -42,12 +39,6 @@ namespace TsvToHtmlTable
         private void ShowArgsNLog(GroupHeaderOptions opt)
         {
             logger.Debug("GroupHeader.ShowArgsNLog()");
-            logger.Fatal("Fatal");
-            logger.Error("Error");
-            logger.Warn("Warn");
-            logger.Info("Info");
-            logger.Debug("Debug");
-            logger.Trace("Trace");
             logger.Debug("----- Arguments -----");
             logger.Debug("Header                : {}", opt.Header);
             logger.Debug("Row                   : {}", opt.Row);
@@ -153,12 +144,17 @@ namespace TsvToHtmlTable
         }
         private void MakeCells(int rowCnt, int colCnt)
         {
+            logger.Debug("RowHeader.MakeCells()");
             foreach (var row in this.Options.SourceList.GetRange(0, rowCnt))
             {
                 logger.Trace("row: {}", row);
                 this.Cells.Add(row.GetRange(colCnt, row.Count - colCnt));
                 logger.Trace("Cells: {}", Cells);
             }
+
+            StringBuilder spanLog = new StringBuilder();
+            StringBuilder textLog = new StringBuilder();
+            Logger nlogger = NLog.LogManager.GetLogger("NoneNewLineLogger");
             for (int r=0; r<this.Cells.Count; r++)
             {
                 for (int c=0; c<this.Cells[r].Count; c++)
@@ -168,30 +164,33 @@ namespace TsvToHtmlTable
                         this.Cells[r][c].RowSpan = this.CellTable.GetZeroLenByRow(this.Cells, r, c);
                         this.Cells[r][c].ColSpan = this.CellTable.GetZeroLenByColumn(this.Cells, r, c);
                     }
-                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                    spanLog.Append($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                    textLog.Append($"{this.Cells[r][c].Text}\t");
                 }
-                Console.WriteLine();
+                spanLog.Append("\n");
+                textLog.Append("\n");
             }
+            logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
+            logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
+
             this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
             this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
             SetCrossSpan();
             this.Cells = this.CellTable.SetZeroRect(this.Cells);
+            spanLog.Clear();
+            textLog.Clear();
             for (int r=0; r<this.Cells.Count; r++)
             {
                 for (int c=0; c<this.Cells[r].Count; c++)
                 {
-                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                    spanLog.Append($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
+                    textLog.Append($"{this.Cells[r][c].Text}\t");
                 }
-                Console.WriteLine();
+                spanLog.Append("\n");
+                textLog.Append("\n");
             }
-            for (int r=0; r<this.Cells.Count; r++)
-            {
-                for (int c=0; c<this.Cells[r].Count; c++)
-                {
-                    Console.Write($"{this.Cells[r][c].Text}\t");
-                }
-                Console.WriteLine();
-            }
+            logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
+            logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
         }
         private void SetCrossSpan()
         {
