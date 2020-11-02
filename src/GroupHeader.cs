@@ -101,12 +101,17 @@ namespace TsvToHtmlTable
             this.Count = rowCnt;
             if (HeaderType.c == this.Options.Header) {
                 this.Count = 0;
-            } else {
-                MakeCells(rowCnt, colCnt);
-                logger.Debug("RowHeader");
-                if (RowHeaderPosType.b == this.Options.Row || 
-                    RowHeaderPosType.B == this.Options.Row) { MakeReversedCells(); }
+                this.RowHeaderCount = 0;
+                return;
+            } else if (HeaderType.r == this.Options.Header) {
+                this.Count = this.InferLength();
+                rowCnt = this.Count;
+                this.RowHeaderCount = rowCnt;
             }
+            MakeCells(rowCnt, colCnt);
+            logger.Debug("RowHeader");
+            if (RowHeaderPosType.b == this.Options.Row || 
+                RowHeaderPosType.B == this.Options.Row) { MakeReversedCells(); }
         }
         public bool HasTop()
         {
@@ -122,6 +127,22 @@ namespace TsvToHtmlTable
                  RowHeaderPosType.B == this.Options.Row)) { return true; }
             else { return false; }
         }
+        private int InferLength()
+        {
+            int len = 1;
+            List<bool> has = new List<bool>(new bool[this.Options.SourceList[0].Count-this.ColumnHeaderCount]);
+            for (int r=0; r<this.Options.SourceList.Count; r++)
+            {
+                for (int c=this.ColumnHeaderCount; c<this.Options.SourceList[0].Count-this.ColumnHeaderCount; c++)
+                {
+                    if (0 < this.Options.SourceList[r][c].Text.Length) { has[c] = true; }
+                }
+                if (has.All(v=>v==true)) { return len; }
+                len++;
+            }
+            return has.Count;
+        }
+
         private void MakeCells(int rowCnt, int colCnt)
         {
             logger.Debug("RowHeader.MakeCells()");
@@ -228,7 +249,6 @@ namespace TsvToHtmlTable
             this.Count = colCnt;
             if (HeaderType.r == this.Options.Header) {
                 this.Count = 0;
-                return;
             }
             if (HeaderType.c == this.Options.Header) {
                 rowCnt = 0;
@@ -239,6 +259,7 @@ namespace TsvToHtmlTable
                 logger.Debug("rowCnt: {}", rowCnt);
             }
             logger.Debug("ColumnHeader: {}", this.Count);
+            if (0 == this.Count) { return; }
             MakeCells(rowCnt, colCnt);
             if (ColumnHeaderPosType.r == this.Options.Column || 
                 ColumnHeaderPosType.B == this.Options.Column) { MakeReversedCells(); }
