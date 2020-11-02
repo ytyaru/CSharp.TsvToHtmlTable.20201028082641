@@ -341,29 +341,14 @@ namespace TsvToHtmlTable
         }
         private void MakeReversedCells()
         {
-            logger.Debug("MakeReversedCells");
+            logger.Debug("ColumnHeader.MakeReversedCells()");
             this.ReversedCells = this.CellTable.DeepCopy(this.Cells);
             for (int r=0; r<this.ReversedCells.Count; r++)
             {
                 this.ReversedCells[r].Reverse();
             }
-            foreach (var row in this.ReversedCells)
-            {
-                foreach (var cell in row)
-                {
-                    Console.Write($"{cell.RowSpan},{cell.ColSpan}\t");
-                }
-                Console.WriteLine();
-            }
-            foreach (var row in this.ReversedCells)
-            {
-                foreach (var cell in row)
-                {
-                    Console.Write($"{cell.Text}\t");
-                }
-                Console.WriteLine();
-            }
             this.Reverse();
+            this.CellTable.Log(this.ReversedCells);
         }
         private void SetCrossSpan()
         {
