@@ -24,5 +24,19 @@ namespace TsvToHtmlTable
         public string RowHeaderAttributes { get; set; } = "";
         [Option('C', "--column-header-attributes", Required=false, HelpText="列ヘッダ属性。")]
         public string ColumnHeaderAttributes { get; set; } = "";
+
+        /*
+//        [Usage(ApplicationAlias = "yourapp")]
+        [Usage]
+        public static IEnumerable<Example> Examples {
+            get {
+                yield return new Example("Normal scenario", new GroupHeaderOptions {});
+                yield return new Example("Normal scenario", new GroupHeaderOptions { Row=RowHeaderPosType.b });
+                yield return new Example("Normal scenario", new GroupHeaderOptions { Row=RowHeaderPosType.B });
+//                yield return new Example("Logging warnings", UnParserSettings.WithGroupSwitchesOnly() , new Options { InputFile = "file.bin", LogWarning = true });
+//                yield return new Example("Logging errors", new[] { UnParserSettings.WithGroupSwitchesOnly(), UnParserSettings.WithUseEqualTokenOnly() }, new Options { InputFile = "file.bin", LogError = true });
+            }
+        }
+        */
     }
 }
