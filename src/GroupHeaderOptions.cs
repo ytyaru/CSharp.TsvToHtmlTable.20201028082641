@@ -20,9 +20,9 @@ namespace TsvToHtmlTable
         public RowHeaderPosType Row { get; set; } = RowHeaderPosType.t;
         [Option('c', "column", Required=false, Default=ColumnHeaderPosType.l, HelpText="列ヘッダ位置。")]
         public ColumnHeaderPosType Column { get; set; } = ColumnHeaderPosType.l;
-        [Option('R', "--row-header-attributes", Default="", Required=false, HelpText="行ヘッダ属性。")]
+        [Option('R', "--row-header-attributes", Required=false, HelpText="行ヘッダ属性。")]
         public string RowHeaderAttributes { get; set; } = "";
-        [Option('C', "--column-header-attributes", Default="", Required=false, HelpText="列ヘッダ属性。")]
+        [Option('C', "--column-header-attributes", Required=false, HelpText="列ヘッダ属性。")]
         public string ColumnHeaderAttributes { get; set; } = "";
     }
 }

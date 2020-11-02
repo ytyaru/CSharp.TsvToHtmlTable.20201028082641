@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using NLog;
 using System.Reflection; // assembly:AssemblyVersionAttribute
 
-[assembly:AssemblyVersionAttribute("0.0.1")]
-
 namespace TsvToHtmlTable
 {
     public class Program
