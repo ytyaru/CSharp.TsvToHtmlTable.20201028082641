@@ -41,12 +41,6 @@ namespace TsvToHtmlTable
         private void ShowArgsNLog(NoneHeaderOptions opt)
         {
             logger.Debug("InnerHeader.ShowArgsNLog()");
-            logger.Fatal("Fatal");
-            logger.Error("Error");
-            logger.Warn("Warn");
-            logger.Info("Info");
-            logger.Debug("Debug");
-            logger.Trace("Trace");
             logger.Debug("----- Arguments -----");
             logger.Debug("File                  : {}", opt.File);
             logger.Debug("Delimiter             : {}", opt.Delimiter);
@@ -55,6 +49,5 @@ namespace TsvToHtmlTable
             logger.Debug("Source                :\n{}", opt.Source);
             logger.Debug("----------");
         }
-
     }
 }
