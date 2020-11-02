@@ -49,7 +49,6 @@ namespace TsvToHtmlTable
             }
             return list;
         }
-//        public void Log(List<List<Cell>> cells, LogLevel level=NLog.LogLevel.Debug)
         public void Log(List<List<Cell>> cells, LogLevel level=default!)
         {
             if (null == level) { level = LogLevel.Debug; }
@@ -67,25 +66,12 @@ namespace TsvToHtmlTable
                 spanLog.Append("\n");
                 textLog.Append("\n");
             }
-//            logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
-//            logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
             logger.Log(level, "\n" + spanLog.ToString().TrimEnd('\n'));
             logger.Log(level, "\n" + textLog.ToString().TrimEnd('\n'));
         }
-        /*
-        public void LogSpan(List<List<Cell>> cells, LogLevel level=LogLevel.Debug)
-        {
-
-        }
-        public void LogText(List<List<Cell>> cells, LogLevel level=LogLevel.Debug)
-        {
-
-        }
-        */
 
         public void SetBlankToZero()
         {
-//            foreach (var i in this.Cells())
             foreach ((int r, int c) in this.Cells())
             {
                 if (0 == this.SourceList[r][c].Text.Length)

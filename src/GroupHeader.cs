@@ -151,10 +151,6 @@ namespace TsvToHtmlTable
                 this.Cells.Add(row.GetRange(colCnt, row.Count - colCnt));
                 logger.Trace("Cells: {}", Cells);
             }
-
-            StringBuilder spanLog = new StringBuilder();
-            StringBuilder textLog = new StringBuilder();
-            Logger nlogger = NLog.LogManager.GetLogger("NoneNewLineLogger");
             for (int r=0; r<this.Cells.Count; r++)
             {
                 for (int c=0; c<this.Cells[r].Count; c++)
@@ -164,35 +160,14 @@ namespace TsvToHtmlTable
                         this.Cells[r][c].RowSpan = this.CellTable.GetZeroLenByRow(this.Cells, r, c);
                         this.Cells[r][c].ColSpan = this.CellTable.GetZeroLenByColumn(this.Cells, r, c);
                     }
-                    spanLog.Append($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
-                    textLog.Append($"{this.Cells[r][c].Text}\t");
                 }
-                spanLog.Append("\n");
-                textLog.Append("\n");
             }
-            logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
-            logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
-
             this.CellTable.Log(this.Cells);
-
             this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
             this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
             SetCrossSpan();
             this.Cells = this.CellTable.SetZeroRect(this.Cells);
-            spanLog.Clear();
-            textLog.Clear();
-            for (int r=0; r<this.Cells.Count; r++)
-            {
-                for (int c=0; c<this.Cells[r].Count; c++)
-                {
-                    spanLog.Append($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
-                    textLog.Append($"{this.Cells[r][c].Text}\t");
-                }
-                spanLog.Append("\n");
-                textLog.Append("\n");
-            }
-            logger.Debug("\n" + spanLog.ToString().TrimEnd('\n'));
-            logger.Debug("\n" + textLog.ToString().TrimEnd('\n'));
+            this.CellTable.Log(this.Cells);
         }
         private void SetCrossSpan()
         {
@@ -227,19 +202,8 @@ namespace TsvToHtmlTable
         }
         private void Reverse()
         {
-            Console.WriteLine("Reverse");
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
-                }
-                Console.WriteLine();
-            }
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
-                }
-                Console.WriteLine();
-            }
+            logger.Debug("RowHeader.Reverse()");
+            this.CellTable.Log(this.ReversedCells);
             for (int r=0; r<this.ReversedCells.Count; r++)
             {
                 for (int c=0; c<this.ReversedCells[r].Count; c++)
@@ -250,18 +214,7 @@ namespace TsvToHtmlTable
                     }
                 }
             }
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
-                }
-                Console.WriteLine();
-            }
-            for (int r=0; r<this.ReversedCells.Count; r++) {
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
-                }
-                Console.WriteLine();
-            }
+            this.CellTable.Log(this.ReversedCells);
         }
         private void SwapCell(int r, int c)
         {
