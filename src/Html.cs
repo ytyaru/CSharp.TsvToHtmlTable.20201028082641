@@ -73,8 +73,9 @@ namespace TsvToHtmlTable
                 builder.Append('"');
                 builder.Append(pair.Value);
                 builder.Append('"');
+                builder.Append(' ');
             }
-            return builder.ToString();
+            return builder.ToString().Trim(' ');
         }
     }
 }
