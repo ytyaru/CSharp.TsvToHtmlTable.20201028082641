@@ -59,7 +59,6 @@ namespace TsvToHtmlTable
         public GroupHeaderOptions Options { get; private set; }
         public RowHeader Row { get; private set; } = default!;
         public ColumnHeader Column { get; private set; } = default!;
-//        public MatrixHeader Matrix { get; private set; } = default!;
         public Header(GroupHeaderOptions opt)
         {
             this.Options = opt;
@@ -88,7 +87,6 @@ namespace TsvToHtmlTable
 
             Row = new RowHeader(this.Options, cellTable, rowCnt, colCnt);
             Column = new ColumnHeader(this.Options, cellTable, rowCnt, colCnt);
-//            Matrix = new MatrixHeader(this.Options, rowCnt, colCnt);
         }
         private void Set()
         {
@@ -402,17 +400,6 @@ namespace TsvToHtmlTable
             }
         }
     }
-    /*
-    class MatrixHeader
-    {
-        private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
-        public GroupHeaderOptions Options { get; private set; }
-        public MatrixHeader(GroupHeaderOptions opt, int rowCnt, int colCnt)
-        {
-            this.Options = opt;
-        }
-    }
-    */
     class TableBuilder
     {
         private Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
