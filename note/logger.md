@@ -68,6 +68,52 @@ class MyClass
 
 # できなかったこと
 
+## ロガーの共通化
+
+　例外表示とそれ以外のロガーを共通化できなかった。`<target>`の属性`layout`の値`${exception:format=tostring}`があるかないかだけの違い。
+
+　というか、`Error`,`Fatal`などのレベルであれば例外表示するものだと思うのだが。それくらいイチイチ設定を作り込まずとも表示できるようにしてほしい。
+
+```xml
+    <targets>
+        <target name="log-stderr" 
+                xsi:type="ColoredConsole" 
+                errorStream="true" 
+                enableAnsiOutput="true" 
+                layout="[${level:upperCase=true}] ${message}">
+            <highlight-row condition="level == LogLevel.Trace" foregroundColor="Gray" />
+            <highlight-row condition="level == LogLevel.Debug" foregroundColor="Blue" />
+            <highlight-row condition="level == LogLevel.Info" foregroundColor="Green" />
+            <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow" />
+            <highlight-row condition="level == LogLevel.Error" foregroundColor="Red" />
+            <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Magenta" />
+        </target>
+        <target name="log-stderr-exception" 
+                xsi:type="ColoredConsole" 
+                errorStream="true" 
+                enableAnsiOutput="true" 
+                layout="[${level:upperCase=true}] ${message} ${exception:format=tostring}">
+            <highlight-row condition="level == LogLevel.Trace" foregroundColor="Gray" />
+            <highlight-row condition="level == LogLevel.Debug" foregroundColor="Blue" />
+            <highlight-row condition="level == LogLevel.Info" foregroundColor="Green" />
+            <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow" />
+            <highlight-row condition="level == LogLevel.Error" foregroundColor="Red" />
+            <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Magenta" />
+        </target>
+    </targets>
+    <rules>
+        <logger name="AppDefaultLogger" levels="Trace,Debug,Info,Warn" writeTo="log-stderr" />
+        <logger name="AppErrorLogger" levels="Error,Fatal" writeTo="log-stderr-exception" />
+    </rules>
+```
+
+　呼出元でもロガー名を区別して取得・使用せねばならない。
+
+```cs
+Logger logger = NLog.LogManager.GetLogger("AppDefaultLogger");
+Logger logger = NLog.LogManager.GetLogger("AppErrorLogger");
+```
+
 ## 行数表示byリリースビルド
 
 * https://github.com/NLog/NLog/wiki/Callsite-line-number-layout-renderer
@@ -121,6 +167,7 @@ NLog.config
 
 　どうやらファイル用ログでないと改行なしにできないようだ……。
 
+　仕方ないのでStringBuilderで1行分の文字列を組み立てるようプログラミングした。余計な手間が生じてしまった。だが、よく考えればログに`[DEBUG]`などのプレフィクスがついてしまうなら1行単位でしか出力すべきでない。おそらく最初はそういう想定だったのだろう。だが、プレフィクスが何もないレイアウトにもできる。だったら改行なし出力という要望もあると考えて然るべき。なのに無い。なぜファイル出力だけにはあるのか謎。絶対にとってつけただけだろ。
 
 # バックアップ
 

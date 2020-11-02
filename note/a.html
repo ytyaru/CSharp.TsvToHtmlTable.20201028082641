@@ -138,6 +138,144 @@
 <table><tr><td></td><td></td><td></td><td>ア</td><td></td><td></td><td></td><td>イ</td><td>ウ</td><td></td></tr><tr><td></td><td></td><td></td><td>A</td><td></td><td>B</td><td></td><td></td><td></td><td>C</td></tr><tr><td></td><td></td><td></td><td>a</td><td>b</td><td>c</td><td>d</td><td></td><td>e</td><td></td></tr><tr><td>あ</td><td>A</td><td>a</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td></td><td></td><td>b</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td></td><td>B</td><td>c</td><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><td></td><td></td><td>d</td><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><td>い</td><td></td><td></td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><td>う</td><td></td><td>e</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><td></td><td>C</td><td></td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
 </section>
 
+<section>
+<h1>version</h1>
+<pre><code>tsv2table version
+tsv2table --version</code></pre>
+<pre><code>tsv2table 0.0.1.0</code></pre>
+</section>
 
+<section>
+<h1>help</h1>
+<pre><code>tsv2table help
+tsv2table --help
+</code></pre>
+<pre><code>
+tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  g          (Default Verb) ヘッダが外側にある。
+
+  i          ヘッダが内側にある。
+
+  n          ヘッダがない。
+
+  help       Display more information on a specific command.
+
+  version    Display version information.
+</code></pre>
+<section>
+<h1>group-header</h1>
+<pre><code>tsv2table help g
+tsv2table g --help
+</code></pre>
+<pre><code>
+tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  -H, --header                        (Default: a) ヘッダ。
+
+  -r, --row                           (Default: t) 行ヘッダ位置。
+
+  -c, --column                        (Default: l) 列ヘッダ位置。
+
+  -R, ----row-header-attributes       行ヘッダ属性。
+
+  -C, ----column-header-attributes    列ヘッダ属性。
+
+  -d, --delimiter                     (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
+
+  -T, --table-attributes              table要素の属性。
+
+  -l, --logging-level                 (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
+
+  --help                              Display this help screen.
+
+  --version                           Display version information.
+
+  file (pos. 1)                       入力ファイルパス。</code></pre>
+</section>
+<section>
+<h1>inner-header</h1>
+<pre><code>tsv2table help i
+tsv2table i --help
+</code></pre>
+<pre><code>
+tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  -H, --header               (Default: c) 指定した軸がヘッダになる。
+
+  -s, --start                (Default: 1) ヘッダ開始位置。
+
+  -S, --step                 (Default: 1) ヘッダを指定数だけ飛ばす。
+
+  -A, --header-attributes    全ヘッダに指定した属性を付与する
+
+  -d, --delimiter            (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
+
+  -T, --table-attributes     table要素の属性。
+
+  -l, --logging-level        (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
+
+  --help                     Display this help screen.
+
+  --version                  Display version information.
+
+  file (pos. 1)              入力ファイルパス。
+
+</code></pre>
+</section>
+<section>
+<h1>none-header</h1>
+<pre><code>tsv2table help n
+tsv2table n --help
+</code></pre>
+<pre><code>
+tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  -d, --delimiter           (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
+
+  -T, --table-attributes    table要素の属性。
+
+  -l, --logging-level       (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
+
+  --help                    Display this help screen.
+
+  --version                 Display version information.
+
+  file (pos. 1)             入力ファイルパス。
+</code></pre>
+</section>
+</section>
 </body>
 </html>

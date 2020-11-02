@@ -13,7 +13,7 @@ namespace TsvToHtmlTable
 
     public class CommonOptions
     {
-        [Value(1, MetaName="file")]
+        [Value(1, MetaName="file", HelpText="入力ファイルパス。")]
         public string File { get; set; } = "";
         [Option('d', "delimiter", Required=false, Default="\t", HelpText="入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。")]
         public string Delimiter { get; set; } = "\t";
