@@ -316,6 +316,7 @@ namespace TsvToHtmlTable
         }
         private void MakeCells(int rowCnt, int colCnt)
         {
+            logger.Debug("ColumnHeader.MakeCells()");
             foreach (var row in this.Options.SourceList.GetRange(rowCnt, Options.SourceList.Count - rowCnt))
             {
                 this.Cells.Add(row.GetRange(0, colCnt));
@@ -329,22 +330,14 @@ namespace TsvToHtmlTable
                         this.Cells[r][c].RowSpan = this.CellTable.GetZeroLenByRow(this.Cells, r, c);
                         this.Cells[r][c].ColSpan = this.CellTable.GetZeroLenByColumn(this.Cells, r, c);
                     }
-                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
                 }
-                Console.WriteLine();
             }
+            this.CellTable.Log(this.Cells);
             this.Cells = this.CellTable.StopColSpanByRowSpan(this.Cells);
             this.Cells = this.CellTable.StopRowSpanByColSpan(this.Cells);
             SetCrossSpan();
             this.Cells = this.CellTable.SetZeroRect(this.Cells);
-            for (int r=0; r<this.Cells.Count; r++)
-            {
-                for (int c=0; c<this.Cells[r].Count; c++)
-                {
-                    Console.Write($"({this.Cells[r][c].RowSpan},{this.Cells[r][c].ColSpan})\t");
-                }
-                Console.WriteLine();
-            }
+            this.CellTable.Log(this.Cells);
         }
         private void MakeReversedCells()
         {
