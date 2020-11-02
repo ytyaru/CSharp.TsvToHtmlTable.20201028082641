@@ -32,18 +32,6 @@ namespace TsvToHtmlTable
                     }
                 }  
             }
-//            Console.WriteLine(opt.SourceList.Count);
-/*
-            logger.Debug(opt.SourceList.Count);
-            for (int r=0; r<opt.SourceList.Count; r++) {
-                for (int c=0; c<opt.SourceList[r].Count; c++) {
-                    Console.Write($"{opt.SourceList[r][c].Text}\t");
-                    logger.Debug("{}\t", opt.SourceList[r][c].Text);
-                }
-                Console.WriteLine();
-                logger.Debug(opt.SourceList.Count);
-            }
-*/
         }
         abstract public string ToHtml();
     }

@@ -19,7 +19,7 @@ namespace TsvToHtmlTable
         }
         public override string ToHtml()
         {
-            Console.WriteLine("InnerHeader.ToHtml()");
+            logger.Debug("InnerHeader.ToHtml()");
             var tr = this.Options.Header switch
             {
                 InnerHeaderType.c => MakeColumn(),
@@ -63,19 +63,13 @@ namespace TsvToHtmlTable
         }
         private bool IsHeader(int idx)
         {
-            logger.Debug("{} {} {} {}", idx, this.Options.Start, this.Options.Step, ((idx + 1 - this.Options.Start) % this.Options.Step));
+//            logger.Trace("{} {} {} {}", idx, this.Options.Start, this.Options.Step, ((idx + 1 - this.Options.Start) % this.Options.Step));
             if (0 == ((idx + 1 - this.Options.Start) % (this.Options.Step + 1))) { return true; }
             else { return false; }
         }
         private void ShowArgsNLog(InnerHeaderOptions opt)
         {
             logger.Debug("InnerHeader.ShowArgsNLog()");
-            logger.Fatal("Fatal");
-            logger.Error("Error");
-            logger.Warn("Warn");
-            logger.Info("Info");
-            logger.Debug("Debug");
-            logger.Trace("Trace");
             logger.Debug("----- Arguments -----");
             logger.Debug("Header                : {}", opt.Header);
             logger.Debug("Start                 : {}", opt.Start);

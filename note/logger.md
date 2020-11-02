@@ -68,7 +68,26 @@ class MyClass
 
 # できなかったこと
 
+## 行数表示byリリースビルド
+
+* https://github.com/NLog/NLog/wiki/Callsite-line-number-layout-renderer
+
+　行番号を取得するにはビルドモードをreleaseでなくdebugで行わねばならない。さもなくば行数はすべて0になる。
+
+```xml
+${callsite-linenumber}
+```
+```xml
+<target name="log-stderr" 
+        xsi:type="ColoredConsole" 
+        errorStream="true" 
+        enableAnsiOutput="true" 
+        layout="[${level:upperCase=true}] ${message} ${callsite-linenumber}">
+```
+
 ## 色付き＆改行なし
+
+* https://github.com/nlog/NLog/wiki/ColoredConsole-target
 
 ```sh
 NLog.NLogConfigurationException: Exception when parsing /tmp/work/CSharp.TsvToHtmlTable.20201028082641/bin/NLog.config.  ---> System.NotSupportedException: Parameter lineEnding not supported on ColoredConsoleTarget
@@ -101,4 +120,119 @@ NLog.config
 * https://github.com/nlog/NLog/wiki/File-target
 
 　どうやらファイル用ログでないと改行なしにできないようだ……。
+
+
+# バックアップ
+
+　コメントアウトを含めたNLog.config。
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      throwConfigExceptions="true">
+
+    <targets>
+        <!--
+        <target name="log-stderr" xsi:type="Console" error="true" />
+        <target name="log-file" xsi:type="File" fileName="app.log" />
+        <target name="log-stdout" xsi:type="Console" />
+        -->
+        <!-- https://github.com/nlog/NLog/wiki/ColoredConsole-target -->
+        <!-- 行番号を取得するにはビルドモードをreleaseでなくdebugで行わねばならない。さもなくば行数はすべて0になる。 -->
+        <!--   https://github.com/NLog/NLog/wiki/Callsite-line-number-layout-renderer -->
+        <!--   ${callsite-linenumber} -->
+        <target name="log-stderr" 
+                xsi:type="ColoredConsole" 
+                errorStream="true" 
+                enableAnsiOutput="true" 
+                layout="[${level:upperCase=true}] ${message}">
+            <highlight-row condition="level == LogLevel.Trace" foregroundColor="Gray" />
+            <highlight-row condition="level == LogLevel.Debug" foregroundColor="Blue" />
+            <highlight-row condition="level == LogLevel.Info" foregroundColor="Green" />
+            <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow" />
+            <highlight-row condition="level == LogLevel.Error" foregroundColor="Red" />
+            <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Magenta" />
+        </target>
+        <target name="log-stderr-exception" 
+                xsi:type="ColoredConsole" 
+                errorStream="true" 
+                enableAnsiOutput="true" 
+                layout="[${level:upperCase=true}] ${message} ${exception:format=tostring}">
+            <highlight-row condition="level == LogLevel.Trace" foregroundColor="Gray" />
+            <highlight-row condition="level == LogLevel.Debug" foregroundColor="Blue" />
+            <highlight-row condition="level == LogLevel.Info" foregroundColor="Green" />
+            <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow" />
+            <highlight-row condition="level == LogLevel.Error" foregroundColor="Red" />
+            <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Magenta" />
+        </target>
+        <!--
+        <target name="log-stderr-none-new-line" 
+                xsi:type="ColoredConsole" 
+                errorStream="true" 
+                enableAnsiOutput="true" 
+                lineEnding="None" 
+                layout="[${level:upperCase=true}] ${message}">
+            <highlight-row condition="level == LogLevel.Trace" foregroundColor="Gray" />
+            <highlight-row condition="level == LogLevel.Debug" foregroundColor="Blue" />
+            <highlight-row condition="level == LogLevel.Info" foregroundColor="Green" />
+            <highlight-row condition="level == LogLevel.Warn" foregroundColor="Yellow" />
+            <highlight-row condition="level == LogLevel.Error" foregroundColor="Red" />
+            <highlight-row condition="level == LogLevel.Fatal" foregroundColor="Magenta" />
+        </target>
+        -->
+        <!--
+        <target name="log-stderr" xsi:type="Console" error="true">
+            <layout xsi:type="JsonLayout">
+                <attribute name="Level" layout="${level}" />
+                <attribute name="Timestamp" layout="${longdate}" />
+                <attribute name="Message" layout="${message}" />
+                <attribute name="Exception" layout="${exception}" />
+            </layout>
+        </target>
+        -->
+        <!--
+        <target name="log-stderr" xsi:type="Console" error="true">
+            <layout xsi:type="CsvLayout" delimiter="Space" withHeader="false">
+                <column name="level" layout="[${level:upperCase=true}]"/>
+                <column name="message" layout="${message}" />
+            </layout>
+        </target>
+        -->
+        <!-- https://nlog-project.org/config/?tab=layouts -->
+        <!-- https://github.com/NLog/NLog/wiki/CsvLayout -->
+        <!--
+        <target name="log-stderr" xsi:type="Console" error="true">
+            <layout xsi:type="CsvLayout" delimiter="Tab" withHeader="false">
+                <column name="time" layout="${longdate}" />
+                <column name="level" layout="${level:upperCase=true}"/>
+                <column name="message" layout="${message}" />
+                <column name="callsite" layout="${callsite:includeSourcePath=true}" />
+                <column name="stacktrace" layout="${stacktrace:topFrames=10}" />
+                <column name="exception" layout="${exception:format=ToString}"/>
+                <column name="property1" layout="${event-properties:property1}"/>
+            </layout>
+        </target>
+        -->
+    </targets>
+    <rules>
+        <!--<logger name="AppDefaultLogger" minlevel="Debug" writeTo="log-stderr" />-->
+        <!--
+        <logger name="AppDefaultLogger" levels="Trace,Debug,Info,Warn" writeTo="log-stderr" />
+        <logger name="AppDefaultLogger" levels="Error,Fatal" writeTo="log-stderr-exception" />
+        <logger name="*" levels="Trace,Debug,Info,Warn" writeTo="log-stderr" />
+        <logger name="*" levels="Error,Fatal" writeTo="log-stderr-exception" />
+        -->
+        <logger name="AppDefaultLogger" levels="Trace,Debug,Info,Warn" writeTo="log-stderr" />
+        <logger name="AppErrorLogger" levels="Error,Fatal" writeTo="log-stderr-exception" />
+<!--        <logger name="NoneNewLineLogger" levels="Trace,Debug,Info,Warn" writeTo="log-stderr-none-new-line" />-->
+    </rules>
+    <!--
+    <rules>
+        <logger name="*" levels="Info,Warn" writeTo="event"/>
+        <logger name="*" levels="Error,Fatal" writeTo="error"/>
+    </rules>
+    -->
+</nlog>
+```
 

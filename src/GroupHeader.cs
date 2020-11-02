@@ -19,22 +19,12 @@ namespace TsvToHtmlTable
         }
         public override string ToHtml()
         {
-            try
-            {
-                logger.Debug("GroupHeader.ToHtml()");
-                var cellTable = new CellTable(this.Options.SourceList);
-                cellTable.SetBlankToZero();
-                var header = new Header(this.Options);
-                header.Infer(cellTable);
-//                throw new Exception("Some Error");
-                return new TableBuilder(this.Options, header).ToHtml();
-            }
-            catch (Exception e)
-            {
-                Logger logger = NLog.LogManager.GetLogger("AppErrorLogger");
-                logger.Error(e, "Error !!");
-            }
-            return "<table></table>";
+            logger.Debug("GroupHeader.ToHtml()");
+            var cellTable = new CellTable(this.Options.SourceList);
+            cellTable.SetBlankToZero();
+            var header = new Header(this.Options);
+            header.Infer(cellTable);
+            return new TableBuilder(this.Options, header).ToHtml();
         }
         private void ShowArgsNLog(GroupHeaderOptions opt)
         {
@@ -76,15 +66,8 @@ namespace TsvToHtmlTable
             } else if (HeaderType.c == this.Options.Header) {
                 colCnt = cellTable.InferColumnHeaderCount();
             }
-            /*
-            int colCnt = cellTable.InferColumnHeaderCount();
-            int rowCnt = cellTable.InferRowHeaderCount(colCnt);
-            */
             logger.Debug("InferColumnHeaderCount: {}", colCnt);
             logger.Debug("InferRowHeaderCount: {}", rowCnt);
-
-//            bool hasReverseRowHeader = () ? :;
-
             Row = new RowHeader(this.Options, cellTable, rowCnt, colCnt);
             Column = new ColumnHeader(this.Options, cellTable, rowCnt, colCnt);
         }
@@ -224,23 +207,6 @@ namespace TsvToHtmlTable
                 }
             }
         }
-        /*
-        public IEnumerable<List<Cell>> Cells()
-        {
-            foreach (var row in this.SourceList.GetRange(0, this.RowHeaderCount))
-            {
-                yield return row.GetRange(colCnt, row.Count - this.ColumnHeaderCount);
-            }
-        }
-        */
-        public void Infer(List<List<Cell>> SourceList)
-        {
-
-        }
-        private int InferRowHeaderCount()
-        {
-            return 0;
-        }
     }
     class ColumnHeader
     {
@@ -294,10 +260,7 @@ namespace TsvToHtmlTable
         private int InferLength()
         {
             int len = 1;
-//            bool[] has = new bool[this.Options.SourceList[0].Count];
-//            bool[] has = new bool[this.Options.SourceList.Count-this.RowHeaderCount];
             List<bool> has = new List<bool>(new bool[this.Options.SourceList.Count-this.RowHeaderCount]);
-//            for (int c=0; c<has.Count; c++)
             for (int c=0; c<this.Options.SourceList[0].Count; c++)
             {
                 for (int r=this.RowHeaderCount; r<this.Options.SourceList.Count-this.RowHeaderCount; r++)
