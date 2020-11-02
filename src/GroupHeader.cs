@@ -377,19 +377,6 @@ namespace TsvToHtmlTable
         }
         private void Reverse()
         {
-            Console.WriteLine("Reverse");
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
-                }
-                Console.WriteLine();
-            }
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
-                }
-                Console.WriteLine();
-            }
             for (int r=0; r<this.ReversedCells.Count; r++)
             {
                 for (int c=0; c<this.ReversedCells[r].Count; c++)
@@ -399,18 +386,6 @@ namespace TsvToHtmlTable
                         SwapCell(r, c);
                     }
                 }
-            }
-            for (int r=0; r<this.ReversedCells.Count; r++) { 
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].Text}\t");
-                }
-                Console.WriteLine();
-            }
-            for (int r=0; r<this.ReversedCells.Count; r++) {
-                for (int c=0; c<this.ReversedCells[r].Count; c++) {
-                    Console.Write($"{this.ReversedCells[r][c].RowSpan},{this.ReversedCells[r][c].ColSpan}\t");
-                }
-                Console.WriteLine();
             }
         }
         private void SwapCell(int r, int c)
