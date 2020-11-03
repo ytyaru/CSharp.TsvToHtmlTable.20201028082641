@@ -1,0 +1,11 @@
+@charset "utf-8";
+ol {
+    counter-reset: section;
+}
+li {
+    list-style: none;
+}
+ol>li:before {
+    content : counters(section, '-') '. ';
+    counter-increment : section;
+}

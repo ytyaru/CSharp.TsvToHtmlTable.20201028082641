@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="highlight.css">
     <link rel="stylesheet" type="text/css" href="table.css">
+<!--    <link rel="stylesheet" type="text/css" href="ol.css">-->
 </head>
 <body>
 <main>
@@ -92,7 +93,6 @@ tsv2table n
 <a id="input"></a>
 <section>
 <h1>入力 <a href="#input">¶</a></h1>
-
 <section>
     <a id="input-sub-command"></a>
     <h1>サブコマンド <a href="#input-sub-command">¶</a></h1>
@@ -101,7 +101,7 @@ tsv2table n
             <th>短</th><th>長</th><th>概要</th>
         </tr>
         <tr>
-            <td><code>g</code></td><td><code>group-header</code></td><td>外側にヘッダがある表を作る。</td>
+            <td><code>g</code></td><td><code>group-header</code></td><td>外側にヘッダがある表を作る。ヘッダは包含関係を表現できる。空白セルがあると結合する。</td>
         </tr>
         <tr>
             <td><code>i</code></td><td><code>inner-header</code></td><td>内側にヘッダがある表を作る。</td>
@@ -126,6 +126,15 @@ tsv2table n
                 <td><code>1</code></td><td><code>file</code></td><td></td><td>入力ファイルパス（stdinでも可）</td>
             </tr>
         </table>
+        <p>たとえば以下のようなTSVを使う。</p>
+        <ul>
+            <li><a href="./tsv/row_1.tsv">row_1.tsv</a></li>
+            <li><a href="./tsv/row_3.tsv">row_3.tsv</a></li>
+            <li><a href="./tsv/col_1.tsv">col_1.tsv</a></li>
+            <li><a href="./tsv/col_3.tsv">col_3.tsv</a></li>
+            <li><a href="./tsv/matrix_1.tsv">matrix_1.tsv</a></li>
+            <li><a href="./tsv/matrix_3.tsv">matrix_3.tsv</a></li>
+        </ul>
     </section>
     <section>
         <a id="input-common-option"></a>
