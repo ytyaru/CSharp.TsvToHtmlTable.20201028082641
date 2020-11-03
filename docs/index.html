@@ -154,6 +154,90 @@ tsv2table n
             </tr>
         </table>
     </section>
+
+    <section>
+        <a id="input-group-header"></a>
+        <h1>group-header <a href="#input-group-header">¶</a></h1>
+        <table>
+            <tr>
+                <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
+            </tr>
+            <tr>
+                <td><code>-H</code></td><td><code>--header</code></td><td><code>a</code></td><td>
+                    <table>
+                    <tr><td><code>a</code></td><td><code>auto</code></td><td>ヘッダを推測する。<small><br>1行目1列目が空でなければ列ヘッダなし。<br>1行目に空がなければ行ヘッダは1行のみ。</small></td></tr>
+                    <tr><td><code>r</code></td><td><code>row</code></td><td>行ヘッダがある。</td></tr>
+                    <tr><td><code>c</code></td><td><code>column</code></td><td>列ヘッダがある。</td></tr>
+                    <tr><td><code>m</code></td><td><code>matrix</code></td><td>行列ヘッダがある。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-r</code></td><td><code>--row</code></td><td><code>t</code></td><td>
+                    <table>
+                    <tr><td><code>t</code></td><td><code>top</code></td><td>行ヘッダを上端に配置する。</td></tr>
+                    <tr><td><code>b</code></td><td><code>bottom</code></td><td>行ヘッダを下端に配置する。</td></tr>
+                    <tr><td><code>B</code></td><td><code>both</code></td><td>行ヘッダを上下両端に配置する。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-c</code></td><td><code>--column</code></td><td><code>l</code></td><td>
+                    <table>
+                    <tr><td><code>l</code></td><td><code>left</code></td><td>列ヘッダを左端に配置する。</td></tr>
+                    <tr><td><code>r</code></td><td><code>right</code></td><td>列ヘッダを右端に配置する。</td></tr>
+                    <tr><td><code>B</code></td><td><code>both</code></td><td>列ヘッダを左右両端に配置する。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-R</code></td><td><code>--row-header-attributes</code></td><td><code></code></td><td>行ヘッダに指定するHTML属性。</td>
+            </tr>
+            <tr>
+                <td><code>-C</code></td><td><code>--common-header-attributes</code></td><td><code></code></td><td>列ヘッダに指定するHTML属性。</td>
+            </tr>
+            <tr>
+                <td><code>-M</code></td><td><code>--matrix-header-attributes</code></td><td><code></code></td><td>四隅の空ヘッダに指定するHTML属性。</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <a id="input-inner-header"></a>
+        <h1>inner-header <a href="#input-inner-header">¶</a></h1>
+        <table>
+            <tr>
+                <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
+            </tr>
+            <tr>
+                <td><code>-H</code></td><td><code>--header</code></td><td><code>c</code></td><td>
+                    <table>
+                    <tr><td><code>c</code></td><td><code>column</code></td><td>列がヘッダになる。</td></tr>
+                    <tr><td><code>r</code></td><td><code>row</code></td><td>行がヘッダになる。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-s</code></td><td><code>--start</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
+            </tr>
+            <tr>
+                <td><code>-S</code></td><td><code>--stop</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
+            </tr>
+            <tr>
+                <td><code>-A</code></td><td><code>--header-attributes</code></td><td><code></code></td><td>全ヘッダに指定したHTML属性を付与する。</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <a id="input-none-header"></a>
+        <h1>none-header <a href="#input-none-header">¶</a></h1>
+        <p><a href="#input-common">common</a> 引数のみ。</p>
+    </section>
+</section>
+
+
+
+
 </section>
 
 <section>
@@ -172,23 +256,131 @@ tsv2table n
     <section>
         <a id="output-help-root"></a>
         <h1>ルート <a href="#output-help-root">¶</a></h1>
+        <pre><code>tsv2table help
+tsv2table --help
+        </code></pre>
+        <pre><code>tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  g          (Default Verb) ヘッダが外側にある。
+
+  i          ヘッダが内側にある。
+
+  n          ヘッダがない。
+
+  help       Display more information on a specific command.
+
+  version    Display version information.</code></pre>
     </section>
 
     <section>
         <a id="output-help-g"></a>
         <h1>group-header <a href="#output-help-g">¶</a></h1>
+        <pre><code>tsv2table help g
+tsv2table g --help</code></pre>
+        <pre><code>tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  -H, --header                        (Default: a) ヘッダ。
+
+  -r, --row                           (Default: t) 行ヘッダ位置。
+
+  -c, --column                        (Default: l) 列ヘッダ位置。
+
+  -R, ----row-header-attributes       行ヘッダ属性。
+
+  -C, ----column-header-attributes    列ヘッダ属性。
+
+  -d, --delimiter                     (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
+
+  -T, --table-attributes              table要素の属性。
+
+  -l, --logging-level                 (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
+
+  --help                              Display this help screen.
+
+  --version                           Display version information.
+
+  file (pos. 1)                       入力ファイルパス。</code></pre>
     </section>
 
     <section>
         <a id="output-help-i"></a>
         <h1>inner-header <a href="#output-help-i">¶</a></h1>
+        <pre><code>tsv2table help i
+tsv2table i --help</code></pre>
+        <pre><code>tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
+
+  -H, --header               (Default: c) 指定した軸がヘッダになる。
+
+  -s, --start                (Default: 1) ヘッダ開始位置。
+
+  -S, --step                 (Default: 1) ヘッダを指定数だけ飛ばす。
+
+  -A, --header-attributes    全ヘッダに指定した属性を付与する
+
+  -d, --delimiter            (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
+
+  -T, --table-attributes     table要素の属性。
+
+  -l, --logging-level        (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
+
+  --help                     Display this help screen.
+
+  --version                  Display version information.
+
+  file (pos. 1)              入力ファイルパス。</code></pre>
     </section>
 
     <section>
         <a id="output-help-n"></a>
         <h1>none-header <a href="#output-help-n">¶</a></h1>
-    </section>
+        <pre><code>tsv2table help n
+tsv2table n --help</code></pre>
+        <pre><code>tsv2table 0.0.1.0
+(C) 2020 ytyaru
+CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
+USAGE:
+  TSVをHTMLのtableタグに変換する。
+  tsv2talbe [g|i|n]
+  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
+  tsv2talbe i [-H c|r] [-s N] [-S N]
+  tsv2talbe n
 
+  -d, --delimiter           (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
+
+  -T, --table-attributes    table要素の属性。
+
+  -l, --logging-level       (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
+
+  --help                    Display this help screen.
+
+  --version                 Display version information.
+
+  file (pos. 1)             入力ファイルパス。</code></pre>
+    </section>
 </section>
 
 <section>
@@ -336,84 +528,6 @@ tsv2table n
 
 
 
-<section>
-    <h1>group-header</h1>
-    <table>
-        <tr>
-            <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
-        </tr>
-        <tr>
-            <td><code>-H</code></td><td><code>--header</code></td><td><code>a</code></td><td>
-                <table>
-                <tr><td><code>a</code></td><td><code>auto</code></td><td>ヘッダを推測する。<small><br>1行目1列目が空でなければ列ヘッダなし。<br>1行目に空がなければ行ヘッダは1行のみ。</small></td></tr>
-                <tr><td><code>r</code></td><td><code>row</code></td><td>行ヘッダがある。</td></tr>
-                <tr><td><code>c</code></td><td><code>column</code></td><td>列ヘッダがある。</td></tr>
-                <tr><td><code>m</code></td><td><code>matrix</code></td><td>行列ヘッダがある。</td></tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><code>-r</code></td><td><code>--row</code></td><td><code>t</code></td><td>
-                <table>
-                <tr><td><code>t</code></td><td><code>top</code></td><td>行ヘッダを上端に配置する。</td></tr>
-                <tr><td><code>b</code></td><td><code>bottom</code></td><td>行ヘッダを下端に配置する。</td></tr>
-                <tr><td><code>B</code></td><td><code>both</code></td><td>行ヘッダを上下両端に配置する。</td></tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><code>-c</code></td><td><code>--column</code></td><td><code>l</code></td><td>
-                <table>
-                <tr><td><code>l</code></td><td><code>left</code></td><td>列ヘッダを左端に配置する。</td></tr>
-                <tr><td><code>r</code></td><td><code>right</code></td><td>列ヘッダを右端に配置する。</td></tr>
-                <tr><td><code>B</code></td><td><code>both</code></td><td>列ヘッダを左右両端に配置する。</td></tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><code>-R</code></td><td><code>--row-header-attributes</code></td><td><code></code></td><td>行ヘッダに指定するHTML属性。</td>
-        </tr>
-        <tr>
-            <td><code>-C</code></td><td><code>--common-header-attributes</code></td><td><code></code></td><td>列ヘッダに指定するHTML属性。</td>
-        </tr>
-        <tr>
-            <td><code>-M</code></td><td><code>--matrix-header-attributes</code></td><td><code></code></td><td>四隅の空ヘッダに指定するHTML属性。</td>
-        </tr>
-    </table>
-</section>
-
-</section>
-<section>
-    <h1>inner-header</h1>
-    <table>
-        <tr>
-            <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
-        </tr>
-        <tr>
-            <td><code>-H</code></td><td><code>--header</code></td><td><code>c</code></td><td>
-                <table>
-                <tr><td><code>c</code></td><td><code>column</code></td><td>列がヘッダになる。</td></tr>
-                <tr><td><code>r</code></td><td><code>row</code></td><td>行がヘッダになる。</td></tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><code>-s</code></td><td><code>--start</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
-        </tr>
-        <tr>
-            <td><code>-S</code></td><td><code>--stop</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
-        </tr>
-        <tr>
-            <td><code>-A</code></td><td><code>--header-attributes</code></td><td><code></code></td><td>全ヘッダに指定した属性を付与する。</td>
-        </tr>
-    </table>
-</section>
-<section>
-    <h1>none-header</h1>
-    <p>common 引数のみ。</p>
-</section>
-</section>
-
 
 
 
@@ -552,139 +666,6 @@ tsv2table n
 <pre><code>tsv2table version
 tsv2table --version</code></pre>
 <pre><code>tsv2table 0.0.1.0</code></pre>
-</section>
-
-<section>
-<h1>help</h1>
-<pre><code>tsv2table help
-tsv2table --help
-</code></pre>
-<pre><code>
-tsv2table 0.0.1.0
-(C) 2020 ytyaru
-CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
-USAGE:
-  TSVをHTMLのtableタグに変換する。
-  tsv2talbe [g|i|n]
-  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
-  tsv2talbe i [-H c|r] [-s N] [-S N]
-  tsv2talbe n
-
-  g          (Default Verb) ヘッダが外側にある。
-
-  i          ヘッダが内側にある。
-
-  n          ヘッダがない。
-
-  help       Display more information on a specific command.
-
-  version    Display version information.
-</code></pre>
-<section>
-<h1>group-header</h1>
-<pre><code>tsv2table help g
-tsv2table g --help
-</code></pre>
-<pre><code>
-tsv2table 0.0.1.0
-(C) 2020 ytyaru
-CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
-USAGE:
-  TSVをHTMLのtableタグに変換する。
-  tsv2talbe [g|i|n]
-  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
-  tsv2talbe i [-H c|r] [-s N] [-S N]
-  tsv2talbe n
-
-  -H, --header                        (Default: a) ヘッダ。
-
-  -r, --row                           (Default: t) 行ヘッダ位置。
-
-  -c, --column                        (Default: l) 列ヘッダ位置。
-
-  -R, ----row-header-attributes       行ヘッダ属性。
-
-  -C, ----column-header-attributes    列ヘッダ属性。
-
-  -d, --delimiter                     (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
-
-  -T, --table-attributes              table要素の属性。
-
-  -l, --logging-level                 (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
-
-  --help                              Display this help screen.
-
-  --version                           Display version information.
-
-  file (pos. 1)                       入力ファイルパス。</code></pre>
-</section>
-<section>
-<h1>inner-header</h1>
-<pre><code>tsv2table help i
-tsv2table i --help
-</code></pre>
-<pre><code>
-tsv2table 0.0.1.0
-(C) 2020 ytyaru
-CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
-USAGE:
-  TSVをHTMLのtableタグに変換する。
-  tsv2talbe [g|i|n]
-  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
-  tsv2talbe i [-H c|r] [-s N] [-S N]
-  tsv2talbe n
-
-  -H, --header               (Default: c) 指定した軸がヘッダになる。
-
-  -s, --start                (Default: 1) ヘッダ開始位置。
-
-  -S, --step                 (Default: 1) ヘッダを指定数だけ飛ばす。
-
-  -A, --header-attributes    全ヘッダに指定した属性を付与する
-
-  -d, --delimiter            (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
-
-  -T, --table-attributes     table要素の属性。
-
-  -l, --logging-level        (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
-
-  --help                     Display this help screen.
-
-  --version                  Display version information.
-
-  file (pos. 1)              入力ファイルパス。
-
-</code></pre>
-</section>
-<section>
-<h1>none-header</h1>
-<pre><code>tsv2table help n
-tsv2table n --help
-</code></pre>
-<pre><code>
-tsv2table 0.0.1.0
-(C) 2020 ytyaru
-CC0 : https://creativecommons.org/publicdomain/zero/1.0/deed.ja
-USAGE:
-  TSVをHTMLのtableタグに変換する。
-  tsv2talbe [g|i|n]
-  tsv2talbe g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
-  tsv2talbe i [-H c|r] [-s N] [-S N]
-  tsv2talbe n
-
-  -d, --delimiter           (Default: 	) 入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。
-
-  -T, --table-attributes    table要素の属性。
-
-  -l, --logging-level       (Default: e) ログ出力する。指定したレベル以上のもののみ出力する。
-
-  --help                    Display this help screen.
-
-  --version                 Display version information.
-
-  file (pos. 1)             入力ファイルパス。
-</code></pre>
-</section>
 </section>
 
 
