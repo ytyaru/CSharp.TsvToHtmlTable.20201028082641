@@ -36,10 +36,16 @@ namespace TsvToHtmlTable
             for (int r=0; r<this.Options.SourceList.Count; r++)
             {
                 td.Clear();
-                string element = (IsHeader(r)) ? "th" : "td";
+                bool isHeader = IsHeader(r);
+//                string element = (IsHeader(r)) ? "th" : "td";
                 for (int c=0; c<this.Options.SourceList[r].Count; c++)
                 {
-                    td.Append(Html.Enclose(element, this.Options.SourceList[r][c].Text));
+                    if (isHeader) {
+                        td.Append(Html.Enclose("th", this.Options.HeaderAttribute, this.Options.SourceList[r][c].Text));
+                    } else {
+                        td.Append(Html.Enclose("td", this.Options.SourceList[r][c].Text));
+                    }
+//                    td.Append(Html.Enclose(element, this.Options.SourceList[r][c].Text));
                 }
                 tr.Append(Html.Enclose("tr", td.ToString()));
             }
@@ -55,7 +61,12 @@ namespace TsvToHtmlTable
                 td.Clear();
                 for (int c=0; c<row.Count; c++)
                 {
-                    td.Append(Html.Enclose((IsHeader(c)) ? "th" : "td", row[c].Text));
+                    if (IsHeader(c)) {
+                        td.Append(Html.Enclose("th", this.Options.HeaderAttribute, row[c].Text));
+                    } else {
+                        td.Append(Html.Enclose("td", row[c].Text));
+                    }
+//                    td.Append(Html.Enclose((IsHeader(c)) ? "th" : "td", row[c].Text));
                 }
                 tr.Append(Html.Enclose("tr", td.ToString()));
             }

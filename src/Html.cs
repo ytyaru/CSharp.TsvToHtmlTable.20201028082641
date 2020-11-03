@@ -41,10 +41,16 @@ namespace TsvToHtmlTable
                 builder.Append(' ');
                 builder.Append(attr);
             }
+            builder.Append('>');
+            if (!string.IsNullOrEmpty(text)) { builder.Append(text); }
+            builder.Append('<');
+            builder.Append('/');
+            builder.Append(element);
+            builder.Append('>');
+            /*
             if (string.IsNullOrEmpty(text)) {
                 builder.Append(' ');
                 builder.Append('/');
-                builder.Append(element);
                 builder.Append('>');
             } else {
                 builder.Append('>');
@@ -54,6 +60,7 @@ namespace TsvToHtmlTable
                 builder.Append(element);
                 builder.Append('>');
             }
+            */
             return builder.ToString();
         }
 

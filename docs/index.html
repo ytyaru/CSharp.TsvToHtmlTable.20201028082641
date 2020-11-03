@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="highlight.css">
     <link rel="stylesheet" type="text/css" href="table.css">
+    <link rel="stylesheet" type="text/css" href="tsv2table.css">
 <!--    <link rel="stylesheet" type="text/css" href="ol.css">-->
 </head>
 <body>
@@ -71,6 +72,12 @@
             <li><a href="#output-html-n">none-header</a></li>
                 <ol>
                 <li><a href="#output-html-n">tsv2table n</a></li>
+                </ol>
+            <li><a href="#output-html-attr">属性</a></li>
+                <ol>
+                <li><a href="#output-html-attr-n">none-header</a></li>
+                <li><a href="#output-html-attr-i">inner-header</a></li>
+                <li><a href="#output-html-attr-g">group-header</a></li>
                 </ol>
             </ol>
         </ol>
@@ -611,6 +618,34 @@ USAGE:
 
 </section>
 
+
+<section>
+    <a id="output-html-attr"></a>
+    <h1>属性 <a href="#output-html-attr">¶</a></h1>
+
+    <section>
+        <a id="output-html-attr-n"></a>
+        <h1>none-header <a href="#output-html-attr-n">¶</a></h1>
+        <pre><code>cat ./tsv/matrix_3.tsv | ./bin/tsv2table n -T 'class="tsv2table"'</code></pre>
+        <table class="tsv2table"><tr><td></td><td></td><td></td><td>ア</td><td></td><td></td><td></td><td>イ</td><td>ウ</td><td></td></tr><tr><td></td><td></td><td></td><td>A</td><td></td><td>B</td><td></td><td></td><td></td><td>C</td></tr><tr><td></td><td></td><td></td><td>a</td><td>b</td><td>c</td><td>d</td><td></td><td>e</td><td></td></tr><tr><td>あ</td><td>A</td><td>a</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td></td><td></td><td>b</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td></td><td>B</td><td>c</td><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><td></td><td></td><td>d</td><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><td>い</td><td></td><td></td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><td>う</td><td></td><td>e</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><td></td><td>C</td><td></td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
+    </section>
+
+    <section>
+        <a id="output-html-attr-i"></a>
+        <h1>inner-header <a href="#output-html-attr-i">¶</a></h1>
+        <pre><code>cat ./tsv/matrix_3.tsv | ./bin/tsv2table i -T 'class="tsv2table"' -A 'class="i-header"'</code></pre>
+        <table class="tsv2table"><tr><th class="i-header"></th><td></td><th class="i-header"></th><td>ア</td><th class="i-header"></th><td></td><th class="i-header"></th><td>イ</td><th class="i-header">ウ</th><td></td></tr><tr><th class="i-header"></th><td></td><th class="i-header"></th><td>A</td><th class="i-header"></th><td>B</td><th class="i-header"></th><td></td><th class="i-header"></th><td>C</td></tr><tr><th class="i-header"></th><td></td><th class="i-header"></th><td>a</td><th class="i-header">b</th><td>c</td><th class="i-header">d</th><td></td><th class="i-header">e</th><td></td></tr><tr><th class="i-header">あ</th><td>A</td><th class="i-header">a</th><td>A</td><th class="i-header">B</th><td>C</td><th class="i-header">D</th><td>E</td><th class="i-header">F</th><td>G</td></tr><tr><th class="i-header"></th><td></td><th class="i-header">b</th><td>H</td><th class="i-header">I</th><td>J</td><th class="i-header">K</th><td>L</td><th class="i-header">M</th><td>N</td></tr><tr><th class="i-header"></th><td>B</td><th class="i-header">c</th><td>OP</td><th class="i-header"></th><td>QX</td><th class="i-header">R</th><td>STZa</td><th class="i-header"></th><td>U</td></tr><tr><th class="i-header"></th><td></td><th class="i-header">d</th><td>V</td><th class="i-header">W</th><td></td><th class="i-header">Y</th><td></td><th class="i-header"></th><td>b</td></tr><tr><th class="i-header">い</th><td></td><th class="i-header"></th><td>c</td><th class="i-header">d</th><td>e</td><th class="i-header">f</th><td>g</td><th class="i-header">h</th><td>i</td></tr><tr><th class="i-header">う</th><td></td><th class="i-header">e</th><td>j</td><th class="i-header">k</th><td>l</td><th class="i-header">m</th><td>n</td><th class="i-header">o</th><td>p</td></tr><tr><th class="i-header"></th><td>C</td><th class="i-header"></th><td>q</td><th class="i-header">r</th><td>s</td><th class="i-header">t</th><td>u</td><th class="i-header">v</th><td>w</td></tr></table>
+    </section>
+
+    <section>
+        <a id="output-html-attr-g"></a>
+        <h1>group-header <a href="#output-html-attr-g">¶</a></h1>
+    </section>
+
+
+
+
+</section>
 </article>
 </main>
 </body>

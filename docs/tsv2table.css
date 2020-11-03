@@ -1,0 +1,24 @@
+@charset "utf-8";
+table.tsv2table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table.tsv2table > th.g-r-header {
+    background-color: #CCFFCC;
+}
+table.tsv2table > th.g-c-header {
+    background-color: #CCFFCC;
+}
+table.tsv2table > th.g-c-header[rowspan] span {
+    background-color: #CCFFCC;
+    text-align: center;
+    vertical-align: middle;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+table.tsv2table th.i-header {
+    background-color: #CCCCFF;
+    border: solid 1px #8888AA;
+}
+
