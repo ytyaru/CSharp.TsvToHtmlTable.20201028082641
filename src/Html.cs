@@ -32,6 +32,31 @@ namespace TsvToHtmlTable
             builder.Append('>');
             return builder.ToString();
         }
+        public static string Enclose(string element, string attr, string text)
+        {
+            var builder = new StringBuilder();
+            builder.Append('<');
+            builder.Append(element);
+            if (!attr.IsNullOrEmpty()) {
+                builder.Append(' ');
+                builder.Append(attr);
+            }
+            if (text.IsNullOrEmpty()) {
+                builder.Append(' ');
+                builder.Append('/');
+                builder.Append(element);
+                builder.Append('>');
+            } else {
+                builder.Append('>');
+                builder.Append(text);
+                builder.Append('<');
+                builder.Append('/');
+                builder.Append(element);
+                builder.Append('>');
+            }
+            return builder.ToString();
+        }
+
         public static string Enclose(string element, Dictionary<string, string> attrs)
         {
             var builder = new StringBuilder();
