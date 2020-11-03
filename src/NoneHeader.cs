@@ -21,7 +21,7 @@ namespace TsvToHtmlTable
         public override string ToHtml()
         {
             logger.Debug("NoneHeader.ToHtml()");
-            return Html.Enclose("table", this.MakeTr(), this.Options.TableAttribute);
+            return Html.Enclose("table", this.Options.TableAttribute, this.MakeTr());
         }
         private string MakeTr()
         {
