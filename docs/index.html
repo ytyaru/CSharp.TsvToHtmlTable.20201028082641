@@ -10,6 +10,189 @@
 <main>
 <article>
 <h1>TSV to HTML table</h1>
+<p>TSVをHTMLのtableタグに変換する。</p>
+
+<section>
+    <h1>目次</h1>
+    <ol>
+    <li><a href="#usage">使い方</a></li>
+    <li><a href="#input">入力</a></li>
+    <li><a href="#output">出力</a></li>
+        <ol>
+        <li><a href="#output-version">バージョン</a></li>
+        <li><a href="#output-help">ヘルプ</a></li>
+            <ol>
+            <li><a href="#output-help-root">ルート</a></li>
+            <li><a href="#output-help-g">group-header</a></li>
+            <li><a href="#output-help-i">inner-header</a></li>
+            <li><a href="#output-help-n">none-header</a></li>
+            </ol>
+        <li><a href="#output-html">HTML</a></li>
+            <ol>
+            <li><a href="#output-html-g">group-header</a></li>
+                <ol>
+                <li><a href="#output-html-g-default">行列ヘッダ</a></li>
+                    <ol>
+                    <li><a href="#output-html-g-m-top-left">tsv2table</a></li>
+                    <li><a href="#output-html-g-m-bottom-left">tsv2table -r b</a></li>
+                    <li><a href="#output-html-g-m-both-left">tsv2table -r B</a></li>
+                    <li><a href="#output-html-g-m-top-right">tsv2table -c r</a></li>
+                    <li><a href="#output-html-g-m-top-both">tsv2table -c B</a></li>
+                    <li><a href="#output-html-g-m-bottom-right">tsv2table -r b -c r</a></li>
+                    <li><a href="#output-html-g-m-bottom-both">tsv2table -r b -c B</a></li>
+                    <li><a href="#output-html-g-m-both-right">tsv2table -r B -c r</a></li>
+                    <li><a href="#output-html-g-m-both-both">tsv2table -r B -c B</a></li>
+                    </ol>
+                <li><a href="#output-html-g-">列ヘッダ</a></li>
+                    <ol>
+                    <li><a href="#output-html-g-c-left">tsv2table -H c</a></li>
+                    <li><a href="#output-html-g-c-right">tsv2table -H c -c r</a></li>
+                    <li><a href="#output-html-g-c-both">tsv2table -H c -c B</a></li>
+                    </ol>
+                <li><a href="#output-html-g-">行ヘッダ</a></li>
+                    <ol>
+                    <li><a href="#output-html-g-r-top">tsv2table</a></li>
+                    <li><a href="#output-html-g-r-bottom">tsv2table -r b</a></li>
+                    <li><a href="#output-html-g-r-both">tsv2table -r B</a></li>
+                    </ol>
+                </ol>
+            <li><a href="#output-html-i">inner-header</a></li>
+            <li><a href="#output-html-n">none-header</a></li>
+            </ol>
+        </ol>
+    </ol>
+</section>
+
+
+<section>
+    <h1>サブコマンド</h1>
+    <table>
+        <tr>
+            <th>短</th><th>長</th><th>概要</th>
+        </tr>
+        <tr>
+            <td><code>g</code></td><td><code>group-header</code></td><td>外側にヘッダがある表を作る。</td>
+        </tr>
+        <tr>
+            <td><code>i</code></td><td><code>inner-header</code></td><td>内側にヘッダがある表を作る。</td>
+        </tr>
+        <tr>
+            <td><code>n</code></td><td><code>none-header</code></td><td>ヘッダがない表を作る。</td>
+        </tr>
+    </table>
+
+    <section>
+        <h1>common</h1>
+        <section>
+            <h1>位置引数</h1>
+            <table>
+                <tr>
+                    <th>位置</th><th>名前</th><th>初期値</th><th>候補値</th>
+                </tr>
+                <tr>
+                    <td><code>1</code></td><td><code>file</code></td><td></td><td>入力ファイルパス（stdinでも可）</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>オプション引数</h1>
+            <table>
+                <tr>
+                    <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
+                </tr>
+                <tr>
+                    <td><code>-d</code></td><td><code>--delimiter</code></td><td><code>"\t"</code></td><td><code>","</code>等任意文字列。</td>
+                </tr>
+                <tr>
+                    <td><code>-T</code></td><td><code>--table-attribute</code></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td><code>-l</code></td><td><code>--logging-level</code></td><td><code>e</code></td><td>
+                        <table>
+                        <tr><td><code>f</code></td><td><code>fatal</code></td><td>致命的エラーのログのみ表示する。</td></tr>
+                        <tr><td><code>e</code></td><td><code>error</code></td><td>エラー以上のログを表示する。</td></tr>
+                        <tr><td><code>w</code></td><td><code>warn</code></td><td>警告以上のログを表示する。</td></tr>
+                        <tr><td><code>i</code></td><td><code>info</code></td><td>Info以上のログを表示する。</td></tr>
+                        <tr><td><code>d</code></td><td><code>debug</code></td><td>Debug以上のログを表示する。</td></tr>
+                        <tr><td><code>t</code></td><td><code>trace</code></td><td>Traceログのみ表示する。</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </section>
+
+    <section>
+        <h1>group-header</h1>
+        <table>
+            <tr>
+                <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
+            </tr>
+            <tr>
+                <td><code>-H</code></td><td><code>--header</code></td><td><code>a</code></td><td>
+                    <table>
+                    <tr><td><code>a</code></td><td><code>auto</code></td><td>ヘッダを推測する。<small><br>1行目1列目が空でなければ列ヘッダなし。<br>1行目に空がなければ行ヘッダは1行のみ。</small></td></tr>
+                    <tr><td><code>r</code></td><td><code>row</code></td><td>行ヘッダがある。</td></tr>
+                    <tr><td><code>c</code></td><td><code>column</code></td><td>列ヘッダがある。</td></tr>
+                    <tr><td><code>m</code></td><td><code>matrix</code></td><td>行列ヘッダがある。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-r</code></td><td><code>--row</code></td><td><code>t</code></td><td>
+                    <table>
+                    <tr><td><code>t</code></td><td><code>top</code></td><td>行ヘッダを上端に配置する。</td></tr>
+                    <tr><td><code>b</code></td><td><code>bottom</code></td><td>行ヘッダを下端に配置する。</td></tr>
+                    <tr><td><code>B</code></td><td><code>both</code></td><td>行ヘッダを上下両端に配置する。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-c</code></td><td><code>--column</code></td><td><code>l</code></td><td>
+                    <table>
+                    <tr><td><code>l</code></td><td><code>left</code></td><td>列ヘッダを左端に配置する。</td></tr>
+                    <tr><td><code>r</code></td><td><code>right</code></td><td>列ヘッダを右端に配置する。</td></tr>
+                    <tr><td><code>B</code></td><td><code>both</code></td><td>列ヘッダを左右両端に配置する。</td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    </section>
+    <section>
+        <h1>inner-header</h1>
+        <table>
+            <tr>
+                <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
+            </tr>
+            <tr>
+                <td><code>-H</code></td><td><code>--header</code></td><td><code>c</code></td><td>
+                    <table>
+                    <tr><td><code>c</code></td><td><code>column</code></td><td>列がヘッダになる。</td></tr>
+                    <tr><td><code>r</code></td><td><code>row</code></td><td>行がヘッダになる。</td></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><code>-s</code></td><td><code>--start</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
+            </tr>
+            <tr>
+                <td><code>-S</code></td><td><code>--stop</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
+            </tr>
+            <tr>
+                <td><code>-A</code></td><td><code>--header-attributes</code></td><td><code></code></td><td>全ヘッダに指定した属性を付与する。</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <h1>none-header</h1>
+        <p>common 引数のみ。</p>
+    </section>
+</section>
+
+
+
 
 <section>
 <h1>group-header</h1>
@@ -282,134 +465,6 @@ USAGE:
 </section>
 
 
-
-
-<section>
-    <h1>サブコマンド</h1>
-    <table>
-        <tr>
-            <th>短</th><th>長</th><th>概要</th>
-        </tr>
-        <tr>
-            <td><code>g</code></td><td><code>group-header</code></td><td>外側にヘッダがある表を作る。</td>
-        </tr>
-        <tr>
-            <td><code>i</code></td><td><code>inner-header</code></td><td>内側にヘッダがある表を作る。</td>
-        </tr>
-        <tr>
-            <td><code>n</code></td><td><code>none-header</code></td><td>ヘッダがない表を作る。</td>
-        </tr>
-    </table>
-
-    <section>
-        <h1>common</h1>
-        <section>
-            <h1>位置引数</h1>
-            <table>
-                <tr>
-                    <th>位置</th><th>名前</th><th>初期値</th><th>候補値</th>
-                </tr>
-                <tr>
-                    <td><code>1</code></td><td><code>file</code></td><td></td><td>入力ファイルパス（stdinでも可）</td>
-                </tr>
-            </table>
-        </section>
-        <section>
-            <h1>オプション引数</h1>
-            <table>
-                <tr>
-                    <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
-                </tr>
-                <tr>
-                    <td><code>-d</code></td><td><code>--delimiter</code></td><td><code>"\t"</code></td><td><code>","</code>等任意文字列。</td>
-                </tr>
-                <tr>
-                    <td><code>-T</code></td><td><code>--table-attribute</code></td><td></td><td></td>
-                </tr>
-                <tr>
-                    <td><code>-l</code></td><td><code>--logging-level</code></td><td><code>e</code></td><td>
-                        <table>
-                        <tr><td><code>f</code></td><td><code>fatal</code></td><td>致命的エラーのログのみ表示する。</td></tr>
-                        <tr><td><code>e</code></td><td><code>error</code></td><td>エラー以上のログを表示する。</td></tr>
-                        <tr><td><code>w</code></td><td><code>warn</code></td><td>警告以上のログを表示する。</td></tr>
-                        <tr><td><code>i</code></td><td><code>info</code></td><td>Info以上のログを表示する。</td></tr>
-                        <tr><td><code>d</code></td><td><code>debug</code></td><td>Debug以上のログを表示する。</td></tr>
-                        <tr><td><code>t</code></td><td><code>trace</code></td><td>Traceログのみ表示する。</td></tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </section>
-    </section>
-
-    <section>
-        <h1>group-header</h1>
-        <table>
-            <tr>
-                <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
-            </tr>
-            <tr>
-                <td><code>-H</code></td><td><code>--header</code></td><td><code>a</code></td><td>
-                    <table>
-                    <tr><td><code>a</code></td><td><code>auto</code></td><td>ヘッダを推測する。<small><br>1行目1列目が空でなければ列ヘッダなし。<br>1行目に空がなければ行ヘッダは1行のみ。</small></td></tr>
-                    <tr><td><code>r</code></td><td><code>row</code></td><td>行ヘッダがある。</td></tr>
-                    <tr><td><code>c</code></td><td><code>column</code></td><td>列ヘッダがある。</td></tr>
-                    <tr><td><code>m</code></td><td><code>matrix</code></td><td>行列ヘッダがある。</td></tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td><code>-r</code></td><td><code>--row</code></td><td><code>t</code></td><td>
-                    <table>
-                    <tr><td><code>t</code></td><td><code>top</code></td><td>行ヘッダを上端に配置する。</td></tr>
-                    <tr><td><code>b</code></td><td><code>bottom</code></td><td>行ヘッダを下端に配置する。</td></tr>
-                    <tr><td><code>B</code></td><td><code>both</code></td><td>行ヘッダを上下両端に配置する。</td></tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td><code>-c</code></td><td><code>--column</code></td><td><code>l</code></td><td>
-                    <table>
-                    <tr><td><code>l</code></td><td><code>left</code></td><td>列ヘッダを左端に配置する。</td></tr>
-                    <tr><td><code>r</code></td><td><code>right</code></td><td>列ヘッダを右端に配置する。</td></tr>
-                    <tr><td><code>B</code></td><td><code>both</code></td><td>列ヘッダを左右両端に配置する。</td></tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </section>
-
-    </section>
-    <section>
-        <h1>inner-header</h1>
-        <table>
-            <tr>
-                <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
-            </tr>
-            <tr>
-                <td><code>-H</code></td><td><code>--header</code></td><td><code>c</code></td><td>
-                    <table>
-                    <tr><td><code>c</code></td><td><code>column</code></td><td>列がヘッダになる。</td></tr>
-                    <tr><td><code>r</code></td><td><code>row</code></td><td>行がヘッダになる。</td></tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td><code>-s</code></td><td><code>--start</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
-            </tr>
-            <tr>
-                <td><code>-S</code></td><td><code>--stop</code></td><td><code>1</code></td><td><code>1</code>以上の整数。</td>
-            </tr>
-            <tr>
-                <td><code>-A</code></td><td><code>--header-attributes</code></td><td><code></code></td><td>全ヘッダに指定した属性を付与する。</td>
-            </tr>
-        </table>
-    </section>
-    <section>
-        <h1>none-header</h1>
-        <p>common 引数のみ。</p>
-    </section>
-</section>
 
 </article>
 </main>

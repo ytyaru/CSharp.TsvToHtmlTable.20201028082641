@@ -8,12 +8,6 @@ Convert TSV to HTML table.
 
 * [demo](https://ytyaru.github.io/CSharp.TsvToHtmlTable.20201028082641/)
 
-![img](https://github.com/ytyaru/CSharp.TsvToHtmlTable.20201028082641/blob/master/doc/0.png?raw=true)
-
-# Features
-
-* sales point
-
 # Requirement
 
 * <time datetime="2020-10-28T08:26:24+0900">2020-10-28</time>
@@ -27,32 +21,19 @@ Convert TSV to HTML table.
     * csc 3.6.0-4.20224.5 (ec77c100)
     * msbuild 16.6.0.32601
     * [Mono 6.12.0.90](http://ytyaru.hatenablog.com/entry/2020/10/27/111111)
-    * [Mono 5.18.0.240](http://ytyaru.hatenablog.com/entry/2020/01/17/000000)
-        * Eto.Forms 2.4.1 [拡張機能](http://ytyaru.hatenablog.com/entry/2020/01/23/000000), [NuGetパッケージ](http://ytyaru.hatenablog.com/entry/2020/01/21/000000)
 
 ```sh
 $ uname -a
 Linux raspberrypi 5.4.72-v7l+ #1356 SMP Thu Oct 22 13:57:51 BST 2020 armv7l GNU/Linux
 ```
 
-# Installation
-
-```sh
-sudo apt install -y some_package
-```
-
 # Usage
 
 ```bash
 git clone https://github.com/ytyaru/CSharp.TsvToHtmlTable.20201028082641
-cd CSharp.TsvToHtmlTable.20201028082641
-csc Main.cs
-mono Main.exe
+cd CSharp.TsvToHtmlTable.20201028082641/src
+./run.sh
 ```
-
-# Note
-
-* important point
 
 # Author
 
