@@ -74,10 +74,10 @@ namespace TsvToHtmlTable
             logger.Debug("Header                : {}", opt.Header);
             logger.Debug("Start                 : {}", opt.Start);
             logger.Debug("Step                  : {}", opt.Step);
-            logger.Debug("HeaderAttributes      : {}", opt.HeaderAttributes);
+            logger.Debug("HeaderAttribute       : {}", opt.HeaderAttribute);
             logger.Debug("File                  : {}", opt.File);
             logger.Debug("Delimiter             : {}", opt.Delimiter);
-            logger.Debug("TableAttributes       : {}", opt.TableAttributes);
+            logger.Debug("TableAttribute        : {}", opt.TableAttribute);
             logger.Debug("LoggingLevel          : {}", opt.LoggingLevel);
             logger.Debug("Source                :\n{}", opt.Source);
             logger.Debug("----------");

@@ -21,7 +21,7 @@ namespace TsvToHtmlTable
         public override string ToHtml()
         {
             logger.Debug("NoneHeader.ToHtml()");
-            return Html.Enclose("table", this.MakeTr());
+            return Html.Enclose("table", this.MakeTr(), this.Options.TableAttribute);
         }
         private string MakeTr()
         {
@@ -44,7 +44,7 @@ namespace TsvToHtmlTable
             logger.Debug("----- Arguments -----");
             logger.Debug("File                  : {}", opt.File);
             logger.Debug("Delimiter             : {}", opt.Delimiter);
-            logger.Debug("TableAttributes       : {}", opt.TableAttributes);
+            logger.Debug("TableAttribute        : {}", opt.TableAttribute);
             logger.Debug("LoggingLevel          : {}", opt.LoggingLevel);
             logger.Debug("Source                :\n{}", opt.Source);
             logger.Debug("----------");

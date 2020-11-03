@@ -37,11 +37,11 @@ namespace TsvToHtmlTable
             var builder = new StringBuilder();
             builder.Append('<');
             builder.Append(element);
-            if (!attr.IsNullOrEmpty()) {
+            if (!string.IsNullOrEmpty(attr)) {
                 builder.Append(' ');
                 builder.Append(attr);
             }
-            if (text.IsNullOrEmpty()) {
+            if (string.IsNullOrEmpty(text)) {
                 builder.Append(' ');
                 builder.Append('/');
                 builder.Append(element);

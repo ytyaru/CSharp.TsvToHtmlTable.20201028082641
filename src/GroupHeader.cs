@@ -33,11 +33,11 @@ namespace TsvToHtmlTable
             logger.Debug("Header                : {}", opt.Header);
             logger.Debug("Row                   : {}", opt.Row);
             logger.Debug("Column                : {}", opt.Column);
-            logger.Debug("RowHeaderAttributes   : {}", opt.RowHeaderAttributes);
-            logger.Debug("ColumnHeaderAttributes: {}", opt.ColumnHeaderAttributes);
+            logger.Debug("RowHeaderAttribute    : {}", opt.RowHeaderAttribute);
+            logger.Debug("ColumnHeaderAttribute : {}", opt.ColumnHeaderAttribute);
             logger.Debug("File                  : {}", opt.File);
             logger.Debug("Delimiter             : {}", opt.Delimiter);
-            logger.Debug("TableAttributes       : {}", opt.TableAttributes);
+            logger.Debug("TableAttribute        : {}", opt.TableAttribute);
             logger.Debug("LoggingLevel          : {}", opt.LoggingLevel);
             logger.Debug("Source                :\n{}", opt.Source);
             logger.Debug("----------");
