@@ -18,7 +18,7 @@ namespace TsvToHtmlTable
         public int Start { get; set; } = 1;
         [Option('S', "step", Required=false, Default=1, HelpText="ヘッダを指定数だけ飛ばす。")]
         public int Step { get; set; } = 1;
-        [Option('A', "header-attributes", Required=false, HelpText="全ヘッダに指定した属性を付与する")]
-        public string HeaderAttributes { get; set; } = "";
+        [Option('A', "header-attribute", Required=false, HelpText="全ヘッダに指定した属性を付与する")]
+        public string HeaderAttribute { get; set; } = "";
     }
 }
