@@ -247,6 +247,9 @@ tsv2table n
 <section>
 <a id="output-version"></a>
 <h1>バージョン <a href="#output-version">¶</a></h1>
+<pre><code>tsv2table version
+tsv2table --version</code></pre>
+<pre><code>tsv2table 0.0.1.0</code></pre>
 </section>
 
 <section>
@@ -397,46 +400,64 @@ USAGE:
         <section>
         <a id="output-html-g-m-top-left"></a>
         <h1>tsv2table <a href="#output-html-g-m-top-left">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table</code></pre>
+        <table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-bottom-left"></a>
-        <h1>tsv2table -r b<a href="#output-html-g-m-bottom-left">¶</a></h1>
+        <h1>tsv2table -r b <a href="#output-html-g-m-bottom-left">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r b</code></pre>
+        <table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-both-left"></a>
-        <h1>tsv2table -r B<a href="#output-html-g-m-both-left">¶</a></h1>
+        <h1>tsv2table -r B <a href="#output-html-g-m-both-left">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r B</code></pre>
+        <table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-top-right"></a>
-        <h1>tsv2table -c r<a href="#output-html-g-m-top-right">¶</a></h1>
+        <h1>tsv2table -c r <a href="#output-html-g-m-top-right">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -c r</code></pre>
+        <table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-top-both"></a>
         <h1>tsv2table -c B<a href="#output-html-g-m-top-both">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -c B</code></pre>
+        <table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-bottom-right"></a>
-        <h1>tsv2table -r b -c r<a href="#output-html-g-m-bottom-right">¶</a></h1>
+        <h1>tsv2table -r b -c r <a href="#output-html-g-m-bottom-right">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r b -c r</code></pre>
+        <table><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-bottom-both"></a>
-        <h1>tsv2table -r b -c B<a href="#output-html-g-m-bottom-both">¶</a></h1>
+        <h1>tsv2table -r b -c B <a href="#output-html-g-m-bottom-both">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r b -c B</code></pre>
+        <table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-both-right"></a>
-        <h1>tsv2table -r B -c r<a href="#output-html-g-m-both-right">¶</a></h1>
+        <h1>tsv2table -r B -c r <a href="#output-html-g-m-both-right">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r B -c r</code></pre>
+        <table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
 
         <section>
         <a id="output-html-g-m-both-both"></a>
-        <h1>tsv2table -r B -c B<a href="#output-html-g-m-both-both">¶</a></h1>
+        <h1>tsv2table -r B -c B <a href="#output-html-g-m-both-both">¶</a></h1>
+        <pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r B -c B</code></pre>
+        <table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
 
     </section>
@@ -446,15 +467,21 @@ USAGE:
     <h1>列ヘッダ <a href="#output-html-g-c">¶</a></h1>
         <section>
         <a id="output-html-g-c-left"></a>
-        <h1>tsv2table -H c<a href="#output-html-g-c-left">¶</a></h1>
+        <h1>tsv2table -H c <a href="#output-html-g-c-left">¶</a></h1>
+        <pre><code>cat ./res/tsv/col_3.tsv | ./bin/tsv2table -H c</code></pre>
+        <table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
         </section>
         <section>
         <a id="output-html-g-c-right"></a>
-        <h1>tsv2table -H c -c r<a href="#output-html-g-c-right">¶</a></h1>
+        <h1>tsv2table -H c -c r <a href="#output-html-g-c-right">¶</a></h1>
+        <pre><code>cat ./res/tsv/col_3.tsv | ./bin/tsv2table -H c -c r</code></pre>
+        <table><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
         </section>
         <section>
         <a id="output-html-g-c-both"></a>
-        <h1>tsv2table -H c -c B<a href="#output-html-g-c-both">¶</a></h1>
+        <h1>tsv2table -H c -c B <a href="#output-html-g-c-both">¶</a></h1>
+        <pre><code>cat ./res/tsv/col_3.tsv | ./bin/tsv2table -H c -c B</code></pre>
+        <table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
         </section>
     </section>
 
@@ -464,14 +491,20 @@ USAGE:
         <section>
         <a id="output-html-g-r-top"></a>
         <h1>tsv2table <a href="#output-html-g-r-top">¶</a></h1>
+        <pre><code>cat ./res/tsv/row_3.tsv | ./bin/tsv2table</code></pre>
+        <table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>ST</td><td></td><td>U</td></tr></table>
         </section>
         <section>
         <a id="output-html-g-r-bottom"></a>
-        <h1>tsv2table -c r<a href="#output-html-g-r-bottom">¶</a></h1>
+        <h1>tsv2table -c r <a href="#output-html-g-r-bottom">¶</a></h1>
+        <pre><code>cat ./res/tsv/row_3.tsv | ./bin/tsv2table -r b</code></pre>
+        <table><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>ST</td><td></td><td>U</td></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
         <section>
         <a id="output-html-g-r-both"></a>
-        <h1>tsv2table -c B<a href="#output-html-g-r-both">¶</a></h1>
+        <h1>tsv2table -c B <a href="#output-html-g-r-both">¶</a></h1>
+        <pre><code>cat ./res/tsv/row_3.tsv | ./bin/tsv2table -r B</code></pre>
+        <table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>ST</td><td></td><td>U</td></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
         </section>
     </section>
 
@@ -518,11 +551,6 @@ USAGE:
 <h1>none-header <a href="#output-html-n">¶</a></h1>
 </section>
 
-
-
-
-
-
 </section>
 
 
@@ -530,143 +558,6 @@ USAGE:
 
 
 
-
-<section>
-<h1>group-header</h1>
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table</code></pre>
-<table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r b</code></pre>
-<table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r B</code></pre>
-<table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -c r</code></pre>
-<table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -c B</code></pre>
-<table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r b -c r</code></pre>
-<table><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r b -c B</code></pre>
-<table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r B -c r</code></pre>
-<table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table -r B -c B</code></pre>
-<table><tr><th rowspan="3" colspan="3"></th><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr><tr><th rowspan="3" colspan="3"></th><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th><th rowspan="3" colspan="3"></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/col_3.tsv | ./bin/tsv2table -H c</code></pre>
-<table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
-
-<pre><code>cat ./res/tsv/col_3.tsv | ./bin/tsv2table -H c -c r</code></pre>
-<table><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/col_3.tsv | ./bin/tsv2table -H c -c B</code></pre>
-<table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><th>a</th><th rowspan="2">A</th><th rowspan="4">あ</th></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td><th>b</th></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td><th>c</th><th rowspan="2">B</th></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td><th>d</th></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td><th colspan="3">い</th></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td><th>e</th><th></th><th>う</th></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td><th colspan="2">C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/row_3.tsv | ./bin/tsv2table</code></pre>
-<table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>ST</td><td></td><td>U</td></tr></table>
-
-<pre><code></code></pre>
-+ cat ./res/tsv/row_3.tsv
-+ ./bin/tsv2table -r b
-<table><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>ST</td><td></td><td>U</td></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/row_3.tsv | ./bin/tsv2table -r B</code></pre>
-<table><tr><th colspan="4">ア</th><th rowspan="3">イ</th><th>ウ</th><th></th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th><th rowspan="2">C</th></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr><tr><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td>OP</td><td></td><td>QX</td><td>R</td><td>ST</td><td></td><td>U</td></tr><tr><th>a</th><th>b</th><th>c</th><th>d</th><th rowspan="3">イ</th><th>e</th><th rowspan="2">C</th></tr><tr><th colspan="2">A</th><th colspan="2">B</th><th></th></tr><tr><th colspan="4">ア</th><th>ウ</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table</code></pre>
-<table><tr><th></th><th>A</th><th>B</th><th>C</th></tr><tr><th>1</th><td>a</td><td>b</td><td>c</td></tr><tr><th>2</th><td>d</td><td>e</td><td>f</td></tr><tr><th>3</th><td>g</td><td>h</td><td>i</td></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -r b</code></pre>
-<table><tr><th>1</th><td>a</td><td>b</td><td>c</td></tr><tr><th>2</th><td>d</td><td>e</td><td>f</td></tr><tr><th>3</th><td>g</td><td>h</td><td>i</td></tr><tr><th></th><th>A</th><th>B</th><th>C</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -r B</code></pre>
-<table><tr><th></th><th>A</th><th>B</th><th>C</th></tr><tr><th>1</th><td>a</td><td>b</td><td>c</td></tr><tr><th>2</th><td>d</td><td>e</td><td>f</td></tr><tr><th>3</th><td>g</td><td>h</td><td>i</td></tr><tr><th></th><th>A</th><th>B</th><th>C</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -c r</code></pre>
-<table><tr><th>A</th><th>B</th><th>C</th><th></th></tr><tr><td>a</td><td>b</td><td>c</td><th>1</th></tr><tr><td>d</td><td>e</td><td>f</td><th>2</th></tr><tr><td>g</td><td>h</td><td>i</td><th>3</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -c B</code></pre>
-<table><tr><th></th><th>A</th><th>B</th><th>C</th><th></th></tr><tr><th>1</th><td>a</td><td>b</td><td>c</td><th>1</th></tr><tr><th>2</th><td>d</td><td>e</td><td>f</td><th>2</th></tr><tr><th>3</th><td>g</td><td>h</td><td>i</td><th>3</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -r b -c r</code></pre>
-<table><tr><td>a</td><td>b</td><td>c</td><th>1</th></tr><tr><td>d</td><td>e</td><td>f</td><th>2</th></tr><tr><td>g</td><td>h</td><td>i</td><th>3</th></tr><tr><th>A</th><th>B</th><th>C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -r b -c B</code></pre>
-<table><tr><th>1</th><td>a</td><td>b</td><td>c</td><th>1</th></tr><tr><th>2</th><td>d</td><td>e</td><td>f</td><th>2</th></tr><tr><th>3</th><td>g</td><td>h</td><td>i</td><th>3</th></tr><tr><th></th><th>A</th><th>B</th><th>C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -r B -c r</code></pre>
-<table><tr><th>A</th><th>B</th><th>C</th><th></th></tr><tr><td>a</td><td>b</td><td>c</td><th>1</th></tr><tr><td>d</td><td>e</td><td>f</td><th>2</th></tr><tr><td>g</td><td>h</td><td>i</td><th>3</th></tr><tr><th>A</th><th>B</th><th>C</th><th></th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_1.tsv | ./bin/tsv2table -r B -c B</code></pre>
-<table><tr><th></th><th>A</th><th>B</th><th>C</th><th></th></tr><tr><th>1</th><td>a</td><td>b</td><td>c</td><th>1</th></tr><tr><th>2</th><td>d</td><td>e</td><td>f</td><th>2</th></tr><tr><th>3</th><td>g</td><td>h</td><td>i</td><th>3</th></tr><tr><th></th><th>A</th><th>B</th><th>C</th><th></th></tr></table>
-
-<pre><code></code>cat ./res/tsv/col_1.tsv | ./bin/tsv2table -H c</pre>
-<table><tr><th>A</th><td>a</td><td>b</td><td>c</td><td>d</td></tr><tr><th>B</th><td>e</td><td>f</td><td>g</td><td>h</td></tr><tr><th>C</th><td>i</td><td>j</td><td>k</td><td>l</td></tr><tr><th>D</th><td>m</td><td>n</td><td>o</td><td>p</td></tr></table>
-
-<pre><code>cat ./res/tsv/col_1.tsv | ./bin/tsv2table -H c -c r</code></pre>
-<table><tr><td>a</td><td>b</td><td>c</td><td>d</td><th>A</th></tr><tr><td>e</td><td>f</td><td>g</td><td>h</td><th>B</th></tr><tr><td>i</td><td>j</td><td>k</td><td>l</td><th>C</th></tr><tr><td>m</td><td>n</td><td>o</td><td>p</td><th>D</th></tr></table>
-
-<pre><code>cat ./res/tsv/col_1.tsv | ./bin/tsv2table -H c -c B</code></pre>
-<table><tr><th>A</th><td>a</td><td>b</td><td>c</td><td>d</td><th>A</th></tr><tr><th>B</th><td>e</td><td>f</td><td>g</td><td>h</td><th>B</th></tr><tr><th>C</th><td>i</td><td>j</td><td>k</td><td>l</td><th>C</th></tr><tr><th>D</th><td>m</td><td>n</td><td>o</td><td>p</td><th>D</th></tr></table>
-
-<pre><code>cat ./res/tsv/row_1.tsv | ./bin/tsv2table</code></pre>
-<table><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr><tr><td>a</td><td>b</td><td>c</td><td>d</td></tr><tr><td>e</td><td>f</td><td>g</td><td>h</td></tr><tr><td>i</td><td>j</td><td>k</td><td>l</td></tr></table>
-
-<pre><code>cat ./res/tsv/row_1.tsv | ./bin/tsv2table -r b</code></pre>
-<table><tr><td>a</td><td>b</td><td>c</td><td>d</td></tr><tr><td>e</td><td>f</td><td>g</td><td>h</td></tr><tr><td>i</td><td>j</td><td>k</td><td>l</td></tr><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></table>
-
-<pre><code>cat ./res/tsv/row_1.tsv | ./bin/tsv2table -r B</code></pre>
-<table><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr><tr><td>a</td><td>b</td><td>c</td><td>d</td></tr><tr><td>e</td><td>f</td><td>g</td><td>h</td></tr><tr><td>i</td><td>j</td><td>k</td><td>l</td></tr><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></table>
-</section>
-
-<section>
-<h1>inner-header</h1>
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i</code></pre>
-<table><tr><th></th><td></td><th></th><td>ア</td><th></th><td></td><th></th><td>イ</td><th>ウ</th><td></td></tr><tr><th></th><td></td><th></th><td>A</td><th></th><td>B</td><th></th><td></td><th></th><td>C</td></tr><tr><th></th><td></td><th></th><td>a</td><th>b</th><td>c</td><th>d</th><td></td><th>e</th><td></td></tr><tr><th>あ</th><td>A</td><th>a</th><td>A</td><th>B</th><td>C</td><th>D</th><td>E</td><th>F</th><td>G</td></tr><tr><th></th><td></td><th>b</th><td>H</td><th>I</th><td>J</td><th>K</th><td>L</td><th>M</th><td>N</td></tr><tr><th></th><td>B</td><th>c</th><td>OP</td><th></th><td>QX</td><th>R</th><td>STZa</td><th></th><td>U</td></tr><tr><th></th><td></td><th>d</th><td>V</td><th>W</th><td></td><th>Y</th><td></td><th></th><td>b</td></tr><tr><th>い</th><td></td><th></th><td>c</td><th>d</th><td>e</td><th>f</th><td>g</td><th>h</th><td>i</td></tr><tr><th>う</th><td></td><th>e</th><td>j</td><th>k</th><td>l</td><th>m</th><td>n</td><th>o</th><td>p</td></tr><tr><th></th><td>C</td><th></th><td>q</td><th>r</th><td>s</td><th>t</th><td>u</td><th>v</th><td>w</td></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -H r</code></pre>
-<table><tr><th></th><th></th><th></th><th>ア</th><th></th><th></th><th></th><th>イ</th><th>ウ</th><th></th></tr><tr><td></td><td></td><td></td><td>A</td><td></td><td>B</td><td></td><td></td><td></td><td>C</td></tr><tr><th></th><th></th><th></th><th>a</th><th>b</th><th>c</th><th>d</th><th></th><th>e</th><th></th></tr><tr><td>あ</td><td>A</td><td>a</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th></th><th></th><th>b</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th><th>N</th></tr><tr><td></td><td>B</td><td>c</td><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th></th><th></th><th>d</th><th>V</th><th>W</th><th></th><th>Y</th><th></th><th></th><th>b</th></tr><tr><td>い</td><td></td><td></td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><th>j</th><th>k</th><th>l</th><th>m</th><th>n</th><th>o</th><th>p</th></tr><tr><td></td><td>C</td><td></td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -s 2</code></pre>
-<table><tr><td></td><th></th><td></td><th>ア</th><td></td><th></th><td></td><th>イ</th><td>ウ</td><th></th></tr><tr><td></td><th></th><td></td><th>A</th><td></td><th>B</th><td></td><th></th><td></td><th>C</th></tr><tr><td></td><th></th><td></td><th>a</th><td>b</td><th>c</th><td>d</td><th></th><td>e</td><th></th></tr><tr><td>あ</td><th>A</th><td>a</td><th>A</th><td>B</td><th>C</th><td>D</td><th>E</th><td>F</td><th>G</th></tr><tr><td></td><th></th><td>b</td><th>H</th><td>I</td><th>J</th><td>K</td><th>L</th><td>M</td><th>N</th></tr><tr><td></td><th>B</th><td>c</td><th>OP</th><td></td><th>QX</th><td>R</td><th>STZa</th><td></td><th>U</th></tr><tr><td></td><th></th><td>d</td><th>V</th><td>W</td><th></th><td>Y</td><th></th><td></td><th>b</th></tr><tr><td>い</td><th></th><td></td><th>c</th><td>d</td><th>e</th><td>f</td><th>g</th><td>h</td><th>i</th></tr><tr><td>う</td><th></th><td>e</td><th>j</th><td>k</td><th>l</th><td>m</td><th>n</th><td>o</td><th>p</th></tr><tr><td></td><th>C</th><td></td><th>q</th><td>r</td><th>s</th><td>t</td><th>u</th><td>v</td><th>w</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -S 2</code></pre>
-<table><tr><th></th><td></td><td></td><th>ア</th><td></td><td></td><th></th><td>イ</td><td>ウ</td><th></th></tr><tr><th></th><td></td><td></td><th>A</th><td></td><td>B</td><th></th><td></td><td></td><th>C</th></tr><tr><th></th><td></td><td></td><th>a</th><td>b</td><td>c</td><th>d</th><td></td><td>e</td><th></th></tr><tr><th>あ</th><td>A</td><td>a</td><th>A</th><td>B</td><td>C</td><th>D</th><td>E</td><td>F</td><th>G</th></tr><tr><th></th><td></td><td>b</td><th>H</th><td>I</td><td>J</td><th>K</th><td>L</td><td>M</td><th>N</th></tr><tr><th></th><td>B</td><td>c</td><th>OP</th><td></td><td>QX</td><th>R</th><td>STZa</td><td></td><th>U</th></tr><tr><th></th><td></td><td>d</td><th>V</th><td>W</td><td></td><th>Y</th><td></td><td></td><th>b</th></tr><tr><th>い</th><td></td><td></td><th>c</th><td>d</td><td>e</td><th>f</th><td>g</td><td>h</td><th>i</th></tr><tr><th>う</th><td></td><td>e</td><th>j</th><td>k</td><td>l</td><th>m</th><td>n</td><td>o</td><th>p</th></tr><tr><th></th><td>C</td><td></td><th>q</th><td>r</td><td>s</td><th>t</th><td>u</td><td>v</td><th>w</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -s 2 -S 3</code></pre>
-<table><tr><td></td><th></th><td></td><td>ア</td><td></td><th></th><td></td><td>イ</td><td>ウ</td><th></th></tr><tr><td></td><th></th><td></td><td>A</td><td></td><th>B</th><td></td><td></td><td></td><th>C</th></tr><tr><td></td><th></th><td></td><td>a</td><td>b</td><th>c</th><td>d</td><td></td><td>e</td><th></th></tr><tr><td>あ</td><th>A</th><td>a</td><td>A</td><td>B</td><th>C</th><td>D</td><td>E</td><td>F</td><th>G</th></tr><tr><td></td><th></th><td>b</td><td>H</td><td>I</td><th>J</th><td>K</td><td>L</td><td>M</td><th>N</th></tr><tr><td></td><th>B</th><td>c</td><td>OP</td><td></td><th>QX</th><td>R</td><td>STZa</td><td></td><th>U</th></tr><tr><td></td><th></th><td>d</td><td>V</td><td>W</td><th></th><td>Y</td><td></td><td></td><th>b</th></tr><tr><td>い</td><th></th><td></td><td>c</td><td>d</td><th>e</th><td>f</td><td>g</td><td>h</td><th>i</th></tr><tr><td>う</td><th></th><td>e</td><td>j</td><td>k</td><th>l</th><td>m</td><td>n</td><td>o</td><th>p</th></tr><tr><td></td><th>C</th><td></td><td>q</td><td>r</td><th>s</th><td>t</td><td>u</td><td>v</td><th>w</th></tr></table>
-
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -H r -s 2</code></pre>
-<table><tr><td></td><td></td><td></td><td>ア</td><td></td><td></td><td></td><td>イ</td><td>ウ</td><td></td></tr><tr><th></th><th></th><th></th><th>A</th><th></th><th>B</th><th></th><th></th><th></th><th>C</th></tr><tr><td></td><td></td><td></td><td>a</td><td>b</td><td>c</td><td>d</td><td></td><td>e</td><td></td></tr><tr><th>あ</th><th>A</th><th>a</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr><tr><td></td><td></td><td>b</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th></th><th>B</th><th>c</th><th>OP</th><th></th><th>QX</th><th>R</th><th>STZa</th><th></th><th>U</th></tr><tr><td></td><td></td><td>d</td><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th>い</th><th></th><th></th><th>c</th><th>d</th><th>e</th><th>f</th><th>g</th><th>h</th><th>i</th></tr><tr><td>う</td><td></td><td>e</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th>C</th><th></th><th>q</th><th>r</th><th>s</th><th>t</th><th>u</th><th>v</th><th>w</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -H r -S 2</code></pre>
-<table><tr><th></th><th></th><th></th><th>ア</th><th></th><th></th><th></th><th>イ</th><th>ウ</th><th></th></tr><tr><td></td><td></td><td></td><td>A</td><td></td><td>B</td><td></td><td></td><td></td><td>C</td></tr><tr><td></td><td></td><td></td><td>a</td><td>b</td><td>c</td><td>d</td><td></td><td>e</td><td></td></tr><tr><th>あ</th><th>A</th><th>a</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr><tr><td></td><td></td><td>b</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td></td><td>B</td><td>c</td><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th></th><th></th><th>d</th><th>V</th><th>W</th><th></th><th>Y</th><th></th><th></th><th>b</th></tr><tr><td>い</td><td></td><td></td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><td>う</td><td></td><td>e</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th>C</th><th></th><th>q</th><th>r</th><th>s</th><th>t</th><th>u</th><th>v</th><th>w</th></tr></table>
-
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table i -H r -s 2 -S 3</code></pre>
-<table><tr><td></td><td></td><td></td><td>ア</td><td></td><td></td><td></td><td>イ</td><td>ウ</td><td></td></tr><tr><th></th><th></th><th></th><th>A</th><th></th><th>B</th><th></th><th></th><th></th><th>C</th></tr><tr><td></td><td></td><td></td><td>a</td><td>b</td><td>c</td><td>d</td><td></td><td>e</td><td></td></tr><tr><td>あ</td><td>A</td><td>a</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td></td><td></td><td>b</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th></th><th>B</th><th>c</th><th>OP</th><th></th><th>QX</th><th>R</th><th>STZa</th><th></th><th>U</th></tr><tr><td></td><td></td><td>d</td><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><td>い</td><td></td><td></td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><td>う</td><td></td><td>e</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th>C</th><th></th><th>q</th><th>r</th><th>s</th><th>t</th><th>u</th><th>v</th><th>w</th></tr></table>
-
-</section>
-
-<section>
-<h1>none-header</h1>
-<pre><code>cat ./res/tsv/matrix_3.tsv | ./bin/tsv2table n</code></pre>
-<table><tr><td></td><td></td><td></td><td>ア</td><td></td><td></td><td></td><td>イ</td><td>ウ</td><td></td></tr><tr><td></td><td></td><td></td><td>A</td><td></td><td>B</td><td></td><td></td><td></td><td>C</td></tr><tr><td></td><td></td><td></td><td>a</td><td>b</td><td>c</td><td>d</td><td></td><td>e</td><td></td></tr><tr><td>あ</td><td>A</td><td>a</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><td></td><td></td><td>b</td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><td></td><td>B</td><td>c</td><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><td></td><td></td><td>d</td><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><td>い</td><td></td><td></td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><td>う</td><td></td><td>e</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><td></td><td>C</td><td></td><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
-</section>
-
-<section>
-<h1>version</h1>
-<pre><code>tsv2table version
-tsv2table --version</code></pre>
-<pre><code>tsv2table 0.0.1.0</code></pre>
-</section>
 
 
 
