@@ -26,7 +26,7 @@ namespace TsvToHtmlTable
                 InnerHeaderType.r => MakeRow(),
                 _ => MakeColumn(),
             };
-            return Html.Enclose("table", tr);
+            return Html.Enclose("table", this.Options.TableAttribute, tr);
         }
         private string MakeRow()
         {

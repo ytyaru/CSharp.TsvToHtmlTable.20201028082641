@@ -413,7 +413,7 @@ namespace TsvToHtmlTable
             html.Append(MakeRowHeader());
             html.Append(MakeBody());
             html.Append(MakeRowHeader(true));
-            return Html.Enclose("table", html.ToString());
+            return Html.Enclose("table", this.Options.TableAttribute, html.ToString());
         }
         private string MakeMatrixHeader()
         {
