@@ -419,7 +419,8 @@ namespace TsvToHtmlTable
         {
             if (0 < this.Header.Row.Count && 0 < this.Header.Column.Count)
             {
-                return Html.Enclose("th", MakeAttrs(this.Header.Row.Count, this.Header.Column.Count));
+                logger.Debug("MatrixHeaderAttribute={}", this.Options.MatrixHeaderAttribute);
+                return Html.Enclose("th", MakeAttrs(this.Header.Row.Count, this.Header.Column.Count, this.Options.MatrixHeaderAttribute), "");
             }
             return "";
         }
@@ -434,7 +435,7 @@ namespace TsvToHtmlTable
                 for (int c=0; c<cells[r].Count; c++)
                 {
                     if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                    th.Append(Html.Enclose("th", MakeAttrs(cells[r][c]), cells[r][c].Text));
+                    th.Append(Html.Enclose("th", MakeAttrs(cells[r][c], this.Options.RowHeaderAttribute), cells[r][c].Text));
                 }
                 tr.Append(Html.Enclose("tr", th.ToString()));
             }
@@ -462,7 +463,7 @@ namespace TsvToHtmlTable
             for (int c=0; c<cells[r].Count; c++)
             {
                 if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                th.Append(Html.Enclose("th", MakeAttrs(cells[r][c]), cells[r][c].Text));
+                th.Append(Html.Enclose("th", MakeAttrs(cells[r][c], this.Options.ColumnHeaderAttribute), cells[r][c].Text));
             }
             return th.ToString();
         }

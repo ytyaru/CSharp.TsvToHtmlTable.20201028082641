@@ -24,6 +24,8 @@ namespace TsvToHtmlTable
         public string RowHeaderAttribute { get; set; } = "";
         [Option('C', "--column-header-attribute", Required=false, HelpText="列ヘッダ属性。")]
         public string ColumnHeaderAttribute { get; set; } = "";
+        [Option('M', "--matrix-header-attribute", Required=false, HelpText="行列ヘッダ属性。")]
+        public string MatrixHeaderAttribute { get; set; } = "";
 
         /*
 //        [Usage(ApplicationAlias = "yourapp")]
