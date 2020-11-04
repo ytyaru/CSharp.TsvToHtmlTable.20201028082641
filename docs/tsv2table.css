@@ -5,12 +5,15 @@ table.tsv2table {
 }
 table.tsv2table th.g-r-header {
     background-color: #CCFFCC;
+    border: solid 1px #88AA88;
 }
 table.tsv2table th.g-c-header {
     background-color: #FFCCFF;
+    border: solid 1px #AA88AA;
 }
 table.tsv2table th.g-m-header {
     background-color: #CCCCCC;
+    border: solid 1px #888888;
 }
 table.tsv2table th.g-c-header[rowspan] span {
     background-color: #CCFFCC;
