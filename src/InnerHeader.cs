@@ -37,7 +37,6 @@ namespace TsvToHtmlTable
             {
                 td.Clear();
                 bool isHeader = IsHeader(r);
-//                string element = (IsHeader(r)) ? "th" : "td";
                 for (int c=0; c<this.Options.SourceList[r].Count; c++)
                 {
                     if (isHeader) {
@@ -45,7 +44,6 @@ namespace TsvToHtmlTable
                     } else {
                         td.Append(Html.Enclose("td", this.Options.SourceList[r][c].Text));
                     }
-//                    td.Append(Html.Enclose(element, this.Options.SourceList[r][c].Text));
                 }
                 tr.Append(Html.Enclose("tr", td.ToString()));
             }
@@ -66,7 +64,6 @@ namespace TsvToHtmlTable
                     } else {
                         td.Append(Html.Enclose("td", row[c].Text));
                     }
-//                    td.Append(Html.Enclose((IsHeader(c)) ? "th" : "td", row[c].Text));
                 }
                 tr.Append(Html.Enclose("tr", td.ToString()));
             }
