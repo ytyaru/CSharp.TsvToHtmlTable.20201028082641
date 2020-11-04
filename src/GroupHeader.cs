@@ -434,7 +434,7 @@ namespace TsvToHtmlTable
                 for (int c=0; c<cells[r].Count; c++)
                 {
                     if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                    th.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
+                    th.Append(Html.Enclose("th", MakeAttrs(cells[r][c]), cells[r][c].Text));
                 }
                 tr.Append(Html.Enclose("tr", th.ToString()));
             }
@@ -462,7 +462,7 @@ namespace TsvToHtmlTable
             for (int c=0; c<cells[r].Count; c++)
             {
                 if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                th.Append(Html.Enclose("th", cells[r][c].Text, MakeAttrs(cells[r][c])));
+                th.Append(Html.Enclose("th", MakeAttrs(cells[r][c]), cells[r][c].Text));
             }
             return th.ToString();
         }
@@ -472,20 +472,21 @@ namespace TsvToHtmlTable
             List<Cell> row = this.Options.SourceList[r+this.Header.Row.Count];
             for (int c=this.Header.Column.Count; c<row.Count; c++)
             {
-                td.Append(Html.Enclose("td", row[c].Text, MakeAttrs(row[c])));
+                td.Append(Html.Enclose("td", MakeAttrs(row[c]), row[c].Text));
             }
             return td.ToString();
         }
-        private Dictionary<string,string> MakeAttrs(int rs, int cs)
+        private string MakeAttrs(int rs, int cs, string attr="")
         {
-            Dictionary<string,string> attrs = new Dictionary<string,string>();
-            if (1 < rs) { attrs["rowspan"] = rs.ToString(); }
-            if (1 < cs) { attrs["colspan"] = cs.ToString(); }
-            return attrs;
+            StringBuilder html = new StringBuilder();
+            if (1 < rs) { html.Append("rowspan=" + '"' + rs.ToString() + '"' + ' '); }
+            if (1 < cs) { html.Append("colspan=" + '"' + cs.ToString() + '"' + ' '); }
+            if (!string.IsNullOrEmpty(attr)) { html.Append(attr); }
+            return html.ToString().Trim();
         }
-        private Dictionary<string,string> MakeAttrs(Cell cell)
+        private string MakeAttrs(Cell cell, string attr="")
         {
-            return MakeAttrs(cell.RowSpan, cell.ColSpan);
+            return MakeAttrs(cell.RowSpan, cell.ColSpan, attr);
         }
     }
 }
