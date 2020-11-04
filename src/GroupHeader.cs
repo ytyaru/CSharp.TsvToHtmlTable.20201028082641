@@ -393,25 +393,16 @@ namespace TsvToHtmlTable
         }
         public string ToHtml()
         {
-            logger.Debug("TableBuilder.ToHtml()");
-
             StringBuilder html = new StringBuilder();
-
+            logger.Debug("TableBuilder.ToHtml()");
             logger.Debug("Header.HasTopLeft():{}", this.Header.HasTopLeft());
             logger.Debug("Header.HasTopRight():{}", this.Header.HasTopRight());
             logger.Debug("Header.HasBottomLeft():{}", this.Header.HasBottomLeft());
             logger.Debug("Header.HasBottomRight():{}", this.Header.HasBottomRight());
-            /*
-            if (this.Header.HasTopLeft()) { Header.Row.Cells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
-            if (this.Header.HasTopRight()) { Header.Row.Cells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
-            if (this.Header.HasBottomLeft()) { Header.Row.ReversedCells[0].Insert(0, new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
-            if (this.Header.HasBottomRight()) { Header.Row.ReversedCells[0].Add(new Cell { RowSpan=this.Header.Row.Count, ColSpan=this.Header.Column.Count }); }
-            */
             if (!this.Header.Row.HasTop()) { this.Header.Row.Cells.Clear(); }
             if (!this.Header.Column.HasLeft()) { this.Header.Column.Cells.Clear(); }
             if (!this.Header.Row.HasBottom()) { this.Header.Row.ReversedCells.Clear(); }
             if (!this.Header.Column.HasRight()) { this.Header.Column.ReversedCells.Clear(); }
-
             html.Append(MakeRowHeader());
             html.Append(MakeBody());
             html.Append(MakeRowHeader(true));
@@ -428,32 +419,27 @@ namespace TsvToHtmlTable
         }
         private string MakeRowHeader(bool isReversed=false)
         {
-//            List<StringBuilder> th = new List<StringBuilder>();
-            List<string> th = new List<string>();
-//            List<List<string>> th = new List<List<string>>();
-//            StringBuilder th = new StringBuilder();
+            List<StringBuilder> th = new List<StringBuilder>();
             StringBuilder tr = new StringBuilder();
             List<List<Cell>> cells = (isReversed) ? this.Header.Row.ReversedCells : this.Header.Row.Cells;
-
             for (int r=0; r<cells.Count; r++)
             {
-                th.Add("");
+                th.Add(new StringBuilder());
                 if (r==0 && (
                     (isReversed==false && this.Header.HasTopLeft()) ||
-                    (isReversed==true  && this.Header.HasBottomLeft()))) { th[r] += MakeMatrixHeader(); }
-
+                    (isReversed==true  && this.Header.HasBottomLeft()))) { th[r].Append(MakeMatrixHeader()); }
                 for (int c=0; c<cells[r].Count; c++)
                 {
                     if (cells[r][c].RowSpan < 1 && cells[r][c].ColSpan < 1) { continue; }
-                    th[r] += Html.Enclose("th", MakeAttrs(cells[r][c], this.Options.RowHeaderAttribute), cells[r][c].Text);
+                    th[r].Append(Html.Enclose("th", MakeAttrs(cells[r][c], this.Options.RowHeaderAttribute), cells[r][c].Text));
                 }
                 if (r==0 && (
                     (isReversed==false && this.Header.HasTopRight()) ||
-                    (isReversed==true  && this.Header.HasBottomRight()))) { th[r] += MakeMatrixHeader(); }
+                    (isReversed==true  && this.Header.HasBottomRight()))) { th[r].Append(MakeMatrixHeader()); }
             }
             foreach (var row in th)
             {
-                tr.Append(Html.Enclose("tr", row));
+                tr.Append(Html.Enclose("tr", row.ToString()));
             }
             return tr.ToString();
         }
