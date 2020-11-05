@@ -12,12 +12,13 @@ Run() {
 #	csc -nologo *.cs -out:prog.exe
 	local EXE="$APP_ROOT/bin/tsv2table"
 	csc -nologo \
-		-recurse:*.cs \
+		*.cs \
 		-nullable:enable \
 		-langversion:latest \
 		-out:"$EXE" \
 		-r:"$APP_ROOT/bin/CommandLine.dll" \
 		-r:"$APP_ROOT/bin/NLog.dll"
+#		-recurse:*.cs \
 #		-r:CommandLine.dll \
 #		-r:NLog.dll
 #		-r:"$APP_ROOT/bin/packages/CommandLine.dll" \

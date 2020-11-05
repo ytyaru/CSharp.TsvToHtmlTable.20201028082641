@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-run id="0" runstate="Runnable" testcasecount="1" result="Failed" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="1" engine-version="3.11.1.0" clr-version="4.0.30319.42000" start-time="2020-11-05 01:51:04Z" end-time="2020-11-05 01:51:06Z" duration="2.261710">
+  <command-line><![CDATA[/tmp/work/CSharp.TsvToHtmlTable.20201028082641/bin/packages/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe /tmp/work/CSharp.TsvToHtmlTable.20201028082641/bin/tests.dll]]></command-line>
+  <test-suite type="Assembly" id="0-1002" name="tests.dll" fullname="/tmp/work/CSharp.TsvToHtmlTable.20201028082641/bin/tests.dll" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2020-11-05 01:51:06Z" end-time="2020-11-05 01:51:06Z" duration="0.270514" total="1" passed="0" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+    <environment framework-version="3.12.0.0" clr-version="4.0.30319.42000" os-version="Unix 5.4.72.7" platform="Unix" cwd="/tmp/work/CSharp.TsvToHtmlTable.20201028082641/src" machine-name="raspberrypi" user="pi" user-domain="raspberrypi" culture="ja-JP" uiculture="ja-JP" os-architecture="x86" />
+    <settings>
+      <setting name="DisposeRunners" value="True" />
+      <setting name="WorkDirectory" value="/tmp/work/CSharp.TsvToHtmlTable.20201028082641/src" />
+      <setting name="ImageRuntimeVersion" value="4.0.30319" />
+      <setting name="ImageRequiresX86" value="False" />
+      <setting name="ImageRequiresDefaultAppDomainAssemblyResolver" value="False" />
+      <setting name="RuntimeFramework" value="mono-4.0" />
+      <setting name="NumberOfTestWorkers" value="4" />
+    </settings>
+    <properties>
+      <property name="_PID" value="8194" />
+      <property name="_APPDOMAIN" value="domain-" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="TestSuite" id="0-1003" name="TsvToHtmlTable" fullname="TsvToHtmlTable" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2020-11-05 01:51:06Z" end-time="2020-11-05 01:51:06Z" duration="0.229502" total="1" passed="0" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="0-1004" name="Tests" fullname="TsvToHtmlTable.Tests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2020-11-05 01:51:06Z" end-time="2020-11-05 01:51:06Z" duration="0.228660" total="1" passed="0" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestFixture" id="0-1000" name="HtmlTest" fullname="TsvToHtmlTable.Tests.HtmlTest" classname="TsvToHtmlTable.Tests.HtmlTest" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2020-11-05 01:51:06Z" end-time="2020-11-05 01:51:06Z" duration="0.221064" total="1" passed="0" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-case id="0-1001" name="Test" fullname="TsvToHtmlTable.Tests.HtmlTest.Test" methodname="Test" classname="TsvToHtmlTable.Tests.HtmlTest" runstate="Runnable" seed="47785092" result="Failed" start-time="2020-11-05 01:51:06Z" end-time="2020-11-05 01:51:06Z" duration="0.192509" asserts="1">
+            <failure>
+              <message><![CDATA[  Expected string length 13 but was 8. Strings differ at index 5.
+  Expected: "<html></html>"
+  But was:  "<html />"
+  ----------------^
+]]></message>
+              <stack-trace><![CDATA[  at TsvToHtmlTable.Tests.HtmlTest.Test () [0x00010] in <f35eaf0c5cd7447b94508e06a2c9880c>:0 
+]]></stack-trace>
+            </failure>
+            <assertions>
+              <assertion result="Failed">
+                <message><![CDATA[  Expected string length 13 but was 8. Strings differ at index 5.
+  Expected: "<html></html>"
+  But was:  "<html />"
+  ----------------^
+]]></message>
+                <stack-trace><![CDATA[  at TsvToHtmlTable.Tests.HtmlTest.Test () [0x00000] in <f35eaf0c5cd7447b94508e06a2c9880c>:0 
+]]></stack-trace>
+              </assertion>
+            </assertions>
+          </test-case>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
