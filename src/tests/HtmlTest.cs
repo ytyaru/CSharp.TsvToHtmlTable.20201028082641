@@ -30,6 +30,7 @@ namespace TsvToHtmlTable.Tests
         {
             Assert.AreEqual(expected, Html.Enclose(element));
         }
+
         [TestCase("", "", "")]
         [TestCase(null!, "", "")]
         [TestCase("", null!, "")]
@@ -39,6 +40,21 @@ namespace TsvToHtmlTable.Tests
         public void TestEncloseElementText(string element, string text, string expected)
         {
             Assert.AreEqual(expected, Html.Enclose(element, text));
+        }
+
+        [TestCase("", "", "", "")]
+        [TestCase(null!, "", "", "")]
+        [TestCase("", null!, "", "")]
+        [TestCase("", "", null!, "")]
+        [TestCase("td", "rowspan=\"2\"", "some text.", "<td rowspan=\"2\">some text.</td>")]
+        [TestCase("",   "rowspan=\"2\"", "some text.", "")]
+        [TestCase("td", "rowspan=\"2\" colspan=\"3\"", "some text.", "<td rowspan=\"2\" colspan=\"3\">some text.</td>")]
+        [TestCase("td", "", "some text.", "<td>some text.</td>")]
+        [TestCase("td", "", "", "<td></td>")]
+        [TestCase("td", "rowspan=\"2\"", "", "<td rowspan=\"2\"></td>")]
+        public void TestEncloseElementAttrText(string element, string attr, string text, string expected)
+        {
+            Assert.AreEqual(expected, Html.Enclose(element, attr, text));
         }
     }
 }

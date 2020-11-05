@@ -36,6 +36,7 @@ namespace TsvToHtmlTable
         }
         public static string Enclose(string element, string attr, string text)
         {
+            if (string.IsNullOrEmpty(element)) { return string.Empty; }
             var builder = new StringBuilder();
             builder.Append('<');
             builder.Append(element);
