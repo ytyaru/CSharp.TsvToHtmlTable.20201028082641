@@ -25,7 +25,9 @@ namespace TsvToHtmlTable
                 RemoveBlankLines(ref lines);
                 RemoveShebang(ref lines);
                 logger.Debug("lines.Count: {}", lines.Count);
-                opt.Delimiter = InferDelimiter(lines);
+                if (string.IsNullOrEmpty(opt.Delimiter)) { 
+                    opt.Delimiter = InferDelimiter(lines);
+                }
                 logger.Debug("Delimiter: {}", opt.Delimiter);
                 logger.Debug("InferDelimiter(lines): {}", InferDelimiter(lines));
                 foreach (string line in lines)
@@ -64,26 +66,6 @@ namespace TsvToHtmlTable
             if (0 < c && c == lines[1].CountOf(",")) { return ","; }
             return "\t";
         }
-
-
-        /*
-        private void MakeSourceList(CommonOptions opt)
-        {
-            opt.SourceList.Clear();
-            using (opt.Source) {
-                string line = "";
-                while((line = opt.Source.ReadLine()) != null)  
-                {  
-                    logger.Debug(line);
-                    opt.SourceList.Add(new List<Cell>());
-                    foreach (string col in line.Split(opt.Delimiter))
-                    {
-                        opt.SourceList.Last().Add(new Cell { Text=col });
-                    }
-                }  
-            }
-        }
-        */
         abstract public string ToHtml();
     }
 }
