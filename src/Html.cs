@@ -22,11 +22,12 @@ namespace TsvToHtmlTable
         }
         public static string Enclose(string element, string text)
         {
+            if (string.IsNullOrEmpty(element)) { return string.Empty; }
             var builder = new StringBuilder();
             builder.Append('<');
             builder.Append(element);
             builder.Append('>');
-            builder.Append(text);
+            if (null != text) { builder.Append(text); }
             builder.Append('<');
             builder.Append('/');
             builder.Append(element);

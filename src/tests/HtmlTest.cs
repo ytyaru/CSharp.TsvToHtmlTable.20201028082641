@@ -26,9 +26,19 @@ namespace TsvToHtmlTable.Tests
         [TestCase("", "")]
         [TestCase(null!, "")]
         [TestCase(@"br", @"<br />")]
-        public void TestElementOnly(string input, string expected)
+        public void TestEncloseElement(string element, string expected)
         {
-            Assert.AreEqual(expected, Html.Enclose(input));
+            Assert.AreEqual(expected, Html.Enclose(element));
+        }
+        [TestCase("", "", "")]
+        [TestCase(null!, "", "")]
+        [TestCase("", null!, "")]
+        [TestCase(null!, null!, "")]
+        [TestCase(@"html", "", @"<html></html>")]
+        [TestCase(@"p", "some text.", @"<p>some text.</p>")]
+        public void TestEncloseElementText(string element, string text, string expected)
+        {
+            Assert.AreEqual(expected, Html.Enclose(element, text));
         }
     }
 }
