@@ -18,9 +18,6 @@ Run() {
 		-r:"$APP_ROOT/bin/CommandLine.dll" \
 		-r:"$APP_ROOT/bin/NLog.dll" \
 		-r:"$APP_ROOT/bin/nunit.framework.dll"
-#	nunit-console "$OUT"
-#	$APP_ROOT/bin/packages/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe
-#	"$APP_ROOT/bin/packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe" "$OUT"
 	"$APP_ROOT/bin/packages/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe" "$OUT"
 }
 Run "$@"

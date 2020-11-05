@@ -14,10 +14,21 @@ namespace TsvToHtmlTable.Tests
     [TestFixture]
     public class HtmlTest
     {
+        /*
         [Test]
-        public void Test()
+        public void TestElementOnly()
         {
             Assert.AreEqual(@"<html></html>", Html.Enclose("html"));
+        }
+        */
+//        [TestCase(null, string.Empty)]
+//        [TestCase(string.Empty, string.Empty)]
+        [TestCase("", "")]
+        [TestCase(null!, "")]
+        [TestCase(@"br", @"<br />")]
+        public void TestElementOnly(string input, string expected)
+        {
+            Assert.AreEqual(expected, Html.Enclose(input));
         }
     }
 }

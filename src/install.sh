@@ -43,21 +43,12 @@ Run() {
 		cp ./NUnit.*/lib/net45/nunit.framework.dll "../nunit.framework.dll"
 		cp ./NUnit.*/lib/net45/nunit.framework.pdb "../nunit.framework.pdb"
 	}
-#	InstallNUnitConsole() {
-#		[ -f "../nunit.console.dll" ] && return
-#		mono $(which nuget.exe) install NUnit.Console
-#		cp ./NUnit.Console.*/lib/net45/nunit.framework.xml "../nunit.console.xml"
-#		cp ./NUnit.Console.*/lib/net45/nunit.framework.dll "../nunit.console.dll"
-#		cp ./NUnit.Console.*/lib/net45/nunit.framework.pdb "../nunit.console.pdb"
-#	}
 	InstallNUnitConsoleRunner() {
 		[ -f "../nunit3-console.exe" ] && return
 		mono $(which nuget.exe) install NUnit.ConsoleRunner
 		cp ./NUnit.ConsoleRunner.*/tools/nunit3-console.exe "../nunit3-console.exe"
-#			/tmp/work/CSharp.TsvToHtmlTable.20201028082641/bin/packages/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe
 	}
 	CopyNLogConfig() {
-#		[ -f "$APP_ROOT/bin/NLog.config" ] && return
 		cp -auv "$APP_ROOT/src/NLog.config" "$APP_ROOT/bin/NLog.config"
 	}
 	AllInstall() {
@@ -70,7 +61,6 @@ Run() {
 		InstallCommandLineParser
 		InstallMicrosoft_VisualBasic
 		InstallNUnit
-#		InstallNUnitConsole
 		InstallNUnitConsoleRunner
 		cd "$HERE"
 		sleep 1
