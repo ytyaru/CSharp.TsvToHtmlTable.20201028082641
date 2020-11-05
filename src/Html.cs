@@ -34,7 +34,7 @@ namespace TsvToHtmlTable
             builder.Append('>');
             return builder.ToString();
         }
-        public static string Enclose(string element, string attr, string text)
+        public static string Enclose(string element, string attr, string? text)
         {
             if (string.IsNullOrEmpty(element)) { return string.Empty; }
             var builder = new StringBuilder();
@@ -44,12 +44,26 @@ namespace TsvToHtmlTable
                 builder.Append(' ');
                 builder.Append(attr);
             }
+            /*
             builder.Append('>');
             if (!string.IsNullOrEmpty(text)) { builder.Append(text); }
             builder.Append('<');
             builder.Append('/');
             builder.Append(element);
             builder.Append('>');
+            */
+            if (null == text) { 
+                builder.Append(' ');
+                builder.Append('/');
+                builder.Append('>');
+            } else {
+                builder.Append('>');
+                builder.Append(text);
+                builder.Append('<');
+                builder.Append('/');
+                builder.Append(element);
+                builder.Append('>');
+            }
             /*
             if (string.IsNullOrEmpty(text)) {
                 builder.Append(' ');

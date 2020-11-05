@@ -14,15 +14,6 @@ namespace TsvToHtmlTable.Tests
     [TestFixture]
     public class HtmlTest
     {
-        /*
-        [Test]
-        public void TestElementOnly()
-        {
-            Assert.AreEqual(@"<html></html>", Html.Enclose("html"));
-        }
-        */
-//        [TestCase(null, string.Empty)]
-//        [TestCase(string.Empty, string.Empty)]
         [TestCase("", "")]
         [TestCase(null!, "")]
         [TestCase(@"br", @"<br />")]
@@ -52,6 +43,7 @@ namespace TsvToHtmlTable.Tests
         [TestCase("td", "", "some text.", "<td>some text.</td>")]
         [TestCase("td", "", "", "<td></td>")]
         [TestCase("td", "rowspan=\"2\"", "", "<td rowspan=\"2\"></td>")]
+        [TestCase("input", "type=\"text\"", null!, "<input type=\"text\" />")]
         public void TestEncloseElementAttrText(string element, string attr, string text, string expected)
         {
             Assert.AreEqual(expected, Html.Enclose(element, attr, text));
