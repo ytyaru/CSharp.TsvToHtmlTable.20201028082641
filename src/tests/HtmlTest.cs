@@ -48,5 +48,34 @@ namespace TsvToHtmlTable.Tests
         {
             Assert.AreEqual(expected, Html.Enclose(element, attr, text));
         }
+
+        [TestCase("", "", "")]
+        [TestCase(null!, null!, "")]
+        [TestCase("", null!, "")]
+        [TestCase(null!, "", "")]
+        [TestCase("class", "tsv2table", "class=\"tsv2table\"")]
+        [TestCase("class", "", "")]
+        [TestCase("", "tsv2table", "")]
+        public void TestMakeAttrString(string key, string value, string expected)
+        {
+            Assert.AreEqual(expected, Html.MakeAttr(key, value));
+        }
+
+        [TestCaseSourceAttribute("MakeAttrPairCases")]
+        public void TestMakeAttrPair(KeyValuePair<string,string> pair, string expected)
+        {
+            Assert.AreEqual(expected, Html.MakeAttr(pair));
+        }
+        private static readonly object[] MakeAttrPairCases = {
+            new object[] { new KeyValuePair<string,string>("", ""), ""},
+            new object[] { new KeyValuePair<string,string>(null!, null!), ""},
+            new object[] { new KeyValuePair<string,string>("", null!), ""},
+            new object[] { new KeyValuePair<string,string>(null!, ""), ""},
+            new object[] { new KeyValuePair<string,string>("class", "tsv2table"), "class=\"tsv2table\"" },
+            new object[] { new KeyValuePair<string,string>("class", ""), ""},
+            new object[] { new KeyValuePair<string,string>("", "tsv2table"), ""}
+        };
+
+        //[TestCase(KeyValuePair<string,string>{Key="",Value=""}, "")]
     }
 }
