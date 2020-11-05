@@ -87,15 +87,43 @@
 <a id="usage"></a>
 <section>
     <h1>使い方 <a href="#usage">¶</a></h1>
-    <pre><code>tsv2table a.tsv
-cat a.tsv | tsv2table
-
-tsv2table [g|i|n]
+    <pre><code>tsv2table [g|i|n]
 tsv2table g [-H a|r|c|m] [-r t|b|B] [-c l|r|B]
 tsv2table i [-H c|r] [-s 1..] [-S 1..]
-tsv2table n
-</code></pre>
+tsv2table n</code></pre>
+
+    <p>　TSVまたはCSVを入力する。入力方法は第一引数またはstdin。</p>
+    <pre><code>tsv2table a.tsv
+tsv2table a.csv
+cat a.tsv | tsv2table
+cat a.csv | tsv2table
+echo -e '\tA\tB\n1\ta\tb\n2\tc\td' | tsv2table
+tsv2table <(echo -e '\tA\tB\n1\ta\tb\n2\tc\td')</code></pre>
+
+    <p>　TSVまたはCSVの1行目にシバンを書いて実行できる。コマンドや引数ごとTSV,CSVに含めることができて便利。</p>
+    <pre><code>export PATH="$PATH":"$(pwd)/CSharp.TsvToHtmlTable.20201028082641/bin"
+chmod + x $(pwd)/CSharp.TsvToHtmlTable.20201028082641/docs/csv/col_3_shebang.csv
+./CSharp.TsvToHtmlTable.20201028082641/docs/csv/col_3_shebang.csv</code></pre>
+
+    <section>
+        <a id="usage-shebang"></a>
+        <h1>shebang <a href="#usage-shebang">¶</a></h1>
+        <pre><code>./csv/col_3_shebang.csv</code></pre>
+        <table><tr><th rowspan="4">あ</th><th rowspan="2">A</th><th>a</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td></tr><tr><th>b</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td></tr><tr><th rowspan="2">B</th><th>c</th><td>OP</td><td></td><td>QX</td><td>R</td><td>STZa</td><td></td><td>U</td></tr><tr><th>d</th><td>V</td><td>W</td><td></td><td>Y</td><td></td><td></td><td>b</td></tr><tr><th colspan="3">い</th><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td><td>i</td></tr><tr><th>う</th><th></th><th>e</th><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr><tr><th></th><th colspan="2">C</th><td>q</td><td>r</td><td>s</td><td>t</td><td>u</td><td>v</td><td>w</td></tr></table>
+        <a href="./csv/col_3_shebang.csv">col_3_shebang.csv</a>
+        <pre><code>#!/usr/bin/env -S tsv2table -H c
+あ,A,a,A,B,C,D,E,F,G
+,,b,H,I,J,K,L,M,N
+,B,c,OP,,QX,R,STZa,,U
+,,d,V,W,,Y,,,b
+い,,,c,d,e,f,g,h,i
+う,,e,j,k,l,m,n,o,p
+,C,,q,r,s,t,u,v,w</code></pre>
+        <p>通常なら実行コマンドは <code>cat col_3.csv | table -H c</code> である。しかしこれをCSVのシバンに書くことで実行時に省略できる。</p>
+    </section>
+
 </section>
+
 
 <a id="input"></a>
 <section>
@@ -160,7 +188,7 @@ tsv2table n
                 <th>短</th><th>長</th><th>初期値</th><th>候補値</th>
             </tr>
             <tr>
-                <td><code>-d</code></td><td><code>--delimiter</code></td><td><code>"\t"</code></td><td><code>","</code>等任意文字列。</td>
+                <td><code>-d</code></td><td><code>--delimiter</code></td><td><code>"\t"</code></td><td><code>","</code>等任意文字列。未指定のときはファイルの内容から"\t"か","のどちらかだと推測する。</td>
             </tr>
             <tr>
                 <td><code>-T</code></td><td><code>--table-attribute</code></td><td></td><td>table要素に付与する属性。</td>

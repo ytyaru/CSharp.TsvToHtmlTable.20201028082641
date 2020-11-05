@@ -15,8 +15,8 @@ namespace TsvToHtmlTable
     {
         [Value(1, MetaName="file", HelpText="入力ファイルパス。")]
         public string File { get; set; } = "";
-        [Option('d', "delimiter", Required=false, Default="\t", HelpText="入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。")]
-        public string Delimiter { get; set; } = "\t";
+        [Option('d', "delimiter", Required=false, HelpText="入力の区切文字。引数にファイルパスが指定されているときは拡張子で特定する。初期値:\"\\t\"。未指定のときはファイル内容から\"\\t\"か\",\"のどちらかだと推測する。")]
+        public string Delimiter { get; set; } = string.Empty;
         [Option('T', "table-attribute", Required = false, HelpText="table要素の属性。")]
         public string TableAttribute { get; set; } = "";
         [Option('l', "logging-level", Required=false, Default=LoggingLevelType.e, HelpText="ログ出力する。指定したレベル以上のもののみ出力する。")]
