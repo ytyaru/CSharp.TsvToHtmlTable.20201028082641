@@ -90,6 +90,7 @@ namespace TsvToHtmlTable.Tests
             new object[] { new string[] { "class", "" }, ""},
             new object[] { new string[] { "", "tsv2table" }, ""},
         };
+
         [TestCaseSourceAttribute("MakeAttrsListCases")]
         public void TestMakeAttrsList(List<KeyValuePair<string,string>> pairs, string expected)
         {
@@ -104,6 +105,5 @@ namespace TsvToHtmlTable.Tests
             new object[] { new List<KeyValuePair<string,string>> { new KeyValuePair<string,string>("class","") }, ""},
             new object[] { new List<KeyValuePair<string,string>> { new KeyValuePair<string,string>("","tsv2table") }, ""}
         };
-        //[TestCase(KeyValuePair<string,string>{Key="",Value=""}, "")]
     }
 }
